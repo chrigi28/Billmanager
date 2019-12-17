@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="Billmanager.Views.OverviewPage"
-             xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations" >
-    <ContentPage.Content>
-        <Grid VerticalOptions="FillAndExpand" 
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Billmanager.Views.Overview">
+   <Grid VerticalOptions="FillAndExpand" 
               HorizontalOptions="FillAndExpand" 
               Margin="10,30,10,5">
             <Grid.RowDefinitions>
@@ -37,12 +35,14 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     VerticalOptions="FillAndExpand" 
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding CreateCustomerCommand}"/>
             <Button Text="{x:Static texts:Resources.CreateCar}"
                     Grid.Row="2"
                     Grid.Column="1"
                     VerticalOptions="FillAndExpand" 
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding CreateCarCommand}"/>
             <Button Text="{x:Static texts:Resources.CreateBill}"
                     Grid.Row="3"
                     Grid.Column="1"
@@ -64,5 +64,4 @@
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" />
         </Grid>
-    </ContentPage.Content>
 </ContentPage>

@@ -23,14 +23,20 @@ namespace Billmanager
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/OverviewPage");
+            await NavigationService.NavigateAsync("NavigationPage/Overview");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<OverviewPage>();
+            containerRegistry.RegisterForNavigation<Overview, OverviewViewModel>();
+            containerRegistry.RegisterForNavigation<CreateCustomer, CreateCustomerViewModel>();
+            containerRegistry.RegisterForNavigation<CreateCar, CreateCarViewModel>();
+            containerRegistry.RegisterForNavigation<CreateBill, CreateBillViewModel>();
+            containerRegistry.RegisterForNavigation<CreateWorkcard, CreateWorkcardViewModel>();
+            containerRegistry.RegisterForNavigation<CreateAddresscard, CreateAddresscardViewModel>();
+            containerRegistry.RegisterForNavigation<CreateOffert, CreateOffertViewModel>();
         }
     }
 }
