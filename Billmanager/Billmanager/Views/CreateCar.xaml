@@ -4,9 +4,13 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Billmanager.Views.CreateCar"
-             xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
              xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
-             BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateCarViewModel}}">
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+             xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
+             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateCarViewModel}}"
+             mc:Ignorable="d"
+>
   
     <Grid VerticalOptions="FillAndExpand"
           HorizontalOptions="FillAndExpand">

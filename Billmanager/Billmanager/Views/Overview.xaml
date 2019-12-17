@@ -5,9 +5,12 @@
              xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Billmanager.Views.Overview"
-             xmlns:viewModels="clr-namespace:Billmanager.ViewModels;assembly=Billmanager"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
-             BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.OverviewViewModel}}" >
+             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.OverviewViewModel}}" 
+             mc:Ignorable="d helper"
+             >
    <Grid VerticalOptions="FillAndExpand" 
               HorizontalOptions="FillAndExpand" 
               Margin="10,30,10,5">

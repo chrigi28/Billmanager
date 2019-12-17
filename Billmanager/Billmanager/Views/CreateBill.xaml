@@ -4,8 +4,12 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Billmanager.Views.CreateBill"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
-             BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateBillViewModel}}">
+             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateBillViewModel}}"
+             mc:Ignorable="d"
+             >
   
     <Grid VerticalOptions="FillAndExpand"
           HorizontalOptions="FillAndExpand">
