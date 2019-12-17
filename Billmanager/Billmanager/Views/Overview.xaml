@@ -4,7 +4,10 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Billmanager.Views.Overview">
+             x:Class="Billmanager.Views.Overview"
+             xmlns:viewModels="clr-namespace:Billmanager.ViewModels;assembly=Billmanager"
+             xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
+             BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.OverviewViewModel}}" >
    <Grid VerticalOptions="FillAndExpand" 
               HorizontalOptions="FillAndExpand" 
               Margin="10,30,10,5">
@@ -47,21 +50,25 @@
                     Grid.Row="3"
                     Grid.Column="1"
                     VerticalOptions="FillAndExpand" 
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding CreateBillCommand}"/>
             <Button Text="{x:Static texts:Resources.CreateOffer}"
                     Grid.Row="4"
                     Grid.Column="1"
                     VerticalOptions="FillAndExpand" 
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding CreateOffertCommand}"/>
             <Button Text="{x:Static texts:Resources.CreateWorkcard}"
                     Grid.Row="5"
                     Grid.Column="1"
                     VerticalOptions="FillAndExpand" 
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding CreateWorkcardCommand}"/>
             <Button Text="{x:Static texts:Resources.CreateAddresscard}"
                     Grid.Row="6"
                     Grid.Column="1"
                     VerticalOptions="FillAndExpand" 
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding CreateAddresscardCommand}"/>
         </Grid>
 </ContentPage>

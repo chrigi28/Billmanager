@@ -4,6 +4,7 @@
     {
         // Database Primary key
         string Id { get; set; }
-        string Name { get; }
+        string TableName { get; }
+        string Remark { get; set; }
     }
 }

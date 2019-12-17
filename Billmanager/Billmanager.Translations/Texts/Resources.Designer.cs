@@ -69,10 +69,14 @@ namespace  Billmanager.Translations.Texts {
                 resourceMan = null;
             }
         }
+        /// <summary>Looks up a localized string similar to Address.</summary>
+        public static string Address => ResourceManager.GetString("Address", resourceCulture);       
         /// <summary>Looks up a localized string similar to Addresscard.</summary>
         public static string Addresscard => ResourceManager.GetString("Addresscard", resourceCulture);       
         /// <summary>Looks up a localized string similar to Bill.</summary>
         public static string Bill => ResourceManager.GetString("Bill", resourceCulture);       
+        /// <summary>Looks up a localized string similar to Cancel.</summary>
+        public static string Cancel => ResourceManager.GetString("Cancel", resourceCulture);       
         /// <summary>Looks up a localized string similar to CarDocuments.</summary>
         public static string CarDocuments => ResourceManager.GetString("CarDocuments", resourceCulture);       
         /// <summary>Looks up a localized string similar to CarInformation.</summary>
@@ -121,8 +125,12 @@ namespace  Billmanager.Translations.Texts {
         public static string Plate => ResourceManager.GetString("Plate", resourceCulture);       
         /// <summary>Looks up a localized string similar to Print.</summary>
         public static string Print => ResourceManager.GetString("Print", resourceCulture);       
+        /// <summary>Looks up a localized string similar to Remark.</summary>
+        public static string Remark => ResourceManager.GetString("Remark", resourceCulture);       
         /// <summary>Looks up a localized string similar to RootNumber.</summary>
         public static string RootNumber => ResourceManager.GetString("RootNumber", resourceCulture);       
+        /// <summary>Looks up a localized string similar to Save.</summary>
+        public static string Save => ResourceManager.GetString("Save", resourceCulture);       
         /// <summary>Looks up a localized string similar to Titel_Customer.</summary>
         public static string Titel_Customer => ResourceManager.GetString("Titel_Customer", resourceCulture);       
         /// <summary>Looks up a localized string similar to Typ.</summary>

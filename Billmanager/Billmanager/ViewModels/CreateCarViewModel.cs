@@ -8,7 +8,7 @@ using Prism.Navigation;
 
 namespace Billmanager.ViewModels
 {
-    public class CreateCarViewModel : ViewModelBase
+    public class CreateCarViewModel : DataViewModelBase<CarDbt>
     {
         public CreateCarViewModel(INavigationService ns) : base(ns)
         {

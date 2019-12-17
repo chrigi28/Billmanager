@@ -3,6 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Billmanager.Views.CreateAddresscard">
+             x:Class="Billmanager.Views.CreateAddresscard"
+             xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
+             BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateAddresscardViewModel}}">
   
+    <Grid VerticalOptions="FillAndExpand"
+          HorizontalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+    </Grid>
 </ContentPage>

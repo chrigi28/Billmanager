@@ -3,14 +3,17 @@ using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
+using Billmanager.Database;
+using Billmanager.Interfaces.Database;
 
 namespace Billmanager.ViewModels
 {
     public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible
     {
         protected INavigationService NavigationService { get; private set; }
-
+        
         private string _title;
         public string Title
         {
