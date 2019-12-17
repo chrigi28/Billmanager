@@ -11,7 +11,7 @@ namespace Billmanager.Services
     {
         public static void Initialize()
         {
-            DependencyService.Register<IDbPath, IDbPath>();
+            DependencyService.Register<IDbPath>();
         }
 
         public static void PreInit()

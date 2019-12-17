@@ -14,18 +14,17 @@ namespace Billmanager.Database
 {
     public static class SqliteDatabase
     {
-        public static readonly Dictionary<Type, DbContext> Tables;
+        public static readonly Dictionary<Type, DbContext> Tables = new Dictionary<Type, DbContext>();
 
         static SqliteDatabase()
         {
-            Tables = new Dictionary<Type, DbContext>();
             EnsureDatabases();
         }
 
         private static void EnsureDatabases()
         {
-            Tables.Add(typeof(CustomerDbt), new GenericDbContext<ICustomerDbt>("CustomerDbt"));
-            Tables.Add(typeof(CarDbt), new GenericDbContext<ICarDbt>("CarDbt"));
+            Tables.Add(typeof(CustomerDbt), new GenericDbContext<CustomerDbt>("CustomerDbt"));
+            Tables.Add(typeof(CarDbt), new GenericDbContext<CarDbt>("CarDbt"));
             ////Tables.Add(typeof(CustomerDbt), new GenericDbContext<ICustomerDbt>("ItemDbt"));
             ////Tables.Add(typeof(CustomerDbt), new GenericDbContext<ICustomerDbt>("ItemDbt"));
             ////Tables.Add(typeof(CustomerDbt), new GenericDbContext<ICustomerDbt>("ItemDbt"));

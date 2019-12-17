@@ -14,7 +14,7 @@
   
     <Grid VerticalOptions="FillAndExpand"
           HorizontalOptions="FillAndExpand"
-          BackgroundColor="Aqua">
+          >
 <Grid.RowDefinitions>
     <RowDefinition Height="Auto" />
     <RowDefinition Height="Auto" />
@@ -30,8 +30,8 @@
     <RowDefinition Height="*" />
 </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
   
@@ -43,8 +43,7 @@
         <Entry Text="{Binding Model.Title_customer}" Placeholder="{x:Static texts:Resources.Titel_Customer}" 
                Grid.Row="1"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="FillAndExpand"
-               BackgroundColor="Blue"/>
+               HorizontalOptions="FillAndExpand"/>
         <Entry Text="{Binding  Model.FirstName}" Placeholder="{x:Static texts:Resources.Firstname}" 
                Grid.Row="2"
                VerticalOptions="FillAndExpand" 

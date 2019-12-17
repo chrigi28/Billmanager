@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,9 @@ namespace Billmanager.Database.Tables
     {
         private readonly string storagePath;
 
-        public GenericDbContext(string databaseName)
+        public GenericDbContext(string databaseName) : base()
         {
-            this.storagePath = Path.Combine(DependencyService.Get<IDbPath>().GetDbStoragePath(), databaseName);
+            this.storagePath = Path.Combine(DependencyService.Get<IDbPath>().GetDbStoragePath(), databaseName + ".sqlite");
 
             Database.EnsureCreated();
         }
@@ -27,14 +28,14 @@ namespace Billmanager.Database.Tables
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlite($"Filename={storagePath}");
+            var connectionString = string.Format($"Filename={storagePath}");
+            Debug.WriteLine($"DB-ConnectionString: {connectionString}");
+            optionsBuilder.UseSqlite(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // todo set necessery columns depending on the type
-            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<T>().HasKey(f => f.Id);
         }
 

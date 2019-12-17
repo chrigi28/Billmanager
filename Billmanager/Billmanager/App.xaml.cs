@@ -1,4 +1,5 @@
-﻿using Prism;
+﻿using Billmanager.Services;
+using Prism;
 using Prism.Ioc;
 using Billmanager.ViewModels;
 using Billmanager.Views;
@@ -22,7 +23,7 @@ namespace Billmanager
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
+            SharedInitializations.Initialize();
             await NavigationService.NavigateAsync("NavigationPage/Overview");
         }
 
