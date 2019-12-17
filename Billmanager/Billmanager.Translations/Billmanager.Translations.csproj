@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="Texts\Resources.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Texts\Resources.ttinclude">
+      <Generator></Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Texts\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Texts\Resources.en-US.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Texts\Resources.de-AT.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Texts\Resources.de-DE.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Texts\Resources.en.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Texts\Resources.fr-CH.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Texts\Resources.it-CH.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Texts\Resources.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Texts\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ResxFiles Remove="Texts\Resources.en-US.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs" Link="CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+</Project>

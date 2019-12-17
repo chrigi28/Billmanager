@@ -1,0 +1,4 @@
+﻿<#@ include file="Resources.ttinclude"#>
+<# 
+   GenerateResources(@"Resources.resx", @"Billmanager.Translations.Texts"); 
+#>  
