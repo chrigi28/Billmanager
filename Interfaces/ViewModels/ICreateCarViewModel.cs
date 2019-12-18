@@ -12,8 +12,5 @@ namespace Billmanager.Interface.ViewModels
 {
     public interface ICreateCarViewModel<T> : IDataViewModelBase<T> where T : ICarDbt
     {
-
-        IEnumerable<ICustomerDbt> CustomerItems { get; set; }
-        ICustomerDbt SelectedCustomer { get; set; }
     }
 }

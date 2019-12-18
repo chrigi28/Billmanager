@@ -8,11 +8,11 @@ using Prism.Navigation;
 
 namespace Billmanager.ViewModels
 {
-    public class CreateWorkcardViewModel : ViewModelBase
+    public class CreateAddresscardPageViewModel : ViewModelBase
     {
-        public CreateWorkcardViewModel(INavigationService ns) : base(ns)
+        public CreateAddresscardPageViewModel(INavigationService ns) : base(ns)
         {
-            this.Title = Resources.CreateWorkcard;
+            this.Title = Resources.CreateAddresscard;
         }
     }
 }

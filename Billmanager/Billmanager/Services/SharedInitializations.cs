@@ -13,6 +13,7 @@ namespace Billmanager.Services
         {
             DependencyService.Register<IDbPath>();
             DependencyService.Register<ICustomerService>();
+            DependencyService.Register<ISelectionData>();
         }
 
         public static void PreInit()

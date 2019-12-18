@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controlls\**" />
+    <EmbeddedResource Remove="Controlls\**" />
+    <None Remove="Controlls\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" Link="CommonAssemblyInfo.cs" />
   </ItemGroup>
 
@@ -21,34 +27,57 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\CreateAddresscard.xaml">
+    <EmbeddedResource Update="Views\CreateAddresscardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateBill.xaml">
+    <EmbeddedResource Update="Views\CreateBillPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateCar.xaml">
+    <EmbeddedResource Update="Views\CreateCarPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateCustomer.xaml">
+    <EmbeddedResource Update="Views\CreateCustomerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateOffert.xaml">
+    <EmbeddedResource Update="Views\CreateOffertPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateWorkcard.xaml">
+    <EmbeddedResource Update="Views\CreateWorkcardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Overview.xaml">
+    <EmbeddedResource Update="Views\OverviewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SelectionPage.xaml">
+    <EmbeddedResource Update="Views\CustomerSelectionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controlls\" />
+    <Compile Update="Views\CreateAddresscardPage.xaml.cs">
+      <DependentUpon>CreateAddresscardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CreateBillPage.xaml.cs">
+      <DependentUpon>CreateBillPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CreateCarPage.xaml.cs">
+      <DependentUpon>CreateCarPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CreateCustomerPage.xaml.cs">
+      <DependentUpon>CreateCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CreateOffertPage.xaml.cs">
+      <DependentUpon>CreateOffertPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CreateWorkcardPage.xaml.cs">
+      <DependentUpon>CreateWorkcardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\OverviewPage.xaml.cs">
+      <DependentUpon>OverviewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CustomerSelectionPage.xaml.cs">
+      <DependentUpon>CustomerSelectionPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

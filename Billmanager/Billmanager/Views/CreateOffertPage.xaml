@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Billmanager.Views.CreateOffert"
+             x:Class="Billmanager.Views.CreateOffertPage"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
-             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateOffertViewModel}}"
+             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateOffertPageViewModel}}"
              mc:Ignorable="d helper">
   
     <Grid VerticalOptions="FillAndExpand"

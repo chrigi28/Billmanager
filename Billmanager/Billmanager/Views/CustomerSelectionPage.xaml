@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:prism="http://prismlibrary.com"
-                x:Class="Billmanager.Views.SelectionPage" 
+                x:Class="Billmanager.Views.CustomerSelectionPage" 
                 prism:ViewModelLocator.AutowireViewModel="True"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
                 xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
-                d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.SelectionPageViewModel}}"
+                d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CustomerSelectionPageViewModel}}"
                 mc:Ignorable="d helper">
 
     <ContentPage.Resources>

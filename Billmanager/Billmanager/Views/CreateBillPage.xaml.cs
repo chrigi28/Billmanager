@@ -2,9 +2,9 @@
 
 namespace Billmanager.Views
 {
-    public partial class CreateCar : ContentPage
+    public partial class CreateBillPage : ContentPage
     {
-        public CreateCar()
+        public CreateBillPage()
         {
             InitializeComponent();
         }

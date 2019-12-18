@@ -2,9 +2,9 @@
 
 namespace Billmanager.Views
 {
-    public partial class CreateAddresscard : ContentPage
+    public partial class CreateWorkcardPage : ContentPage
     {
-        public CreateAddresscard()
+        public CreateWorkcardPage()
         {
             InitializeComponent();
         }

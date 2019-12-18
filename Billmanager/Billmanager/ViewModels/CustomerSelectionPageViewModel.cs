@@ -6,30 +6,34 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using Billmanager.Interfaces;
+using Billmanager.Interfaces.Database.Datatables;
+using Billmanager.Interfaces.Service;
+using Billmanager.StaticAppData;
 using Prism.Navigation;
 using Xamarin.Forms;
 
 namespace Billmanager.ViewModels
 {
-    public class SelectionPageViewModel<T> : ViewModelBase where T : IFilterStringProperty
+    public class CustomerSelectionPageViewModel : ViewModelBase
     {
-        private IEnumerable<T> itemSource;
-        private T selectedItem;
+        private IEnumerable<ICustomerDbt> itemSource;
+        private ICustomerDbt selectedItem;
 
-        public SelectionPageViewModel(INavigationService ns) : base(ns)
+        public CustomerSelectionPageViewModel(INavigationService ns) : base(ns)
         {
         }
 
         public ICommand FilterCommand => new Command<string>(FilterItems);
         
-        public ObservableCollection<T> FilteredItems;
+        public ObservableCollection<ICustomerDbt> FilteredItems;
 
-        public T SelectedItem
+        public ICustomerDbt SelectedItem
         {
             get => this.selectedItem;
             set
             {
                 this.selectedItem = value;
+                SelectionData.SelectedCustomer = value;
                 this.NavigationService.GoBackAsync();
             }
         }
@@ -53,15 +57,11 @@ namespace Billmanager.ViewModels
             }
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
-            base.OnNavigatedTo(parameters);
-            
-            if (parameters.ContainsKey("SelectionPageProperty"))
-            {
-                this.itemSource = parameters.GetValue<IEnumerable<T>>("SelectionPageProperty");
-                this.FilteredItems = new ObservableCollection<T>(this.itemSource);
-            }
+            base.Initialize(parameters);
+            this.itemSource = await DependencyService.Get<ICustomerService>().GetCustomerSelection();
+            this.FilteredItems = new ObservableCollection<ICustomerDbt>(this.itemSource);
         }
 
         public override void OnNavigatedFrom(INavigationParameters parameters)

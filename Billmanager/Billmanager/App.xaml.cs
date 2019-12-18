@@ -26,22 +26,21 @@ namespace Billmanager
         {
             InitializeComponent();
             SharedInitializations.Initialize();
-            await NavigationService.NavigateAsync("NavigationPage/Overview");
+            await NavigationService.NavigateAsync("NavigationPage/OverviewPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<Overview, OverviewViewModel>();
-            containerRegistry.RegisterForNavigation<CreateCustomer, CreateCustomerViewModel>();
-            containerRegistry.RegisterForNavigation<CreateCar, CreateCarViewModel>();
-            containerRegistry.RegisterForNavigation<CreateBill, CreateBillViewModel>();
-            containerRegistry.RegisterForNavigation<CreateWorkcard, CreateWorkcardViewModel>();
-            containerRegistry.RegisterForNavigation<CreateAddresscard, CreateAddresscardViewModel>();
-            containerRegistry.RegisterForNavigation<CreateOffert, CreateOffertViewModel>();
-            containerRegistry.RegisterForNavigation<SelectionPage, SelectionPageViewModel<CustomerDbt>>("CustomerSelection");
-            containerRegistry.RegisterForNavigation<SelectionPage, SelectionPageViewModel<CarDbt>>("CarSelection");
+            containerRegistry.RegisterForNavigation<OverviewPage, OverviewPageViewModel>();
+            containerRegistry.RegisterForNavigation<CreateCustomerPage, CreateCustomerPageViewModel>();
+            containerRegistry.RegisterForNavigation<CreateCarPage, CreateCarPageViewModel>();
+            containerRegistry.RegisterForNavigation<CreateBillPage, CreateBillPageViewModel>();
+            containerRegistry.RegisterForNavigation<CreateWorkcardPage, CreateWorkcardPageViewModel>();
+            containerRegistry.RegisterForNavigation<CreateAddresscardPage, CreateAddresscardPageViewModel>();
+            containerRegistry.RegisterForNavigation<CreateOffertPage, CreateOffertPageViewModel>();
+            containerRegistry.RegisterForNavigation<CustomerSelectionPage, CustomerSelectionPageViewModel>("CustomerSelection");
         }
     }
 }

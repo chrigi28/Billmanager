@@ -9,9 +9,9 @@ using Xamarin.Forms;
 
 namespace Billmanager.ViewModels
 {
-    public class CreateOffertViewModel : ViewModelBase
+    public class CreateOffertPageViewModel : ViewModelBase
     {
-        public CreateOffertViewModel(INavigationService ns) : base(ns)
+        public CreateOffertPageViewModel(INavigationService ns) : base(ns)
         {
             this.Title = Resources.CreateOffer;
         }

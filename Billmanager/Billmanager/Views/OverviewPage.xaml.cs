@@ -2,9 +2,9 @@
 
 namespace Billmanager.Views
 {
-    public partial class Overview : ContentPage
+    public partial class OverviewPage : ContentPage
     {
-        public Overview()
+        public OverviewPage()
         {
             InitializeComponent();
         }

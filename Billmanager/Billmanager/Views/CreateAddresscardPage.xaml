@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Billmanager.Views.CreateWorkcard"
+             x:Class="Billmanager.Views.CreateAddresscardPage"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
-             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateWorkcardViewModel}}"
-             mc:Ignorable="d helper">
+             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateAddresscardPageViewModel}}"
+             mc:Ignorable="d">
   
     <Grid VerticalOptions="FillAndExpand"
           HorizontalOptions="FillAndExpand">
