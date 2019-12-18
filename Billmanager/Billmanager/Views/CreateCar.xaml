@@ -1,15 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Billmanager.Views.CreateCar"
              xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
+             xmlns:viewModels="clr-namespace:Billmanager.ViewModels;assembly=Billmanager"
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateCarViewModel}}"
-             mc:Ignorable="d"
+             mc:Ignorable="d helper"
 >
   
     <Grid VerticalOptions="FillAndExpand"
@@ -27,61 +26,82 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
   
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
         <Label Text="{x:Static texts:Resources.CreateCar}"
                Grid.Row="0"
+               Grid.Column="1"
                VerticalOptions="FillAndExpand" 
                HorizontalOptions="CenterAndExpand" 
                FontSize="Large"/>
-        <SelectableItemsView SelectedItem="{Binding SelectedCustomer}"
-                             ItemsSource="{Binding CustomerItems}" 
-                             Grid.Row="1"/>
-        
-        <Entry Text="{Binding  Model.FirstName}" Placeholder="{x:Static texts:Resources.CarMake}" 
+
+        <Button Text="{x:Static texts:Resources.Customer}"
+                Command="{Binding SelectCustomerCommand}"
+                Grid.Row="1"
+                Grid.Column="1" />
+        <Entry Text="{Binding Model.CarMake}" Placeholder="{x:Static texts:Resources.CarMake}" 
                Grid.Row="2"
+               Grid.Column="1"
                Margin="0,10,0,0"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
-        <Entry Text="{Binding  Model.LastName}" Placeholder="{x:Static texts:Resources.Typ}" 
+               HorizontalOptions="FillAndExpand"  />
+        <Entry Text="{Binding  Model.Typ}" Placeholder="{x:Static texts:Resources.Typ}" 
                Grid.Row="3"
+               Grid.Column="1"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
-        <Entry Text="{Binding  Model.Address}" Placeholder="{x:Static texts:Resources.Typecertificate}" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Typecertificate}" Placeholder="{x:Static texts:Resources.Typecertificate}" 
                Grid.Row="4"
+               Grid.Column="1"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
-        <Entry Text="{Binding  Model.Zip}" Placeholder="{x:Static texts:Resources.EngineNo}" 
+               HorizontalOptions="FillAndExpand"  />
+        <Entry Text="{Binding  Model.EnginNo}" Placeholder="{x:Static texts:Resources.EngineNo}" 
                Grid.Row="5"
+               Grid.Column="1"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
-        <Entry Text="{Binding  Model.Location}" Placeholder="{x:Static texts:Resources.FirstOnMarket}" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.FirstOnMarket}" Placeholder="{x:Static texts:Resources.FirstOnMarket}" 
                Grid.Row="6"
+               Grid.Column="1"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
-        <Entry Text="{Binding  Model.Phone}" Placeholder="{x:Static texts:Resources.Cubic}" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Cubic}" Placeholder="{x:Static texts:Resources.Cubic}" 
                Grid.Row="7"
+               Grid.Column="1"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
-        <Entry Text="{Binding  Model.Phone}" Placeholder="{x:Static texts:Resources.ChassisNo}" 
-               Grid.Row="7"
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.ChassisNo}" Placeholder="{x:Static texts:Resources.ChassisNo}" 
+               Grid.Row="8"
+               Grid.Column="1"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
-        <Entry Text="{Binding  Model.Phone}" Placeholder="{x:Static texts:Resources.Plate}" 
-               Grid.Row="7"
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Plate}" Placeholder="{x:Static texts:Resources.Plate}" 
+               Grid.Row="9"
+               Grid.Column="1"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
-        <Entry Text="{Binding  Model.Phone}" Placeholder="{x:Static texts:Resources.RootNumber}" 
-               Grid.Row="7"
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Rootnumber}" Placeholder="{x:Static texts:Resources.RootNumber}" 
+               Grid.Row="10"
+               Grid.Column="1"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
-        <Entry Text="{Binding  Model.Phone}" Placeholder="{x:Static texts:Resources.Remark}" 
-               Grid.Row="7"
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Remark}" Placeholder="{x:Static texts:Resources.Remark}" 
+               Grid.Row="11"
+               Grid.Column="1"
                VerticalOptions="FillAndExpand" 
-               HorizontalOptions="CenterAndExpand" />
-        <Button Text="{x:Static texts:Resources.Save}" 
-                Command="{Binding SaveCommand}"/>
+               HorizontalOptions="FillAndExpand" />
+        <Button    Grid.Row="12"
+                   Grid.Column="1"
+                   Text="{x:Static texts:Resources.Save}" 
+                   Command="{Binding SaveCommand}"/>
 
     </Grid>
 </ContentPage>

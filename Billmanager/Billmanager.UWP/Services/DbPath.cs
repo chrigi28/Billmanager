@@ -1,5 +1,4 @@
-﻿using Billmanager.Interfaces;
-using System.IO;
+﻿using System.IO;
 using Windows.Storage;
 using Billmanager.Interfaces.Database;
 using Billmanager.UWP.Services;

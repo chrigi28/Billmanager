@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Billmanager.Interfaces.csproj" />
     <ProjectReference Include="..\Billmanager.Translations\Billmanager.Translations.csproj" />
   </ItemGroup>
 
@@ -41,6 +42,13 @@
     <EmbeddedResource Update="Views\Overview.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\SelectionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controlls\" />
   </ItemGroup>
 
 </Project>

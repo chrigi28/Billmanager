@@ -1,4 +1,6 @@
-﻿namespace Billmanager.Interfaces.Database.Datatables
+﻿using System.ComponentModel;
+
+namespace Billmanager.Interfaces.Database.Datatables
 {
     public interface ICarDbt : IDatabaseTable
     {

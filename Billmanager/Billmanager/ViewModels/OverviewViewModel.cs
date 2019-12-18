@@ -26,14 +26,14 @@ namespace Billmanager.ViewModels
 
         public Command CreateCustomerCommand => this.createCustomerCommand ?? (this.createCustomerCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateCustomer))));
 
-        public Command CreateCarCommand => this.createCarCommand ?? (this.createCarCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateCarViewModel))));
+        public Command CreateCarCommand => this.createCarCommand ?? (this.createCarCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateCar))));
 
-        public Command CreateBillCommand => this.createBillCommand ?? (this.createBillCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateBillViewModel))));
+        public Command CreateBillCommand => this.createBillCommand ?? (this.createBillCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateBill))));
 
-        public Command CreateWorkcardCommand => this.createWorkcardCommand ?? (this.createWorkcardCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateWorkcardViewModel))));
+        public Command CreateWorkcardCommand => this.createWorkcardCommand ?? (this.createWorkcardCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateWorkcard))));
 
-        public Command CreateAddresscardCommand => this.createAddresscardCommand ?? (this.createAddresscardCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateAddresscardViewModel))));
+        public Command CreateAddresscardCommand => this.createAddresscardCommand ?? (this.createAddresscardCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateAddresscard))));
 
-        public Command CreateOffertCommand => this.createOffertCommand ?? (this.createOffertCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateOffertViewModel))));
+        public Command CreateOffertCommand => this.createOffertCommand ?? (this.createOffertCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateOffert))));
     }
 }

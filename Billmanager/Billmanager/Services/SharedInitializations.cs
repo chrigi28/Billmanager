@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
-using Billmanager.Interfaces;
 using Billmanager.Interfaces.Database;
+using Billmanager.Interfaces.Service;
 using Billmanager.Translations.Texts;
 using Microsoft.EntityFrameworkCore.Query;
 using Xamarin.Forms;
@@ -12,6 +12,7 @@ namespace Billmanager.Services
         public static void Initialize()
         {
             DependencyService.Register<IDbPath>();
+            DependencyService.Register<ICustomerService>();
         }
 
         public static void PreInit()

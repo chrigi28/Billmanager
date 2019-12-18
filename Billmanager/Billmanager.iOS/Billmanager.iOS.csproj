@@ -200,6 +200,10 @@
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1367" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Billmanager.Interfaces.csproj">
+      <Project>{DBD4695E-0F72-42AC-A6D3-CB967F15121A}</Project>
+      <Name>Billmanager.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Billmanager\Billmanager.csproj">
       <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
       <Name>Billmanager</Name>

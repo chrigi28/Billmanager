@@ -1,4 +1,6 @@
-﻿using Billmanager.Services;
+﻿using Billmanager.Database.Tables;
+using Billmanager.Interfaces;
+using Billmanager.Services;
 using Prism;
 using Prism.Ioc;
 using Billmanager.ViewModels;
@@ -38,6 +40,8 @@ namespace Billmanager
             containerRegistry.RegisterForNavigation<CreateWorkcard, CreateWorkcardViewModel>();
             containerRegistry.RegisterForNavigation<CreateAddresscard, CreateAddresscardViewModel>();
             containerRegistry.RegisterForNavigation<CreateOffert, CreateOffertViewModel>();
+            containerRegistry.RegisterForNavigation<SelectionPage, SelectionPageViewModel<CustomerDbt>>("CustomerSelection");
+            containerRegistry.RegisterForNavigation<SelectionPage, SelectionPageViewModel<CarDbt>>("CarSelection");
         }
     }
 }

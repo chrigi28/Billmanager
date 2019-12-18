@@ -11,5 +11,8 @@ namespace Billmanager.Database.Tables
         public string Zip { get; set; }
         public string Location { get; set; }
         public string Phone { get; set; }
+
+        public override string FilterString => this.Title_customer + FilterString + LastName + Address + Zip +
+                                               Location + Phone + base.FilterString;
     }
 }

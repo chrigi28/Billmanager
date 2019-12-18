@@ -10,7 +10,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Billmanager.Droid.Services;
-using Billmanager.Interfaces;
 using Billmanager.Interfaces.Database;
 using Xamarin.Forms;
 

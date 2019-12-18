@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Billmanager.Interfaces;
 using Billmanager.Interfaces.Database;
 using Microsoft.EntityFrameworkCore;
 using Xamarin.Forms;
@@ -16,11 +15,11 @@ namespace Billmanager.Database.Tables
     public class GenericDbContext<T> : DbContext, IDataStore<T> where T : class, IDatabaseTable
     {
         private readonly string storagePath;
-
+        
         public GenericDbContext(string databaseName) : base()
         {
             this.storagePath = Path.Combine(DependencyService.Get<IDbPath>().GetDbStoragePath(), databaseName + ".sqlite");
-
+            
             Database.EnsureCreated();
         }
 

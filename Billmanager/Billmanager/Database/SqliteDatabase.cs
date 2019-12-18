@@ -4,9 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Billmanager.Database.Tables;
-using Billmanager.Interfaces;
 using Billmanager.Interfaces.Database;
-using Billmanager.Interfaces.Database.Datatables;
 using Microsoft.EntityFrameworkCore;
 using Xamarin.Forms;
 

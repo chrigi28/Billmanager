@@ -13,5 +13,8 @@ namespace Billmanager.Database.Tables
         public string ChassisNo { get; set; }
         public string Plate { get; set; }
         public string Rootnumber { get; set; }
+
+        public override string FilterString => CarMake + Typ + Typecertificate + EnginNo + FirstOnMarket + Cubic +
+                                               ChassisNo + Plate + Rootnumber + base.FilterString;
     }
 }

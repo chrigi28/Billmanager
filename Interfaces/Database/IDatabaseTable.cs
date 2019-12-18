@@ -1,6 +1,7 @@
-﻿namespace Billmanager.Interfaces.Database
+﻿
+namespace Billmanager.Interfaces.Database
 {
-    public interface IDatabaseTable
+    public interface IDatabaseTable : IFilterStringProperty
     {
         // Database Primary key
         string Id { get; set; }

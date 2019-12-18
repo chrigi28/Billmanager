@@ -6,14 +6,15 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Billmanager.Database;
-using Billmanager.Interfaces.Database;
+using Billmanager.Interface.ViewModels;
 
 namespace Billmanager.ViewModels
 {
-    public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible
+    public class ViewModelBase : BindableBase, IViewModelBase
     {
         protected INavigationService NavigationService { get; private set; }
-        
+        protected INavigationParameters navigationParameters; 
+
         private string _title;
         public string Title
         {
@@ -33,12 +34,13 @@ namespace Billmanager.ViewModels
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
-
+            // awai from this
         }
 
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
-
+            // when this page is added to the navigation stack
+            this.navigationParameters = parameters;
         }
 
         public virtual void Destroy()

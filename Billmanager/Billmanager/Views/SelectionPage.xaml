@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:prism="http://prismlibrary.com"
+                x:Class="Billmanager.Views.SelectionPage" 
+                prism:ViewModelLocator.AutowireViewModel="True"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+                xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
+                d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.SelectionPageViewModel}}"
+                mc:Ignorable="d helper">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="CustomerTemplate">
+           
+        </DataTemplate>
+
+    </ContentPage.Resources>
+    
+    <StackLayout Margin="20">
+        <SearchBar x:Name="searchBar"
+                   SearchCommand="{Binding FilterCommand}"
+                   SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}"
+                   Placeholder="Filter" />
+        <CollectionView ItemsSource="{Binding FilteredItems}"
+                        EmptyView="{Binding Source={x:Reference searchBar}, Path=Text}">
+                        <!--EmptyViewTemplate="{StaticResource SearchSelector}">-->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding FirstName}"
+                               Margin="10"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding LastName}"
+                               Margin="10"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="Adresse."
+                               Margin="10"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="Ort"
+                               Margin="10"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="Plz"
+                               Margin="10"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

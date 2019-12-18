@@ -1,5 +1,4 @@
-﻿using Billmanager.Interfaces;
-using System.IO;
+﻿using System.IO;
 using Billmanager.Interfaces.Database;
 using Billmanager.iOS.Services;
 using Xamarin.Forms;

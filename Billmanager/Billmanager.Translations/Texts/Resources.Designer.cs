@@ -75,6 +75,8 @@ namespace  Billmanager.Translations.Texts {
         public static string Addresscard => ResourceManager.GetString("Addresscard", resourceCulture);       
         /// <summary>Looks up a localized string similar to Bill.</summary>
         public static string Bill => ResourceManager.GetString("Bill", resourceCulture);       
+        /// <summary>Looks up a localized string similar to Billmanager.</summary>
+        public static string Billmanager => ResourceManager.GetString("Billmanager", resourceCulture);       
         /// <summary>Looks up a localized string similar to Cancel.</summary>
         public static string Cancel => ResourceManager.GetString("Cancel", resourceCulture);       
         /// <summary>Looks up a localized string similar to CarDocuments.</summary>
