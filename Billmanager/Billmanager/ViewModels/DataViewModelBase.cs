@@ -33,6 +33,8 @@ namespace Billmanager.ViewModels
             {
                 await this.DataStore.UpdateItemAsync(this.Model).ConfigureAwait(false);
             }
+
+            await NavigationService.GoBackAsync();
         }
     }
 }

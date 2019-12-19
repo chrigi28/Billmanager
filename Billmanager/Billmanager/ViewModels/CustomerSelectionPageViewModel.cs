@@ -18,14 +18,28 @@ namespace Billmanager.ViewModels
     {
         private IEnumerable<ICustomerDbt> itemSource;
         private ICustomerDbt selectedItem;
+        private string _filter;
 
         public CustomerSelectionPageViewModel(INavigationService ns) : base(ns)
         {
         }
 
+        public string Filter
+        {
+            get => _filter;
+            set
+            {
+                if (_filter != value)
+                {
+                    _filter = value;
+                    this.FilterItems(_filter);
+                }
+            }
+        }
+
         public ICommand FilterCommand => new Command<string>(FilterItems);
-        
-        public ObservableCollection<ICustomerDbt> FilteredItems;
+
+        public ObservableCollection<ICustomerDbt> FilteredItems { get; set; }
 
         public ICustomerDbt SelectedItem
         {
@@ -40,21 +54,24 @@ namespace Billmanager.ViewModels
 
         private void FilterItems(string filter)
         {
-            var filteredItems = itemSource.Where(i=> i.FilterString.Contains(filter)).ToList();
-            foreach (var item in filteredItems)
-            {
-                if (!FilteredItems.Contains(item))
-                {
-                    this.FilteredItems.Remove(item);
-                }
-                else
-                {
-                    if (!this.FilteredItems.Contains(item))
-                    {
-                        this.FilteredItems.Add(item);
-                    }
-                }
-            }
+            var filteredItems = itemSource.Where(i => i.FilterString.Contains(filter)).ToList();
+            ////foreach (var item in filteredItems)
+            ////{
+            ////    if (!FilteredItems.Contains(item))
+            ////    {
+            ////        this.FilteredItems.Remove(item);
+            ////    }
+            ////    else
+            ////    {
+            ////        if (!this.FilteredItems.Contains(item))
+            ////        {
+            ////            this.FilteredItems.Add(item);
+            ////        }
+            ////    }
+            ////}
+            this.FilteredItems = new ObservableCollection<ICustomerDbt>(filteredItems);
+
+            this.RaisePropertyChanged(nameof(this.FilteredItems));
         }
 
         public override async void Initialize(INavigationParameters parameters)
@@ -62,6 +79,7 @@ namespace Billmanager.ViewModels
             base.Initialize(parameters);
             this.itemSource = await DependencyService.Get<ICustomerService>().GetCustomerSelection();
             this.FilteredItems = new ObservableCollection<ICustomerDbt>(this.itemSource);
+            this.RaisePropertyChanged(nameof(this.FilteredItems));
         }
 
         public override void OnNavigatedFrom(INavigationParameters parameters)

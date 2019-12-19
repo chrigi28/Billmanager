@@ -29,7 +29,7 @@ namespace Billmanager.ViewModels
         
         private async Task SelectCustomer()
         {
-            await this.NavigationService.NavigateAsync("CustomerSelection");
+            await this.NavigationService.NavigateAsync("CustomerSelectionPage");
         }
     }
 }

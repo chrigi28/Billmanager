@@ -40,7 +40,7 @@ namespace Billmanager
             containerRegistry.RegisterForNavigation<CreateWorkcardPage, CreateWorkcardPageViewModel>();
             containerRegistry.RegisterForNavigation<CreateAddresscardPage, CreateAddresscardPageViewModel>();
             containerRegistry.RegisterForNavigation<CreateOffertPage, CreateOffertPageViewModel>();
-            containerRegistry.RegisterForNavigation<CustomerSelectionPage, CustomerSelectionPageViewModel>("CustomerSelection");
+            containerRegistry.RegisterForNavigation<CustomerSelectionPage, CustomerSelectionPageViewModel>();
         }
     }
 }

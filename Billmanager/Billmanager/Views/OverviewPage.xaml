@@ -73,5 +73,11 @@
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateAddresscardCommand}"/>
+            <Button Text="{x:Static texts:Resources.Customer}"
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    VerticalOptions="FillAndExpand" 
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding CustomerSelectionCommand}"/>
         </Grid>
 </ContentPage>

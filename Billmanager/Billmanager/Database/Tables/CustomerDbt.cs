@@ -12,7 +12,7 @@ namespace Billmanager.Database.Tables
         public string Location { get; set; }
         public string Phone { get; set; }
 
-        public override string FilterString => this.Title_customer + FilterString + LastName + Address + Zip +
+        public override string FilterString => this.Title_customer + LastName + Address + Zip +
                                                Location + Phone + base.FilterString;
     }
 }
