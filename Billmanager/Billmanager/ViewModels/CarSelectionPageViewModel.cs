@@ -2,10 +2,7 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
-using Billmanager.Interfaces;
 using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
 using Billmanager.StaticAppData;
@@ -14,19 +11,19 @@ using Xamarin.Forms;
 
 namespace Billmanager.ViewModels
 {
-    public class CustomerSelectionPageViewModel : GenericSelectionViewModel<ICustomerDbt>
+    public class CarSelectionPageViewModel  : GenericSelectionViewModel<ICarDbt>
     {
-        public CustomerSelectionPageViewModel(INavigationService ns) : base(ns)
+        public CarSelectionPageViewModel(INavigationService ns) : base(ns)
         {
         }
 
-        public override ICustomerDbt SelectedItem
+        public override ICarDbt SelectedItem
         {
             get => this.selectedItem;
             set
             {
                 this.selectedItem = value;
-                SelectionData.SelectedCustomer = value;
+                SelectionData.SelectedCar = value;
                 this.NavigationService.GoBackAsync();
             }
         }
@@ -34,7 +31,7 @@ namespace Billmanager.ViewModels
         public override async void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
-            this.ItemSource = await DependencyService.Get<ICustomerService>().GetCustomerSelection();
+            this.ItemSource = await DependencyService.Get<ICarService>().GetCarSelection();
         }
     }
 }

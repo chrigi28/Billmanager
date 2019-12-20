@@ -4,6 +4,7 @@ namespace Billmanager.Database.Tables
 {
     public class CarDbt : BaseDbt, ICarDbt
     {
+        public CustomerDbt Customer { get; set; }
         public string CarMake { get; set; }
         public string Typ { get; set; }
         public string Typecertificate { get; set; }

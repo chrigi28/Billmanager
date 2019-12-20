@@ -24,7 +24,7 @@ namespace Billmanager.Database.Tables
         }
 
         public DbSet<T> Table { get; set; }
-
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = string.Format($"Filename={storagePath}");
@@ -36,6 +36,18 @@ namespace Billmanager.Database.Tables
         {
             // todo set necessery columns depending on the type
             modelBuilder.Entity<T>().HasKey(f => f.Id);
+
+            if (typeof(CustomerDbt).IsAssignableFrom(typeof(T)))
+            {
+                modelBuilder.Entity<CustomerDbt>()
+                    .HasMany<CarDbt>()
+                    .WithOne(c => c.Customer);
+            }
+            if (typeof(CarDbt).IsAssignableFrom(typeof(T)))
+            {
+                modelBuilder.Entity<CarDbt>()
+                    .HasOne(p => p.Customer);
+            }
         }
 
         public async Task<bool> AddItemAsync(T item)
