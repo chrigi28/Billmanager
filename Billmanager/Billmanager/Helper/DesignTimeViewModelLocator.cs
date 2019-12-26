@@ -13,6 +13,7 @@ namespace Billmanager.Helper
         public static CreateOffertPageViewModel CreateOffertPageViewModel => new CreateOffertPageViewModel(null);
         public static CreateWorkcardPageViewModel CreateWorkcardPageViewModel => new CreateWorkcardPageViewModel(null);
         public static CustomerSelectionPageViewModel CustomerSelectionPageViewModel => new CustomerSelectionPageViewModel(null);
+        
 
         ////public static SelectionPageViewModel SelectionPageViewModel => new SelectionPageViewModel<null>(null);
     }

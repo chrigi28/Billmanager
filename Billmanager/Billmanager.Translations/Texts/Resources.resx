@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>Adresse</value>
   </data>
   <data name="Addresscard" xml:space="preserve">
     <value>Addresskarte</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Menge</value>
   </data>
   <data name="Bill" xml:space="preserve">
     <value>Rechnung</value>
@@ -143,6 +149,9 @@
   </data>
   <data name="ChassisNo" xml:space="preserve">
     <value>Chassis Nr.</value>
+  </data>
+  <data name="Conclusion" xml:space="preserve">
+    <value>Zusammenfassung</value>
   </data>
   <data name="CreateAddresscard" xml:space="preserve">
     <value>Adresskarte erstellen</value>
@@ -168,6 +177,15 @@
   <data name="Customer" xml:space="preserve">
     <value>Kunde</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Bezeichnung</value>
+  </data>
+  <data name="Dun" xml:space="preserve">
+    <value>Mahnung</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Bearbeiten</value>
   </data>
@@ -186,21 +204,36 @@
   <data name="Location" xml:space="preserve">
     <value>Ort</value>
   </data>
+  <data name="Material" xml:space="preserve">
+    <value>Material</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="NetPrice" xml:space="preserve">
+    <value>Nettopreis</value>
   </data>
   <data name="New" xml:space="preserve">
     <value>Neu</value>
   </data>
+  <data name="Offer" xml:space="preserve">
+    <value>Offerte</value>
+  </data>
   <data name="Overview" xml:space="preserve">
     <value>Übersicht</value>
     <comment>initial page name</comment>
+  </data>
+  <data name="Payed" xml:space="preserve">
+    <value>Bezahlt</value>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Tel. Nr.</value>
   </data>
   <data name="Plate" xml:space="preserve">
     <value>Kontrollschild</value>
+  </data>
+  <data name="Ppp" xml:space="preserve">
+    <value>Stk. Preis</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Drucken</value>
@@ -214,14 +247,29 @@
   <data name="Save" xml:space="preserve">
     <value>Speichern</value>
   </data>
+  <data name="Select" xml:space="preserve">
+    <value>Auswählen</value>
+  </data>
   <data name="Titel_Customer" xml:space="preserve">
     <value>Anrede</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>Ges. Preis</value>
   </data>
   <data name="Typ" xml:space="preserve">
     <value>Typ</value>
   </data>
   <data name="Typecertificate" xml:space="preserve">
     <value>Typenschein</value>
+  </data>
+  <data name="Vehicle" xml:space="preserve">
+    <value>Fahrzeug</value>
+  </data>
+  <data name="Work" xml:space="preserve">
+    <value>Arbeit</value>
   </data>
   <data name="Workcard" xml:space="preserve">
     <value>Arbeitskarte</value>

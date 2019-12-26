@@ -7,10 +7,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
-             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateBillViewModel}}"
+             xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
+             BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateBillPageViewModel}}"
              mc:Ignorable="d"
              >
-  
+
     <Grid VerticalOptions="FillAndExpand"
           HorizontalOptions="FillAndExpand">
         <Grid.RowDefinitions>
@@ -20,8 +21,205 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Text="{x:Static texts:Resources.Bill}"
+               Grid.Row="0"
+               Grid.Column="1"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="CenterAndExpand" 
+               FontSize="Large"/>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="0" >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static texts:Resources.Customer}" />
+                    <Span Text=":"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Button Text="{x:Static texts:Resources.Select}"
+                Command="{Binding SelectCustomerCommand}"
+                Grid.Row="1"
+                Grid.Column="1" />
+
+        <Label
+            Grid.Row="2"
+            Grid.Column="0" >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static texts:Resources.Vehicle}" />
+                    <Span Text=":"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Button Text="{x:Static texts:Resources.Vehicle}"
+                Command="{Binding SelectCarCommand}"
+                Grid.Row="2"
+                Grid.Column="1" />
+
+        <Label
+            Grid.Row="3"
+            Grid.Column="0" >
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static texts:Resources.Date}" />
+                    <Span Text=":"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <DatePicker Date="{Binding Model.Date}"
+               Grid.Row="3"
+               Grid.Column="1"
+               Margin="0,10,0,0"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand"  />
+
+        <Label 
+            Grid.Row="4"
+            Grid.Column="0">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static texts:Resources.Conclusion}" />
+                    <Span Text=":"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Entry Text="{Binding  Model.Conclusion}" Placeholder="{x:Static texts:Resources.Conclusion}" 
+               Grid.Row="4"
+               Grid.Column="1"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+
+        <Grid Grid.Row="5" Column="0" ColumnSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.15*" />
+                <ColumnDefinition Width="0.15*" />
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="{x:Static texts:Resources.Description}" 
+                   Grid.Row="0"
+                   Grid.Column="0"/>
+            <Label Text="{x:Static texts:Resources.Amount}" 
+                   Grid.Row="0"
+                   Grid.Column="1"/>
+            <Label Text="{x:Static texts:Resources.Ppp}" 
+                   Grid.Row="0"
+                   Grid.Column="2"/>
+            <Label Text="{x:Static texts:Resources.TotalPrice}" 
+                   Grid.Row="0"
+                   Grid.Column="3"/>
+
+            <Entry Text="{Binding Description}" 
+                   Grid.Row="1"
+                   Grid.Column="0"/>
+            <Entry Text="{Binding Amount}" 
+                   Keyboard="Numeric"
+                   Grid.Row="1"
+                   Grid.Column="1"/>
+            <Entry Text="{Binding PricePerPiece}" 
+                   Keyboard="Numeric"
+                   Grid.Row="1"
+                   Grid.Column="2"/>
+            <Label Text="{Binding ItemTotal}" 
+                   Grid.Row="1"
+                   Grid.Column="3"/>
+            <Button Text="{x:Static texts:Resources.Add}" 
+                    Grid.Row="1"
+                    Grid.Column="4"
+                    Command="{Binding AddPositionCommand}"/>
+
+            <ListView ItemsSource="{Binding Items}"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="5"
+                  Grid.Row="2">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.15*" />
+                                <ColumnDefinition Width="0.2*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Description}" 
+                               Grid.Column="0"/>
+                            <Label Text="{Binding Amount}" 
+                               Grid.Column="1"/>
+                            <Label Text="{Binding PricePerPiece}" 
+                               Grid.Column="2"/>
+                            <Label Text="{Binding Total}" 
+                               Grid.Column="3"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label Text="{x:Static texts:Resources.Total}" 
+                   Grid.Row="3"
+                   Grid.Column="3"/>
+
+            <Label Text="{Binding Total}" 
+                   Grid.Row="3"
+                   Grid.Column="3"/>
+        </Grid>
+
+        <Label Text="{x:Static texts:Resources.NetPrice}" 
+               Grid.Row="6"
+               Grid.Column="0"/>
+
+        <Entry Text="{Binding NetPrice}" 
+               Keyboard="Numeric"
+               Grid.Row="6"
+               Grid.Column="1"/>
+
+        <Label Text="REPLACE KM-Stand" 
+               Grid.Row="7"
+               Grid.Column="0"/>
+
+        <Entry Text="{Binding NetPrice}" 
+               Keyboard="Numeric"
+               Grid.Row="7"
+               Grid.Column="1"/>
+
+        <Label Text="{x:Static texts:Resources.Payed}" 
+               Grid.Row="8"
+               Grid.Column="0"/>
+
+        <check Text="{Binding NetPrice}" 
+               Keyboard="Numeric"
+               Grid.Row="8"
+               Grid.Column="1"/>
+
+        <Button Grid.Row="12"
+                Grid.Column="1"
+                Text="{x:Static texts:Resources.Save}" 
+                Command="{Binding SaveCommand}"/>
 
     </Grid>
 </ContentPage>

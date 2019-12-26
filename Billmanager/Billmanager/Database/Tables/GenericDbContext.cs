@@ -34,19 +34,26 @@ namespace Billmanager.Database.Tables
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // todo set necessery columns depending on the type
-            modelBuilder.Entity<T>().HasKey(f => f.Id);
-
             if (typeof(CustomerDbt).IsAssignableFrom(typeof(T)))
             {
+                modelBuilder.Entity<CustomerDbt>().HasKey(f => f.CustomerId);
                 modelBuilder.Entity<CustomerDbt>()
                     .HasMany<CarDbt>()
                     .WithOne(c => c.Customer);
             }
+            else 
             if (typeof(CarDbt).IsAssignableFrom(typeof(T)))
             {
+                modelBuilder.Entity<CarDbt>().HasKey(f => f.CarId);
                 modelBuilder.Entity<CarDbt>()
                     .HasOne(p => p.Customer);
+            }
+            else 
+            if (typeof(BillDbt).IsAssignableFrom(typeof(T)))
+            {
+                modelBuilder.Entity<BillDbt>().HasKey(f => f.BillId);
+                modelBuilder.Entity<BillDbt>().HasOne(p => p.Customer);
+                modelBuilder.Entity<BillDbt>().HasMany<ItemPositionDbt>().WithOne(i => i.Bill);
             }
         }
 

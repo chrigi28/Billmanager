@@ -4,6 +4,7 @@ namespace Billmanager.Interfaces.Database.Datatables
 {
     public interface ICarDbt : IDatabaseTable
     {
+        string CarId { get; set; }
         string CarMake { get; set; }
         string Typ { get; set; }
         string Typecertificate { get; set; }
