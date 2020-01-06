@@ -12,9 +12,9 @@ namespace Billmanager.Database.Tables
         public string CustomerId { get; set; }
         public CarDbt Car { get; set; }
         public string CarId { get; set; }
+        
+        public IList<ItemPositionDbt> ItemPositions { get; set; }
 
-
-        public IList<IItemPositionDbt> ItemPositions { get; set; }
         public DateTime Date { get; set; }
         public string Conclusion { get; set; }
         public int kilometers { get; set; }
@@ -22,7 +22,6 @@ namespace Billmanager.Database.Tables
         public decimal Total { get; }
         public bool Payed { get; set; }
 
-
-        public override string FilterString => base.FilterString;
+        ////public override string FilterString => base.FilterString;
     }
 }

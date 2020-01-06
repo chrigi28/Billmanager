@@ -23,7 +23,7 @@ namespace Billmanager.ViewModels
         public T Model { get; set; }
 
         /// <summary>If Id of item is empty => new add otherwise update</summary>
-        public async Task Save()
+        public virtual async Task Save(bool goBack = true)
         {
             if (this.Model.Id.IsNullOrEmpty())
             {
@@ -34,7 +34,10 @@ namespace Billmanager.ViewModels
                 await this.DataStore.UpdateItemAsync(this.Model).ConfigureAwait(false);
             }
 
-            await NavigationService.GoBackAsync();
+            if (goBack)
+            {
+                await NavigationService.GoBackAsync();
+            }
         }
     }
 }

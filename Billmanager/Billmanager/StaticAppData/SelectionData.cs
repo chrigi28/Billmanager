@@ -10,8 +10,32 @@ namespace Billmanager.StaticAppData
 {
     public static class SelectionData
     {
-        public static ICustomerDbt SelectedCustomer { get; set; }
-        public static ICarDbt SelectedCar { get; set; }
-        public static IBillDbt SelectedBill { get; set; }
+        private static ICustomerDbt _selectedCustomer;
+        private static ICarDbt _selectedCar;
+        private static IBillDbt _selectedBill;
+
+        public static ICustomerDbt SelectedCustomer
+        {
+            get => _selectedCustomer;
+            set
+            {
+                if (_selectedCustomer == value)
+                {
+                    _selectedCustomer = value;
+                }
+            }
+        }
+
+        public static ICarDbt SelectedCar
+        {
+            get => _selectedCar;
+            set => _selectedCar = value;
+        }
+
+        public static IBillDbt SelectedBill
+        {
+            get => _selectedBill;
+            set => _selectedBill = value;
+        }
     }
 }

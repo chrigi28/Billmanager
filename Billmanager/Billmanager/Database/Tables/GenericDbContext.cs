@@ -53,7 +53,7 @@ namespace Billmanager.Database.Tables
             {
                 modelBuilder.Entity<BillDbt>().HasKey(f => f.BillId);
                 modelBuilder.Entity<BillDbt>().HasOne(p => p.Customer);
-                modelBuilder.Entity<BillDbt>().HasMany<ItemPositionDbt>().WithOne(i => i.Bill);
+                ////modelBuilder.Entity<BillDbt>().HasMany<ItemPositionDbt>().WithOne(i => i.Bill);
             }
         }
 

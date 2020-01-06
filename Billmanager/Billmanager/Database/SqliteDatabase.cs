@@ -23,8 +23,8 @@ namespace Billmanager.Database
         {
             Tables.Add(typeof(CustomerDbt), new GenericDbContext<CustomerDbt>("CustomerDbt"));
             Tables.Add(typeof(CarDbt), new GenericDbContext<CarDbt>("CarDbt"));
-            ////Tables.Add(typeof(CustomerDbt), new GenericDbContext<ICustomerDbt>("ItemDbt"));
-            ////Tables.Add(typeof(CustomerDbt), new GenericDbContext<ICustomerDbt>("ItemDbt"));
+            Tables.Add(typeof(BillDbt), new GenericDbContext<BillDbt>("BillDbt"));
+            Tables.Add(typeof(ItemPositionDbt), new GenericDbContext<ItemPositionDbt>("ItemPositionDbt"));
             ////Tables.Add(typeof(CustomerDbt), new GenericDbContext<ICustomerDbt>("ItemDbt"));
             ////Tables.Add(typeof(CustomerDbt), new GenericDbContext<ICustomerDbt>("ItemDbt"));
             ////Tables.Add(typeof(CustomerDbt), new GenericDbContext<ICustomerDbt>("ItemDbt"));

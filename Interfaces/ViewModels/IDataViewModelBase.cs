@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Billmanager.Interfaces.Database;
 using Prism.Navigation;
+using Prism.Navigation.Xaml;
 using Xamarin.Forms;
 
 namespace Billmanager.Interface.ViewModels
@@ -13,6 +14,6 @@ namespace Billmanager.Interface.ViewModels
         T Model { get; set; }
 
         /// <summary>If Id of item is empty => new add otherwise update</summary>
-        Task Save();
+        Task Save(bool goBack = true);
     }
 }

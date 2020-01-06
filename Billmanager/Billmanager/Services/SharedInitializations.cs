@@ -12,14 +12,21 @@ namespace Billmanager.Services
         public static void Initialize()
         {
             DependencyService.Register<IDbPath>();
-            DependencyService.Register<ICustomerService>();
-            DependencyService.Register<ICarService>();
             DependencyService.Register<ISelectionData>();
+
+            InitializeServices();
         }
 
         public static void PreInit()
         {
             Resources.Culture = new CultureInfo("de-CH");
+        }
+
+        private static void InitializeServices()
+        {
+            DependencyService.Register<ICustomerService>();
+            DependencyService.Register<ICarService>();
+            DependencyService.Register<IBillService>();
         }
     }
 }

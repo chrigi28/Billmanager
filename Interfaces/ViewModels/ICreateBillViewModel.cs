@@ -2,8 +2,10 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Billmanager.Interfaces.Data;
+using Billmanager.Interfaces.Database.Datatables;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -21,6 +23,6 @@ namespace Billmanager.Interface.ViewModels
         decimal ItemTotal { get; }
         decimal Total { get; }
 
-        IList<IItemPosition> Items { get; set; }
+        ObservableCollection<IItemPositionDbt> Items { get; }
     }
 }

@@ -9,8 +9,7 @@ namespace Billmanager.Database.Tables
     {
         public string ItemPositionId { get; set; }
         public string BillId { get; set; }
-        public BillDbt Bill { get; set; }
-        
+
         public string Description { get; set; }
         public int Amount { get; set; }
         public decimal Price { get; set; }

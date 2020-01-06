@@ -12,7 +12,7 @@ namespace Billmanager.Interfaces.Database.Datatables
         string CustomerId { get; set; }
         string CarId { get; set; }
 
-        IList<IItemPositionDbt> ItemPositions { get; set; }
+        ////IList<IItemPositionDbt> ItemPositions { get; set; }
         DateTime Date { get; set; }
         string Conclusion { get; set; }
         int kilometers { get; set; }
