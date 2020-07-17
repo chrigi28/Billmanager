@@ -29,6 +29,7 @@ namespace Billmanager.ViewModels
         private decimal _itemTotal;
         private decimal _total;
         private ObservableCollection<IItemPositionDbt> _items;
+        private IItemPositionDbt _activeItem;
 
         public CreateBillPageViewModel(INavigationService ns) : base(ns)
         {
@@ -98,6 +99,16 @@ namespace Billmanager.ViewModels
             }
         }
 
+        public IItemPositionDbt ActiveItem
+        {
+            get => _activeItem;
+            set
+            {
+                _activeItem = value; 
+                this.RaisePropertyChanged();
+            }
+        }
+
         public decimal ItemTotal => this.Amount * this.PricePerPiece;
 
         public decimal Total => this.Items.Sum(f => f.Total);
@@ -122,7 +133,7 @@ namespace Billmanager.ViewModels
             if (StaticAppData.SelectionData.SelectedBill != null)
             {
                 this.Model = (BillDbt)StaticAppData.SelectionData.SelectedBill;
-                this._items = new ObservableCollection<IItemPositionDbt>(DependencyService.Get<IBillService>().GetItemPositions(this.Model.BillId));
+                this._items = new ObservableCollection<IItemPositionDbt>(DependencyService.Get<IBillService>().GetItemPositions(this.Model.Id));
                 this.RaisePropertyChanged(nameof(this.Items));
             }
 
@@ -154,13 +165,14 @@ namespace Billmanager.ViewModels
             {
                 var item = new ItemPositionDbt()
                 {
-                    BillId = this.Model.BillId,
+                    BillId = this.Model.Id,
                     Amount = this.Amount,
                     Description = this.Description,
                     Price = this.PricePerPiece,
                 };
 
                 this._items.Add(item);
+                this.ActiveItem = item;
                 this.RaisePropertyChanged(nameof(this.Items));
             }
         }

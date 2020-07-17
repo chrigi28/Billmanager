@@ -7,5 +7,6 @@ namespace Billmanager.Interfaces.Service
     public interface ICarService
     {
         Task<IEnumerable<ICarDbt>> GetCarSelection();
+        Task<IEnumerable<ICarDbt>> GetCarSelectionFromCustomer(string customer);
     }
 }

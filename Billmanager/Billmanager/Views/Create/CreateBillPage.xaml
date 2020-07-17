@@ -10,6 +10,7 @@
              xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateBillPageViewModel}}"
              mc:Ignorable="d"
+             Padding="10,5"
              >
 
     <Grid VerticalOptions="FillAndExpand"
@@ -20,15 +21,15 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -87,7 +88,6 @@
         <DatePicker Date="{Binding Model.Date}"
                Grid.Row="3"
                Grid.Column="1"
-               Margin="0,10,0,0"
                VerticalOptions="FillAndExpand" 
                HorizontalOptions="FillAndExpand"  />
 
@@ -107,7 +107,9 @@
                VerticalOptions="FillAndExpand" 
                HorizontalOptions="FillAndExpand" />
 
-        <Grid Grid.Row="5" Column="0" ColumnSpan="3">
+        <Grid Grid.Row="5" Column="0" ColumnSpan="3"
+              HorizontalOptions="Fill"
+              VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -152,31 +154,45 @@
             <Button Text="{x:Static texts:Resources.Add}" 
                     Grid.Row="1"
                     Grid.Column="4"
-                    Command="{Binding AddPositionCommand}"/>
+                    Command="{Binding AddPositionCommand}"
+                    WidthRequest="150"/>
 
             <ListView ItemsSource="{Binding Items}"
                   Grid.Column="0"
                   Grid.ColumnSpan="5"
                   Grid.Row="2"
-                  BackgroundColor="Blue">
+                  SelectionMode="Single"
+                  SelectedItem="{Binding ActiveItem}"
+                  VerticalOptions="FillAndExpand"
+                  BackgroundColor="LightGray">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid HorizontalOptions="FillAndExpand">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="0.15*" />
                                 <ColumnDefinition Width="0.15*" />
                                 <ColumnDefinition Width="0.2*" />
+                                <ColumnDefinition Width="150" />
                             </Grid.ColumnDefinitions>
                             <Label Text="{Binding Description}" 
-                               Grid.Column="0"/>
+                               Grid.Column="0"
+                               FontSize="Medium"
+                               FontAttributes="Bold"/>
                             <Label Text="{Binding Amount}" 
-                               Grid.Column="1"/>
-                            <Label Text="{Binding PricePerPiece}" 
+                                   FontSize="Medium"
+                                   FontAttributes="Bold"
+                                   Grid.Column="1"/>
+                            <Label Text="{Binding Price}" 
+                                   FontSize="Medium"
+                                   FontAttributes="Bold"
                                Grid.Column="2"/>
                             <Label Text="{Binding Total}" 
+                                   FontSize="Medium"
+                                   FontAttributes="Bold"
                                Grid.Column="3"/>
+                            
                         </Grid>
                             </ViewCell>
                     </DataTemplate>

@@ -27,58 +27,58 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\CarSelectionPage.xaml">
+    <EmbeddedResource Update="Views\Select\CarSelectionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateAddresscardPage.xaml">
+    <EmbeddedResource Update="Views\Create\CreateAddresscardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateBillPage.xaml">
+    <EmbeddedResource Update="Views\Create\CreateBillPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateCarPage.xaml">
+    <EmbeddedResource Update="Views\Create\CreateCarPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateCustomerPage.xaml">
+    <EmbeddedResource Update="Views\Create\CreateCustomerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateOffertPage.xaml">
+    <EmbeddedResource Update="Views\Create\CreateOffertPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CreateWorkcardPage.xaml">
+    <EmbeddedResource Update="Views\Create\CreateWorkcardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\OverviewPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CustomerSelectionPage.xaml">
+    <EmbeddedResource Update="Views\Select\CustomerSelectionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\CreateAddresscardPage.xaml.cs">
+    <Compile Update="Views\Create\CreateAddresscardPage.xaml.cs">
       <DependentUpon>CreateAddresscardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CreateBillPage.xaml.cs">
+    <Compile Update="Views\Create\CreateBillPage.xaml.cs">
       <DependentUpon>CreateBillPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CreateCarPage.xaml.cs">
+    <Compile Update="Views\Create\CreateCarPage.xaml.cs">
       <DependentUpon>CreateCarPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CreateCustomerPage.xaml.cs">
+    <Compile Update="Views\Create\CreateCustomerPage.xaml.cs">
       <DependentUpon>CreateCustomerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CreateOffertPage.xaml.cs">
+    <Compile Update="Views\Create\CreateOffertPage.xaml.cs">
       <DependentUpon>CreateOffertPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CreateWorkcardPage.xaml.cs">
+    <Compile Update="Views\Create\CreateWorkcardPage.xaml.cs">
       <DependentUpon>CreateWorkcardPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\OverviewPage.xaml.cs">
       <DependentUpon>OverviewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\CustomerSelectionPage.xaml.cs">
+    <Compile Update="Views\Select\CustomerSelectionPage.xaml.cs">
       <DependentUpon>CustomerSelectionPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>

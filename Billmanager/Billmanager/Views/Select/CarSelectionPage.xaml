@@ -4,13 +4,19 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Billmanager.Views.CarSelectionPage">
+             x:Class="Billmanager.Views.CarSelectionPage"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+             xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
+             xmlns:texts1="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
+             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CarSelectionPageViewModel}}"
+             mc:Ignorable="d helper">
 
 
     <StackLayout Margin="20"
                  HorizontalOptions="FillAndExpand"
                  VerticalOptions="FillAndExpand">
-        <Label Text="{x:Static texts:Resources.CarInformation}" HorizontalOptions="CenterAndExpand"/>
+        <Label Text="{x:Static texts1:Resources.CarInformation}" HorizontalOptions="CenterAndExpand"/>
         <SearchBar x:Name="searchBar"
                    Text="{Binding Filter}"
                    Placeholder="Filter" />
@@ -33,33 +39,51 @@
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
                                 <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding FirstName}"
+                            <Label Text="{Binding CarMake}"
                                Margin="10"
                                Grid.Column="0"
                                FontAttributes="Bold"
                                FontSize="18"/>
-                            <Label Text="{Binding LastName}"
+                            <Label Text="{Binding Typ}"
                                Margin="10"
                                Grid.Column="1"
                                FontAttributes="Bold"
                                FontSize="18"/>
-                            <Label Text="{Binding Address}"
+                            <Label Text="{Binding Typecertificate}"
                                Margin="10"
                                Grid.Column="2"
                                FontAttributes="Bold"
                                FontSize="18"/>
-                            <Label Text="{Binding Zip}"
+                            <Label Text="{Binding EnginNo}"
                                Margin="10"
                                Grid.Column="3"
                                FontAttributes="Bold"
                                FontSize="18"/>
-                            <Label Text="{Binding Location}"
+                            <Label Text="{Binding FirstOnMarket}"
                                Margin="10"
                                Grid.Column="4"
                                FontAttributes="Bold"
                                FontSize="18"/>
-                            <Label Text="{Binding Phone}"
+                            <Label Text="{Binding Cubic}"
+                               Margin="10"
+                               Grid.Column="5"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                            <Label Text="{Binding ChassisNo}"
+                               Margin="10"
+                               Grid.Column="3"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                            <Label Text="{Binding Plate}"
+                               Margin="10"
+                               Grid.Column="4"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                            <Label Text="{Binding Rootnumber}"
                                Margin="10"
                                Grid.Column="5"
                                FontAttributes="Bold"

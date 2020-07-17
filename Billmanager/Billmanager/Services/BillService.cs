@@ -15,7 +15,7 @@ namespace Billmanager.Services
     {
         public IEnumerable<IBillDbt> GetBillById(string BillId)
         {
-            return SqliteDatabase.GetTable<BillDbt>().Table.Where(f => f.BillId == BillId);
+            return SqliteDatabase.GetTable<BillDbt>().Table.Where(f => f.Id == BillId);
         }
 
         public IEnumerable<IBillDbt> GetBillByCar(string CarId)

@@ -32,6 +32,7 @@ namespace Billmanager.ViewModels
         {
             base.Initialize(parameters);
             this.ItemSource = await DependencyService.Get<ICarService>().GetCarSelection();
+            this.ItemSource = await DependencyService.Get<ICarService>().GetCarSelection();
         }
     }
 }

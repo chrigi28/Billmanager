@@ -8,7 +8,6 @@ namespace Billmanager.Interfaces.Database.Datatables
 {
     public interface IItemPositionDbt : IDatabaseTable
     {
-        string ItemPositionId { get; set; }
         string BillId { get; set; }
         int Amount { get; set; }
         decimal Price { get; set; }

@@ -4,12 +4,6 @@ namespace Billmanager.Database.Tables
 {
     public class CustomerDbt : BaseDbt, ICustomerDbt
     {
-
-        public string CustomerId
-        {
-            get => this.Id;
-            set => this.Id = value;
-        }
         public string Title_customer { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -18,7 +12,7 @@ namespace Billmanager.Database.Tables
         public string Location { get; set; }
         public string Phone { get; set; }
 
-        public override string FilterString => this.Title_customer + LastName + Address + Zip +
+        public override string FilterString => base.FilterString + this.Title_customer + LastName + Address + Zip +
                                                Location + Phone + base.FilterString;
 
     }

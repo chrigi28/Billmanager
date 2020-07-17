@@ -4,6 +4,7 @@ namespace Billmanager.Database.Tables
 {
     public class CarDbt : BaseDbt, ICarDbt
     {
+        public string CustomerId { get; set; }
         public CustomerDbt Customer { get; set; }
         public string CarId { get; set; }
         public string CarMake { get; set; }
@@ -16,7 +17,7 @@ namespace Billmanager.Database.Tables
         public string Plate { get; set; }
         public string Rootnumber { get; set; }
 
-        public override string FilterString => CarMake + Typ + Typecertificate + EnginNo + FirstOnMarket + Cubic +
+        public override string FilterString => base.FilterString + CarMake + Typ + Typecertificate + EnginNo + FirstOnMarket + Cubic +
                                                ChassisNo + Plate + Rootnumber + base.FilterString;
     }
 }
