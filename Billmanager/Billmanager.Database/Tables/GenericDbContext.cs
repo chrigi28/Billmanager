@@ -33,37 +33,38 @@ namespace Billmanager.Database.Tables
             optionsBuilder.UseSqlite(connectionString);
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            if (typeof(CustomerDbt).IsAssignableFrom(typeof(T)))
-            {
-                modelBuilder.Entity<CustomerDbt>().HasKey(f => f.Id);
-                modelBuilder.Entity<CustomerDbt>()
-                    .HasMany<CarDbt>()
-                    .WithOne(c => c.Customer);
-            }
-            else 
-            if (typeof(CarDbt).IsAssignableFrom(typeof(T)))
-            {
-                modelBuilder.Entity<CarDbt>().HasKey(f => f.Id);
-                modelBuilder.Entity<CarDbt>().HasOne(p => p.Customer);
-            }
-            else 
-            if (typeof(BillDbt).IsAssignableFrom(typeof(T)))
-            {
-                modelBuilder.Entity<BillDbt>().HasKey(f => f.Id);
-                modelBuilder.Entity<BillDbt>().HasOne(p => p.Customer);
-                ////modelBuilder.Entity<BillDbt>().HasMany<ItemPositionDbt>().WithOne(i => i.Bill);
-            }
-        }
+        ////protected override void OnModelCreating(ModelBuilder modelBuilder)
+        ////{
+        ////    if (typeof(CustomerDbt).IsAssignableFrom(typeof(T)))
+        ////    {
+        ////        modelBuilder.Entity<CustomerDbt>().HasKey(f => f.Id);
+        ////        modelBuilder.Entity<CustomerDbt>().HasMany<CarDbt>().WithOne(c => c.Customer);
+        ////        modelBuilder.Entity<CustomerDbt>().HasMany<BillDbt>().WithOne(c => c.Customer);
+        ////    }
+        ////    else 
+        ////    if (typeof(CarDbt).IsAssignableFrom(typeof(T)))
+        ////    {
+        ////        modelBuilder.Entity<CarDbt>().HasKey(f => f.Id);
+        ////        modelBuilder.Entity<CarDbt>().HasOne(p => p.Customer);
+        ////        modelBuilder.Entity<CarDbt>().HasMany<BillDbt>().WithOne(p => p.Car);
+        ////    }
+        ////    else 
+        ////    if (typeof(BillDbt).IsAssignableFrom(typeof(T)))
+        ////    {
+        ////        modelBuilder.Entity<BillDbt>().HasKey(f => f.Id);
+        ////        modelBuilder.Entity<BillDbt>().HasOne(p => p.Customer);
+        ////        modelBuilder.Entity<BillDbt>().HasOne(p => p.Car);
+        ////        ////modelBuilder.Entity<BillDbt>().HasMany<ItemPositionDbt>().WithOne(i => i.Bill);
+        ////    }
+        ////}
 
         public async Task<bool> AddItemAsync(T item)
         {
             try
             {
-                if (string.IsNullOrEmpty(item.Id))
+                if (item.Id != -1)
                 {
-                    item.Id = Guid.NewGuid().ToString();
+                    return await this.UpdateItemAsync(item);
                 }
 
                 await Table.AddAsync(item).ConfigureAwait(false);
@@ -90,7 +91,7 @@ namespace Billmanager.Database.Tables
             }
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(int id)
         {
             try
             {
@@ -109,21 +110,21 @@ namespace Billmanager.Database.Tables
             }
         }
 
-        public async Task<T> GetItemAsync(string id)
+        public async Task<T> GetItemAsync(int id)
         {
-            var row = await Table.FirstOrDefaultAsync(f => f.Id == id).ConfigureAwait(false);
+            var row = await Table.FirstOrDefaultAsync(f => f.Id == id && !f.Deleted).ConfigureAwait(false);
             return row;
         }
 
         public async Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false)
         {
-            var rows = await Table.ToListAsync().ConfigureAwait(false);
+            var rows = await Table.Where(f => !f.Deleted).ToListAsync().ConfigureAwait(false);
             return rows;
         }
 
         public async Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> filter, bool forceRefresh = false)
         {
-            var rows = await Table.Where(filter).ToListAsync().ConfigureAwait(false);
+            var rows = await Table.Where(filter).Where(f => !f.Deleted).ToListAsync().ConfigureAwait(false);
             return rows;
         }
     }

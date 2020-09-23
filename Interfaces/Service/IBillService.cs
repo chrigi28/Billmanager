@@ -6,9 +6,9 @@ namespace Billmanager.Interfaces.Service
 {
     public interface IBillService
     {
-        IEnumerable<IBillDbt> GetBillById(string BillId);
-        IEnumerable<IBillDbt> GetBillByCar(string CarId);
-        IEnumerable<IBillDbt> GetBillsOfCustomer(string CustomerId);
-        IEnumerable<IItemPositionDbt> GetItemPositions(string BillId);
+        IEnumerable<IBillDbt> GetBillById(int BillId);
+        IEnumerable<IBillDbt> GetBillByCar(int CarId);
+        IEnumerable<IBillDbt> GetBillsOfCustomer(int CustomerId);
+        IEnumerable<IItemPositionDbt> GetItemPositions(int BillId);
     }
 }

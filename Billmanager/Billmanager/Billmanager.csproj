@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\Billmanager.Interfaces.csproj" />
+    <ProjectReference Include="..\Billmanager.Database\Billmanager.Database.csproj" />
     <ProjectReference Include="..\Billmanager.Translations\Billmanager.Translations.csproj" />
   </ItemGroup>
 

@@ -8,8 +8,8 @@ namespace Billmanager.Interfaces.Database.Datatables
 {
     public interface IBillDbt : IDatabaseTable
     {
-        string CustomerId { get; set; }
-        string CarId { get; set; }
+        int CustomerId { get; set; }
+        int CarId { get; set; }
 
         ////IList<IItemPositionDbt> ItemPositions { get; set; }
         DateTime Date { get; set; }

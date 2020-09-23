@@ -13,22 +13,22 @@ namespace Billmanager.Services
 {
     public class BillService : IBillService
     {
-        public IEnumerable<IBillDbt> GetBillById(string BillId)
+        public IEnumerable<IBillDbt> GetBillById(int BillId)
         {
             return SqliteDatabase.GetTable<BillDbt>().Table.Where(f => f.Id == BillId);
         }
 
-        public IEnumerable<IBillDbt> GetBillByCar(string CarId)
+        public IEnumerable<IBillDbt> GetBillByCar(int CarId)
         {
             return SqliteDatabase.GetTable<BillDbt>().Table.Where(f => f.CarId == CarId);
         }
     
-        public IEnumerable<IBillDbt> GetBillsOfCustomer(string CustomerId)
+        public IEnumerable<IBillDbt> GetBillsOfCustomer(int CustomerId)
         {
             return SqliteDatabase.GetTable<BillDbt>().Table.Where(f => f.CustomerId == CustomerId);
         }
 
-        public IEnumerable<IItemPositionDbt> GetItemPositions(string BillId)
+        public IEnumerable<IItemPositionDbt> GetItemPositions(int BillId)
         {
             return SqliteDatabase.GetTable<IItemPositionDbt>().Table.Where(f => f.BillId == BillId);
         }

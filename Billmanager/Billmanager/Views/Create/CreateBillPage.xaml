@@ -11,6 +11,7 @@
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateBillPageViewModel}}"
              mc:Ignorable="d"
              Padding="10,5"
+             x:Name="Page"
              >
 
     <Grid VerticalOptions="FillAndExpand"
@@ -158,7 +159,6 @@
                   Grid.ColumnSpan="5"
                   Grid.Row="2"
                   SelectionMode="Single"
-                  SelectedItem="{Binding ActiveItem}"
                   VerticalOptions="FillAndExpand"
                   BackgroundColor="LightGray">
                 <ListView.ItemTemplate>
@@ -194,7 +194,8 @@
                             
                             <Button Text="x" 
                                     Grid.Column="4"
-                                    Command="{Binding Source={x:Reference ItemList}, Path=DeleteItemPosition}"
+                                    Command="{Binding Source={x:Reference Page}, Path=BindingContext.DeletePosition}"
+                                    CommandParameter="{Binding .}"
                                     WidthRequest="50" />
                         </Grid>
                             </ViewCell>

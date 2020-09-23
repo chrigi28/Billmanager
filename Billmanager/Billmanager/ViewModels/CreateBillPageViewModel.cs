@@ -1,8 +1,6 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -29,7 +27,7 @@ namespace Billmanager.ViewModels
         private decimal _itemTotal;
         private decimal _total;
         private ObservableCollection<IItemPositionDbt> _items;
-        private IItemPositionDbt _activeItem;
+        private ItemPositionDbt latestItem;
 
         public CreateBillPageViewModel(INavigationService ns) : base(ns)
         {
@@ -99,16 +97,6 @@ namespace Billmanager.ViewModels
             }
         }
 
-        public IItemPositionDbt ActiveItem
-        {
-            get => _activeItem;
-            set
-            {
-                _activeItem = value; 
-                this.RaisePropertyChanged();
-            }
-        }
-
         public ICommand DeletePosition => new Command(this.DeleteItemPosition);
 
         public decimal ItemTotal => this.Amount * this.PricePerPiece;
@@ -139,8 +127,7 @@ namespace Billmanager.ViewModels
                 this.RaisePropertyChanged(nameof(this.Items));
             }
             
-            // add empty item
-            this._items.Add(new ItemPositionDbt());
+            this.AddExtraItem();
 
             if (StaticAppData.SelectionData.SelectedCar != null)
             {
@@ -152,6 +139,24 @@ namespace Billmanager.ViewModels
                 // todo
             }
 
+        }
+
+        private void AddExtraItem()
+        {
+            // add empty item
+            if (this.latestItem != null)
+            {
+                this.latestItem.PropertyChanged -= this.LatestItemOnPropertyChanged;
+            }
+
+            this.latestItem = new ItemPositionDbt();
+            this.latestItem.PropertyChanged += this.LatestItemOnPropertyChanged;
+            this._items.Add(this.latestItem);
+        }
+
+        private void LatestItemOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.AddExtraItem();
         }
 
         private async Task SelectCustomer()
@@ -178,15 +183,26 @@ namespace Billmanager.ViewModels
                 };
 
                 this._items.Add(item);
-                this.ActiveItem = item;
                 this.RaisePropertyChanged(nameof(this.Items));
             }
         }
 
         private void DeleteItemPosition(object item)
         {
-            if (item is IItemPositionDbt position)
+            if (item is ItemPositionDbt position)
             {
+                if (position == this.latestItem)
+                {
+                    this.AddExtraItem();
+                }
+
+                if (position.Id != -1)
+                {
+                    position.Deleted = true;
+
+                    Device.InvokeOnMainThreadAsync(() => Database.SqliteDatabase.GetTable<ItemPositionDbt>().UpdateItemAsync(position));
+                }
+
                 this.Items.Remove(position);
             }
         }

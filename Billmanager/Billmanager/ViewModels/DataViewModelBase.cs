@@ -25,7 +25,7 @@ namespace Billmanager.ViewModels
         /// <summary>If Id of item is empty => new add otherwise update</summary>
         public virtual async Task Save(bool goBack = true)
         {
-            if (this.Model.Id.IsNullOrEmpty())
+            if (this.Model.Id == -1)
             {
                 await this.DataStore.AddItemAsync(this.Model).ConfigureAwait(false);
             }

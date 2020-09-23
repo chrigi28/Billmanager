@@ -15,14 +15,20 @@ namespace Billmanager.Database.Tables
 
         public string BillId { get; set; }
         public BillDbt Bill { get; set; }
-
         public string Description { get; set; }
+
+        public event EventHandler ItemChanged;
 
         public int Amount
         {
             get => _amount;
             set 
             {
+                if (_amount == value)
+                {
+                    return;
+                }
+
                 _amount = value;
                 this.OnPropertyChanged();
             }
@@ -33,6 +39,11 @@ namespace Billmanager.Database.Tables
             get => _price;
             set
             {
+                if (_price == value)
+                {
+                    return;
+                }
+
                 _price = value;
                 this.OnPropertyChanged();
             }
@@ -50,6 +61,7 @@ namespace Billmanager.Database.Tables
             }
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            this.ItemChanged?.Invoke(this, new EventArgs());
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Billmanager.Services
             return await SqliteDatabase.GetTable<CarDbt>().GetItemsAsync();
         }
 
-        public async Task<IEnumerable<ICarDbt>> GetCarSelectionFromCustomer(string customer)
+        public async Task<IEnumerable<ICarDbt>> GetCarSelectionFromCustomer(int customer)
         {
             return await SqliteDatabase.GetTable<CarDbt>().GetItemsAsync(f=> f.CustomerId == customer);
         }
