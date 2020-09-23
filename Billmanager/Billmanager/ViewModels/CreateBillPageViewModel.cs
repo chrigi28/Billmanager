@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Billmanager.Database.Tables;
 using Billmanager.Helper;
 using Billmanager.Interface.ViewModels;
-using Billmanager.Interfaces.Data;
 using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
 using Billmanager.Translations.Texts;
@@ -37,11 +37,11 @@ namespace Billmanager.ViewModels
             this._items = new ObservableCollection<IItemPositionDbt>();
         }
 
-        public Command SelectCarCommand => this._selectCarCommand ?? (this._selectCarCommand = new Command(async () => await this.SelectCar()));
+        public Command SelectCarCommand => this._selectCarCommand ??= new Command(async () => await this.SelectCar());
 
-        public Command SelectCustomerCommand => this._selectCustomerCommand ?? (this._selectCustomerCommand = new Command(async () => await this.SelectCustomer()));
+        public Command SelectCustomerCommand => this._selectCustomerCommand ??= new Command(async () => await this.SelectCustomer());
 
-        public Command AddPositionCommand => this._addPositionCommand ?? (this._addPositionCommand = new Command(this.AddItemPosition));
+        public Command AddPositionCommand => this._addPositionCommand ??= new Command(this.AddItemPosition);
 
         public string Description
         {
@@ -109,6 +109,8 @@ namespace Billmanager.ViewModels
             }
         }
 
+        public ICommand DeletePosition => new Command(this.DeleteItemPosition);
+
         public decimal ItemTotal => this.Amount * this.PricePerPiece;
 
         public decimal Total => this.Items.Sum(f => f.Total);
@@ -136,6 +138,9 @@ namespace Billmanager.ViewModels
                 this._items = new ObservableCollection<IItemPositionDbt>(DependencyService.Get<IBillService>().GetItemPositions(this.Model.Id));
                 this.RaisePropertyChanged(nameof(this.Items));
             }
+            
+            // add empty item
+            this._items.Add(new ItemPositionDbt());
 
             if (StaticAppData.SelectionData.SelectedCar != null)
             {
@@ -146,6 +151,7 @@ namespace Billmanager.ViewModels
             {
                 // todo
             }
+
         }
 
         private async Task SelectCustomer()
@@ -177,5 +183,12 @@ namespace Billmanager.ViewModels
             }
         }
 
+        private void DeleteItemPosition(object item)
+        {
+            if (item is IItemPositionDbt position)
+            {
+                this.Items.Remove(position);
+            }
+        }
     }
 }

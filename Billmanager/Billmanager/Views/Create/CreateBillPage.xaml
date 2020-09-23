@@ -137,7 +137,7 @@
                    Grid.Row="0"
                    Grid.Column="3"/>
 
-            <Entry Text="{Binding Description}" 
+            <!--<Entry Text="{Binding Description}" 
                    Grid.Row="1"
                    Grid.Column="0"/>
             <Entry Text="{Binding Amount}" 
@@ -150,14 +150,10 @@
                    Grid.Column="2"/>
             <Label Text="{Binding ItemTotal, Mode=OneWay}" 
                    Grid.Row="1"
-                   Grid.Column="3"/>
-            <Button Text="{x:Static texts:Resources.Add}" 
-                    Grid.Row="1"
-                    Grid.Column="4"
-                    Command="{Binding AddPositionCommand}"
-                    WidthRequest="150"/>
+                   Grid.Column="3"/>-->
 
             <ListView ItemsSource="{Binding Items}"
+                      x:Name="ItemList"
                   Grid.Column="0"
                   Grid.ColumnSpan="5"
                   Grid.Row="2"
@@ -174,25 +170,32 @@
                                 <ColumnDefinition Width="0.15*" />
                                 <ColumnDefinition Width="0.15*" />
                                 <ColumnDefinition Width="0.2*" />
-                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="50" />
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding Description}" 
+                            <Entry Text="{Binding Description}" 
                                Grid.Column="0"
                                FontSize="Medium"
                                FontAttributes="Bold"/>
-                            <Label Text="{Binding Amount}" 
+                            <Entry Text="{Binding Amount}" 
                                    FontSize="Medium"
                                    FontAttributes="Bold"
-                                   Grid.Column="1"/>
-                            <Label Text="{Binding Price}" 
+                                   Grid.Column="1"
+                                   Keyboard="Numeric"/>
+                            <Entry Text="{Binding Price}" 
                                    FontSize="Medium"
                                    FontAttributes="Bold"
-                               Grid.Column="2"/>
+                               Grid.Column="2"
+                                   Keyboard="Numeric"/>
                             <Label Text="{Binding Total}" 
                                    FontSize="Medium"
                                    FontAttributes="Bold"
+                                   VerticalOptions="Center"
                                Grid.Column="3"/>
                             
+                            <Button Text="x" 
+                                    Grid.Column="4"
+                                    Command="{Binding Source={x:Reference ItemList}, Path=DeleteItemPosition}"
+                                    WidthRequest="50" />
                         </Grid>
                             </ViewCell>
                     </DataTemplate>

@@ -4,6 +4,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <LangVersion>8.0</LangVersion>
     </PropertyGroup>
 
   <ItemGroup>
