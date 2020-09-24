@@ -14,7 +14,8 @@ namespace Billmanager.Services
     {
         public async Task<IEnumerable<ICustomerDbt>> GetCustomerSelection()
         {
-            return await SqliteDatabase.GetTable<CustomerDbt>().GetItemsAsync();
+           return await SqliteDatabase.AssureDb().GetItemsAsync<CustomerDbt>();
+           
         }
     }
 }

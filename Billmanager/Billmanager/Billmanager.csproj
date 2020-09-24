@@ -80,6 +80,9 @@
     <Compile Update="Views\OverviewPage.xaml.cs">
       <DependentUpon>OverviewPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Select\SelectionPage.xaml.cs">
+      <DependentUpon>SelectionPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Select\CustomerSelectionPage.xaml.cs">
       <DependentUpon>CustomerSelectionPage.xaml</DependentUpon>
     </Compile>

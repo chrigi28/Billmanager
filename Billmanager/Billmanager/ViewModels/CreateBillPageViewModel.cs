@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -26,13 +27,11 @@ namespace Billmanager.ViewModels
         private decimal _pricePerPiece;
         private decimal _itemTotal;
         private decimal _total;
-        private ObservableCollection<IItemPositionDbt> _items;
         private ItemPositionDbt latestItem;
 
         public CreateBillPageViewModel(INavigationService ns) : base(ns)
         {
             this.Title = Resources.CreateBill;
-            this._items = new ObservableCollection<IItemPositionDbt>();
         }
 
         public Command SelectCarCommand => this._selectCarCommand ??= new Command(async () => await this.SelectCar());
@@ -101,18 +100,15 @@ namespace Billmanager.ViewModels
 
         public decimal ItemTotal => this.Amount * this.PricePerPiece;
 
-        public decimal Total => this.Items.Sum(f => f.Total);
-
-        public ObservableCollection<IItemPositionDbt> Items
-        {
-            get => this._items;
-        }
-
+        public decimal Total => this.Model.ItemPositions.Sum(f => f.Total);
+        
         public override async Task Save(bool goBack = true)
         {
+            this.Model.ItemPositions.Remove(this.latestItem);
+            this.latestItem = null;
             await base.Save(goBack: false);
 
-            await Database.SqliteDatabase.GetTable<ItemPositionDbt>().AddRangeAsync(this._items).ConfigureAwait(false);
+            ////await Database.SqliteDatabase.AddRangeAsync(this._items).ConfigureAwait(false);
             await this.NavigationService.GoBackAsync();
         }
 
@@ -123,10 +119,12 @@ namespace Billmanager.ViewModels
             if (StaticAppData.SelectionData.SelectedBill != null)
             {
                 this.Model = (BillDbt)StaticAppData.SelectionData.SelectedBill;
-                this._items = new ObservableCollection<IItemPositionDbt>(DependencyService.Get<IBillService>().GetItemPositions(this.Model.Id));
-                this.RaisePropertyChanged(nameof(this.Items));
             }
-            
+            else
+            {
+                this.Model = new BillDbt();
+            }
+
             this.AddExtraItem();
 
             if (StaticAppData.SelectionData.SelectedCar != null)
@@ -139,6 +137,7 @@ namespace Billmanager.ViewModels
                 // todo
             }
 
+            this.OnPropertyChanged(nameof(this.Model));
         }
 
         private void AddExtraItem()
@@ -150,8 +149,9 @@ namespace Billmanager.ViewModels
             }
 
             this.latestItem = new ItemPositionDbt();
+            this.latestItem.Bill = this.Model;
             this.latestItem.PropertyChanged += this.LatestItemOnPropertyChanged;
-            this._items.Add(this.latestItem);
+            this.Model.ItemPositions.Add(this.latestItem);
         }
 
         private void LatestItemOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -161,29 +161,63 @@ namespace Billmanager.ViewModels
 
         private async Task SelectCustomer()
         {
-            await this.NavigationService.NavigateAsync("CustomerSelectionPage");
+            var navparm = new NavigationParameters();
+            var data = await DependencyService.Get<ICustomerService>().GetCustomerSelection();
+            navparm.Add(nameof(NavigationParameter.SelectionItems), data);
+
+            await this.NavigationService.NavigateAsync("SelectionPage", navparm);
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.TryGetValue(nameof(NavigationParameter.Selection), out object selection))
+            {
+                if (selection is CustomerDbt customer)
+                {
+                    this.Model.CustomerId = customer.Id;
+                    this.Model.Customer = customer;
+                }
+
+                if (selection is CarDbt car)
+                {
+                    this.Model.CarId = car.Id;
+                    this.Model.Car = car;
+                }
+            }
         }
 
         private async Task SelectCar()
         {
-            await this.NavigationService.NavigateAsync("CarSelectionPage");
+            IEnumerable<ICarDbt> cars;
+            var navparm = new NavigationParameters();
+            if (this.Model.CustomerId > 0)
+            {
+                cars = await DependencyService.Get<ICarService>().GetCarSelectionFromCustomerAsync(this.Model.CustomerId);
+            }
+            else
+            {
+                cars = await DependencyService.Get<ICarService>().GetCarSelectionAsync();
+            }
+
+            navparm.Add(nameof(NavigationParameter.SelectionItems), cars);
+
+            await this.NavigationService.NavigateAsync("SelectionPage", navparm);
         }
 
         private void AddItemPosition()
         {
             if (!this.Description.IsNullOrEmpty())
-
             {
                 var item = new ItemPositionDbt()
                 {
-                    BillId = this.Model.Id,
+                    Bill = this.Model,
                     Amount = this.Amount,
                     Description = this.Description,
                     Price = this.PricePerPiece,
                 };
 
-                this._items.Add(item);
-                this.RaisePropertyChanged(nameof(this.Items));
+                this.Model.ItemPositions.Add(item);
+                this.RaisePropertyChanged(nameof(this.Model.ItemPositions));
             }
         }
 
@@ -196,14 +230,8 @@ namespace Billmanager.ViewModels
                     this.AddExtraItem();
                 }
 
-                if (position.Id != -1)
-                {
-                    position.Deleted = true;
-
-                    Device.InvokeOnMainThreadAsync(() => Database.SqliteDatabase.GetTable<ItemPositionDbt>().UpdateItemAsync(position));
-                }
-
-                this.Items.Remove(position);
+                position.Deleted = true;
+                this.Model.ItemPositions.Remove(position);
             }
         }
     }

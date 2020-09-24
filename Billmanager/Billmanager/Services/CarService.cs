@@ -10,16 +10,17 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(CarService))]
 namespace Billmanager.Services
 {
-    public class CarService : ICarService
+    public class CarService : BaseService, ICarService
     {
-        public async Task<IEnumerable<ICarDbt>> GetCarSelection()
+        public async Task<IEnumerable<ICarDbt>> GetCarSelectionAsync()
         {
-            return await SqliteDatabase.GetTable<CarDbt>().GetItemsAsync();
+            return await this.GetAllAsync<CarDbt>();
         }
 
-        public async Task<IEnumerable<ICarDbt>> GetCarSelectionFromCustomer(int customer)
+        public async Task<IEnumerable<ICarDbt>> GetCarSelectionFromCustomerAsync(int customer)
         {
-            return await SqliteDatabase.GetTable<CarDbt>().GetItemsAsync(f=> f.CustomerId == customer);
+            return await SqliteDatabase.AssureDb().GetItemsAsync<CarDbt>(f => f.CustomerId == customer);
+           
         }
     }
 }

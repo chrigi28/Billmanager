@@ -14,11 +14,10 @@ namespace Billmanager.Helper
         public static CreateCustomerPageViewModel CreateCustomerPageViewModel => new CreateCustomerPageViewModel(null);
         public static CreateOffertPageViewModel CreateOffertPageViewModel => new CreateOffertPageViewModel(null);
         public static CreateWorkcardPageViewModel CreateWorkcardPageViewModel => new CreateWorkcardPageViewModel(null);
-        ////select
-        public static CustomerSelectionPageViewModel CustomerSelectionPageViewModel => new CustomerSelectionPageViewModel(null);
-        public static CarSelectionPageViewModel CarSelectionPageViewModel => new CarSelectionPageViewModel(null);
         
-
+        ////select
+        public static SelectionPageViewModel SelectionPageViewModel => new SelectionPageViewModel(null);
+        
         ////public static SelectionPageViewModel SelectionPageViewModel => new SelectionPageViewModel<null>(null);
     }
 }

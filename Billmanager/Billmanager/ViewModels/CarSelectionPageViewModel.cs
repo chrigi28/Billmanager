@@ -3,6 +3,7 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
 using Billmanager.StaticAppData;
@@ -31,8 +32,8 @@ namespace Billmanager.ViewModels
         public override async void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
-            this.ItemSource = await DependencyService.Get<ICarService>().GetCarSelection();
-            this.ItemSource = await DependencyService.Get<ICarService>().GetCarSelection();
+            this.ItemSource = await DependencyService.Get<ICarService>().GetCarSelectionAsync();
+            
         }
     }
 }

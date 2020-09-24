@@ -153,7 +153,7 @@
                    Grid.Row="1"
                    Grid.Column="3"/>-->
 
-            <ListView ItemsSource="{Binding Items}"
+            <ListView ItemsSource="{Binding Model.ItemPositions}"
                       x:Name="ItemList"
                   Grid.Column="0"
                   Grid.ColumnSpan="5"
@@ -207,7 +207,7 @@
                    Grid.Row="3"
                    Grid.Column="3"/>
 
-            <Label Text="{Binding Total}" 
+            <Label Text="{Binding Model.Total}" 
                    Grid.Row="3"
                    Grid.Column="3"/>
         </Grid>
@@ -216,7 +216,7 @@
                Grid.Row="6"
                Grid.Column="0"/>
 
-        <Entry Text="{Binding NetPrice}" 
+        <Entry Text="{Binding Model.NettoPrice}" 
                Keyboard="Numeric"
                Grid.Row="6"
                Grid.Column="1"/>
@@ -225,7 +225,7 @@
                Grid.Row="7"
                Grid.Column="0"/>
 
-        <Entry Text="{Binding NetPrice}" 
+        <Entry Text="{Binding Model.kilometers}" 
                Keyboard="Numeric"
                Grid.Row="7"
                Grid.Column="1"/>

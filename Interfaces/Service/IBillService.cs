@@ -6,9 +6,9 @@ namespace Billmanager.Interfaces.Service
 {
     public interface IBillService
     {
-        IEnumerable<IBillDbt> GetBillById(int BillId);
-        IEnumerable<IBillDbt> GetBillByCar(int CarId);
-        IEnumerable<IBillDbt> GetBillsOfCustomer(int CustomerId);
-        IEnumerable<IItemPositionDbt> GetItemPositions(int BillId);
+        Task<IBillDbt> GetBillByIdAsync(int BillId);
+        Task<IEnumerable<IBillDbt>> GetBillsByCarAsync(int CarId);
+        Task<IEnumerable<IBillDbt>> GetBillsOfCustomerAsync(int CustomerId);
+        Task<IEnumerable<IItemPositionDbt>> GetItemPositionsAsync(int BillId);
     }
 }

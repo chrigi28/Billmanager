@@ -11,26 +11,29 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(BillService))]
 namespace Billmanager.Services
 {
-    public class BillService : IBillService
+    public class BillService : BaseService, IBillService
     {
-        public IEnumerable<IBillDbt> GetBillById(int BillId)
+        public async Task<IBillDbt> GetBillByIdAsync(int BillId)
         {
-            return SqliteDatabase.GetTable<BillDbt>().Table.Where(f => f.Id == BillId);
+            return await this.GetByIdAsync<BillDbt>(BillId);
         }
 
-        public IEnumerable<IBillDbt> GetBillByCar(int CarId)
+        public async Task<IEnumerable<IBillDbt>> GetBillsByCarAsync(int CarId)
         {
-            return SqliteDatabase.GetTable<BillDbt>().Table.Where(f => f.CarId == CarId);
-        }
-    
-        public IEnumerable<IBillDbt> GetBillsOfCustomer(int CustomerId)
-        {
-            return SqliteDatabase.GetTable<BillDbt>().Table.Where(f => f.CustomerId == CustomerId);
+            return await SqliteDatabase.AssureDb().GetItemsAsync<BillDbt>(f => f.CarId == CarId);
+
         }
 
-        public IEnumerable<IItemPositionDbt> GetItemPositions(int BillId)
+        public async Task<IEnumerable<IBillDbt>> GetBillsOfCustomerAsync(int CustomerId)
         {
-            return SqliteDatabase.GetTable<IItemPositionDbt>().Table.Where(f => f.BillId == BillId);
+            return await SqliteDatabase.AssureDb().GetItemsAsync<BillDbt>(f => f.CustomerId == CustomerId);
+
+        }
+
+        public async Task<IEnumerable<IItemPositionDbt>> GetItemPositionsAsync(int BillId)
+        {
+            return await SqliteDatabase.AssureDb().GetItemsAsync<ItemPositionDbt>(f => f.BillId == BillId);
+
         }
     }
 }

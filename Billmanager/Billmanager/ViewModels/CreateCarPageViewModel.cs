@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Billmanager.Database.Tables;
+using Billmanager.Helper;
 using Billmanager.Interface.ViewModels;
 using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
@@ -26,10 +27,25 @@ namespace Billmanager.ViewModels
         public ICustomerDbt SelectedCustomer => SelectionData.SelectedCustomer;
 
         public Command SelectCustomerCommand => new Command(async () => await this.SelectCustomer());
-        
+
         private async Task SelectCustomer()
         {
-            await this.NavigationService.NavigateAsync("CustomerSelectionPage");
+            var navparm = new NavigationParameters();
+            navparm.Add(nameof(NavigationParameter.SelectionItems), await DependencyService.Get<ICustomerService>().GetCustomerSelection());
+
+            await this.NavigationService.NavigateAsync("SelectionPage", navparm);
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.TryGetValue(nameof(NavigationParameter.Selection), out object selection))
+            {
+                if (selection is CustomerDbt dbo)
+                {
+                    this.Model.CustomerId = dbo.Id;
+                    this.Model.Customer = dbo;
+                }
+            }
         }
     }
 }

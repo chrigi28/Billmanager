@@ -34,7 +34,7 @@ namespace Billmanager.ViewModels
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
-            // awai from this
+            // away from this
         }
 
         public virtual void OnNavigatedTo(INavigationParameters parameters)

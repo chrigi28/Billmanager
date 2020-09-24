@@ -22,7 +22,5 @@ namespace Billmanager.Interface.ViewModels
         decimal PricePerPiece { get; set; }
         decimal ItemTotal { get; }
         decimal Total { get; }
-
-        ObservableCollection<IItemPositionDbt> Items { get; }
     }
 }

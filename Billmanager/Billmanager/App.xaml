@@ -2,10 +2,136 @@
 <prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+             xmlns:tables="clr-namespace:Billmanager.Database.Tables;assembly=Billmanager.Database"
+             xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
              x:Class="Billmanager.App">
 	<Application.Resources>
 
 		<!-- Application resource dictionary -->
+    <ResourceDictionary>
+            <DataTemplate x:Key="CarSelectionTemplate">
+                <ViewCell>
+                    <Grid HorizontalOptions="FillAndExpand" x:DataType="tables:CarDbt">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding CarMake}"
+                               Margin="10"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding Typ}"
+                               Margin="10"
+                               Grid.Column="1"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding Typecertificate}"
+                               Margin="10"
+                               Grid.Column="2"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding EnginNo}"
+                               Margin="10"
+                               Grid.Column="3"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding FirstOnMarket}"
+                               Margin="10"
+                               Grid.Column="4"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding Cubic}"
+                               Margin="10"
+                               Grid.Column="5"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding ChassisNo}"
+                               Margin="10"
+                               Grid.Column="3"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding Plate}"
+                               Margin="10"
+                               Grid.Column="4"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding Rootnumber}"
+                               Margin="10"
+                               Grid.Column="5"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                    </Grid>
 
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="CustomerSelectionTemplate">
+                <ViewCell>
+                    <Grid HorizontalOptions="FillAndExpand" x:DataType="tables:CustomerDbt">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding FirstName}"
+                               Margin="10"
+                               Grid.Column="0"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding LastName}"
+                               Margin="10"
+                               Grid.Column="1"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding Address}"
+                               Margin="10"
+                               Grid.Column="2"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding Zip}"
+                               Margin="10"
+                               Grid.Column="3"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding Location}"
+                               Margin="10"
+                               Grid.Column="4"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                        <Label Text="{Binding Phone}"
+                               Margin="10"
+                               Grid.Column="5"
+                               FontAttributes="Bold"
+                               FontSize="18"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="BillTemplate">
+                <ViewCell>
+                    <Label Text="no bill template defined" />
+                </ViewCell>
+            </DataTemplate>
+        
+        <helper:SelectionTemplateSelector x:Key="SelectionTemplateSelector"
+                                          CustomerTemplate="{StaticResource CustomerSelectionTemplate}"
+                                          CarTemplate="{StaticResource CarSelectionTemplate}"
+                                          BillTemplate="{StaticResource BillTemplate}"/>
+        </ResourceDictionary>
 	</Application.Resources>
 </prism:PrismApplication>

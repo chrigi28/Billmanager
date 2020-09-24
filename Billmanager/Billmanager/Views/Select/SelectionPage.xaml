@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Billmanager.Views.SelectionPage"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+             xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
+             xmlns:texts1="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
+             xmlns:tables="clr-namespace:Billmanager.Database.Tables;assembly=Billmanager.Database"
+             xmlns:viewModels="clr-namespace:Billmanager.ViewModels;assembly=Billmanager"
+             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.SelectionPageViewModel}}"
+             mc:Ignorable="d helper">
+
+    <StackLayout Margin="20"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand">
+        <Label Text="{x:Static texts1:Resources.Select}" HorizontalOptions="CenterAndExpand"/>
+        <SearchBar Text="{Binding Filter}"
+                   Placeholder="Filter" />
+        <ListView ItemsSource="{Binding FilteredItems}"
+                        SelectedItem="{Binding SelectedItem}"
+                        SelectionMode="Single"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        ItemTemplate="{StaticResource SelectionTemplateSelector}"
+                        >
+
+        </ListView>
+    </StackLayout>
+</ContentPage>

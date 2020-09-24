@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using Billmanager.Interfaces.Data;
 using Billmanager.Interfaces.Database.Datatables;
@@ -17,7 +18,7 @@ namespace Billmanager.Database.Tables
         public CarDbt Car { get; set; }
         
         [ForeignKey(nameof(ItemPositionDbt))]
-        public List<ItemPositionDbt> ItemPositions { get; } = new List<ItemPositionDbt>();
+        public ObservableCollection<ItemPositionDbt> ItemPositions { get; set; } = new ObservableCollection<ItemPositionDbt>();
 
         public DateTime Date { get; set; } = DateTime.Now;
         public string Conclusion { get; set; }

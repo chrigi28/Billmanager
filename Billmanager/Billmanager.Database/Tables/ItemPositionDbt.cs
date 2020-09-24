@@ -10,11 +10,27 @@ namespace Billmanager.Database.Tables
     {
         private decimal _price;
         private int _amount;
+        private string _description;
 
         [ForeignKey(nameof(BillDbt.ItemPositions))]
         public int BillId { get; set; }
         public BillDbt Bill { get; set; }
-        public string Description { get; set; }
+
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                if (value == _description)
+                {
+                    return;
+
+                }
+
+                this._description = value;
+                this.OnPropertyChanged();
+            }
+        }
 
         public event EventHandler ItemChanged;
 
@@ -49,6 +65,7 @@ namespace Billmanager.Database.Tables
         }
 
         public decimal Total => this.Price * this.Amount;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
