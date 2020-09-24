@@ -29,9 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\Select\CarSelectionPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\Create\CreateAddresscardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -51,9 +48,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\OverviewPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Select\CustomerSelectionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -82,9 +76,6 @@
     </Compile>
     <Compile Update="Views\Select\SelectionPage.xaml.cs">
       <DependentUpon>SelectionPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Select\CustomerSelectionPage.xaml.cs">
-      <DependentUpon>CustomerSelectionPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

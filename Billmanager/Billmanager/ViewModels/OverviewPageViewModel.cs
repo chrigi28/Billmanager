@@ -18,7 +18,6 @@ namespace Billmanager.ViewModels
         private Command createWorkcardCommand ;
         private Command createAddresscardCommand ;
         private Command createBillCommand ;
-        private Command customerSelectionCommand;
 
         public OverviewPageViewModel(INavigationService ns) : base(ns)
         {
@@ -36,7 +35,5 @@ namespace Billmanager.ViewModels
         public Command CreateAddresscardCommand => this.createAddresscardCommand ?? (this.createAddresscardCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateAddresscardPage))));
 
         public Command CreateOffertCommand => this.createOffertCommand ?? (this.createOffertCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateOffertPage))));
-
-        public Command CustomerSelectionCommand => this.customerSelectionCommand ?? (this.customerSelectionCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CustomerSelectionPage))));
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Billmanager.Database.Tables;
+using Billmanager.Helper;
 using Billmanager.Interface.ViewModels;
 using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
@@ -24,6 +25,11 @@ namespace Billmanager.ViewModels
         }
 
         public ICommand SelectCustomerCommand => new Command(async () => await this.SelectCustomer());
+
+        public bool HasFirstName
+        {
+            get => !this.Model.FirstName.IsNullOrEmpty();
+        }
 
         private async Task SelectCustomer()
         {

@@ -50,6 +50,7 @@
                VerticalOptions="FillAndExpand" 
                HorizontalOptions="FillAndExpand"/>
         <Entry Text="{Binding  Model.FirstName}" Placeholder="{x:Static texts:Resources.Firstname}" 
+               x:Name="FirstName"
                Grid.Column="1" 
                Grid.Row="2"
                VerticalOptions="FillAndExpand" 
@@ -88,7 +89,9 @@
                 Command="{Binding SaveCommand}"
                 Margin="0,10,0,0"
                 Grid.Column="1"
-                Grid.Row="9"/>
+                Grid.Row="9"
+                IsEnabled="{Binding HasFirstName}"
+                />
 
     </Grid>
 </ContentPage>

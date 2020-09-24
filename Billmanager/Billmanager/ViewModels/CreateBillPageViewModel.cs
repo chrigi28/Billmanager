@@ -25,8 +25,6 @@ namespace Billmanager.ViewModels
         private decimal _netPrice;
         private int _amount;
         private decimal _pricePerPiece;
-        private decimal _itemTotal;
-        private decimal _total;
         private ItemPositionDbt latestItem;
 
         public CreateBillPageViewModel(INavigationService ns) : base(ns)
@@ -137,7 +135,7 @@ namespace Billmanager.ViewModels
                 // todo
             }
 
-            this.OnPropertyChanged(nameof(this.Model));
+            this.RaisePropertyChanged(nameof(this.Model));
         }
 
         private void AddExtraItem()
