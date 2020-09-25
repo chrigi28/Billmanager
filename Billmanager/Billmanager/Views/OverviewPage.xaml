@@ -13,7 +13,8 @@
              >
    <Grid VerticalOptions="FillAndExpand" 
               HorizontalOptions="FillAndExpand" 
-              Margin="10,30,10,5">
+              Margin="10,30,10,5"
+              RowSpacing="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
@@ -26,58 +27,61 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
             <Label Text="{x:Static texts:Resources.Overview}"
                    Grid.Row="0"
-                   Grid.Column="1"
+                   Grid.Column="0" 
+                   Grid.ColumnSpan="3"
                    VerticalOptions="FillAndExpand" 
                    HorizontalOptions="CenterAndExpand" 
                    FontSize="Large"/>
             <Button Text="{x:Static texts:Resources.CreateCustomer}"
                     Grid.Row="1"
-                    Grid.Column="1"
+                    Grid.Column="0" 
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateCustomerCommand}"/>
             <Button Text="{x:Static texts:Resources.CreateCar}"
                     Grid.Row="2"
-                    Grid.Column="1"
+                    Grid.Column="0"
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateCarCommand}"/>
             <Button Text="{x:Static texts:Resources.CreateBill}"
                     Grid.Row="3"
-                    Grid.Column="1"
+                    Grid.Column="0" 
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateBillCommand}"/>
             <Button Text="{x:Static texts:Resources.CreateOffer}"
                     Grid.Row="4"
-                    Grid.Column="1"
+                    Grid.Column="0" 
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateOffertCommand}"/>
             <Button Text="{x:Static texts:Resources.CreateWorkcard}"
                     Grid.Row="5"
-                    Grid.Column="1"
+                    Grid.Column="0" 
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateWorkcardCommand}"/>
             <Button Text="{x:Static texts:Resources.CreateAddresscard}"
                     Grid.Row="6"
-                    Grid.Column="1"
+                    Grid.Column="0"
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateAddresscardCommand}"/>
-            <Button Text="{x:Static texts:Resources.Customer}"
+
+
+            <!--<Button Text="{x:Static texts:Resources.Customer}"
                     Grid.Row="7"
-                    Grid.Column="1"
+                    Grid.Column="0" 
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
-                    Command="{Binding CustomerSelectionCommand}"/>
+                    Command="{Binding CustomerSelectionCommand}"/>-->
         </Grid>
 </ContentPage>
