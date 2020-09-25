@@ -8,13 +8,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
+             xmlns:tables="clr-namespace:Billmanager.Database.Tables;assembly=Billmanager.Database"
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.OverviewPageViewModel}}" 
              mc:Ignorable="d helper"
              >
-   <Grid VerticalOptions="FillAndExpand" 
-              HorizontalOptions="FillAndExpand" 
-              Margin="10,30,10,5"
-              RowSpacing="5">
+    <ScrollView VerticalOptions="FillAndExpand" 
+        HorizontalOptions="FillAndExpand" 
+        >
+        <Grid VerticalOptions="FillAndExpand" 
+          HorizontalOptions="FillAndExpand" 
+          Margin="10,30,10,5"
+          RowSpacing="5"
+          ColumnSpacing="20"
+          >
             <Grid.RowDefinitions>
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
@@ -28,17 +34,17 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+            <!-- #region left grid -->
             <Label Text="{x:Static texts:Resources.Overview}"
-                   Grid.Row="0"
-                   Grid.Column="0" 
-                   Grid.ColumnSpan="3"
-                   VerticalOptions="FillAndExpand" 
-                   HorizontalOptions="CenterAndExpand" 
-                   FontSize="Large"/>
+               Grid.Row="0"
+               Grid.Column="0" 
+               Grid.ColumnSpan="3"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="CenterAndExpand" 
+               FontSize="Large"/>
             <Button Text="{x:Static texts:Resources.CreateCustomer}"
                     Grid.Row="1"
                     Grid.Column="0" 
@@ -83,5 +89,114 @@
                     VerticalOptions="FillAndExpand" 
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CustomerSelectionCommand}"/>-->
+            <!-- #region left grid -->
+
+
+            <!--<CarouselView Grid.Column="1"
+                      Grid.Row="1"
+                      Grid.RowSpan="9"
+            ItemsSource="{Binding CaruselList}">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Frame HasShadow="True"
+                           BorderColor="DarkGray"
+                           CornerRadius="5"
+                           Margin="20"
+                           HeightRequest="300"
+                           HorizontalOptions="Center"
+                           VerticalOptions="CenterAndExpand">
+                            <ListView ItemsSource="">
+
+                            </ListView>
+                    </Frame>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>-->
+
+            <Frame HasShadow="True"
+                   BorderColor="DarkGray"
+                   CornerRadius="5"
+                   Grid.Column="1" 
+                   Grid.Row="1"
+                   Grid.RowSpan="8"
+                   Margin="20"
+                   HeightRequest="300"
+                   HorizontalOptions="Center"
+                   VerticalOptions="StartAndExpand">
+                <ListView 
+                  ItemsSource="{Binding Customers}"
+                  SelectedItem="{Binding SelectedCustomer}"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand"
+                >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" x:DataType="tables:CustomerDbt">
+                                    <Label Text="{Binding FirstName}" />
+                                    <Label Text="{Binding LastName}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Frame>
+
+            <Frame HasShadow="True"
+                   BorderColor="DarkGray"
+                   CornerRadius="5"
+                   Grid.Column="2" 
+                   Grid.Row="1"
+                   Grid.RowSpan="8"
+                   Margin="20"
+                   HeightRequest="300"
+                   HorizontalOptions="Center"
+                   VerticalOptions="StartAndExpand">
+
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+
+                    <ListView ItemsSource="{Binding Cars}"
+                          SelectedItem="{Binding SelectedCar}"
+                          HorizontalOptions="FillAndExpand"
+                          VerticalOptions="FillAndExpand"
+                    >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" x:DataType="tables:CarDbt">
+                                        <Label Text="{Binding CarMake}" />
+                                        <Label Text="{Binding Typ}" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <ListView ItemsSource="{Binding Bills}"
+                              SelectedItem="{Binding SelectedBill}"
+                              HorizontalOptions="FillAndExpand"
+                              VerticalOptions="FillAndExpand"
+                    >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" 
+                                                 HorizontalOptions="Center" 
+                                                 Spacing="10" 
+                                                 x:DataType="tables:BillDbt">
+                                        <Label Text="{Binding Date}" />
+                                        <Label Text="{Binding Conclusion}" />
+                                        <Label Text="{Binding NettoPrice}" />
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Frame>
         </Grid>
+    </ScrollView>
 </ContentPage>
