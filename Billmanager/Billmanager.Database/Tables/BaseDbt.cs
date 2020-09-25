@@ -1,8 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
+using Billmanager.Database.Annotations;
 using Billmanager.Interfaces.Database;
+using PropertyChanged;
 
 namespace Billmanager.Database.Tables
 {
+    [AddINotifyPropertyChangedInterface]
     public class BaseDbt : IDatabaseTable
     {
         [Key]

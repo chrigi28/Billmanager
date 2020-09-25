@@ -26,11 +26,6 @@ namespace Billmanager.ViewModels
 
         public ICommand SelectCustomerCommand => new Command(async () => await this.SelectCustomer());
 
-        public bool HasFirstName
-        {
-            get => !this.Model.FirstName.IsNullOrEmpty();
-        }
-
         private async Task SelectCustomer()
         {
             await this.NavigationService.NavigateAsync("CustomerSelection");

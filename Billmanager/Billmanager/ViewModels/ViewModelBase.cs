@@ -7,9 +7,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Billmanager.Database;
 using Billmanager.Interface.ViewModels;
+using PropertyChanged;
 
 namespace Billmanager.ViewModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class ViewModelBase : BindableBase, IViewModelBase
     {
         protected INavigationService NavigationService { get; private set; }
