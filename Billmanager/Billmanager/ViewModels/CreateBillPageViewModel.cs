@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -12,6 +13,7 @@ using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
 using Billmanager.Translations.Texts;
 using Prism.Navigation;
+using PropertyChanged;
 using Xamarin.Forms;
 
 namespace Billmanager.ViewModels
@@ -99,7 +101,16 @@ namespace Billmanager.ViewModels
         public decimal ItemTotal => this.Amount * this.PricePerPiece;
 
         public decimal Total => this.Model.ItemPositions.Sum(f => f.Total);
-        
+
+        [AlsoNotifyFor(nameof(Model))]
+        public string SelectedCustomerText
+        {
+            get => this.Model.Customer == null
+                ? Resources.Customer
+                : string.Format(CultureInfo.CurrentCulture,
+                    $"{this.Model.Customer.FirstName} {this.Model.Customer.LastName}");
+        }
+
         public override async Task Save(bool goBack = true)
         {
             this.Model.ItemPositions.Remove(this.latestItem);
