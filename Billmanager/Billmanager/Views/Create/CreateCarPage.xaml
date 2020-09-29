@@ -7,6 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
              xmlns:viewModels="clr-namespace:Billmanager.ViewModels;assembly=Billmanager"
+             xmlns:converters="clr-namespace:Muellerchur.Xamos.Mobile.Converters;assembly=Billmanager"
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateCarPageViewModel}}"
              mc:Ignorable="d helper"
 >
@@ -101,7 +102,10 @@
         <Button    Grid.Row="12"
                    Grid.Column="1"
                    Text="{x:Static texts:Resources.Save}" 
-                   Command="{Binding SaveCommand}"/>
+                   Command="{Binding SaveCommand}"
+                   x:Name="SaveButton"
+                   IsEnabled="{Binding Model.CanSave}"
+                   Opacity="{Binding Source={x:Reference SaveButton}, Path=IsEnabled, Converter={converters:BooleanOpacityConverter}}"/>
 
     </Grid>
 </ContentPage>

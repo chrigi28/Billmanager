@@ -7,5 +7,6 @@ namespace Billmanager.Interfaces.Database
         int Id { get; set; }
         bool Deleted { get; set; }
         string Remark { get; set; }
+        bool CanSave { get; }
     }
 }

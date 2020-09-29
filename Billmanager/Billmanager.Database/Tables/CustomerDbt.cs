@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Billmanager.Interfaces.Database.Datatables;
+using PropertyChanged;
 
 namespace Billmanager.Database.Tables
 {
@@ -12,6 +13,9 @@ namespace Billmanager.Database.Tables
         public string Zip { get; set; }
         public string Location { get; set; }
         public string Phone { get; set; }
+        
+        [AlsoNotifyFor(nameof(FirstName))]
+        public override bool CanSave => !string.IsNullOrEmpty(this.FirstName);
 
         public override string FilterString => base.FilterString + this.Title_customer + LastName + Address + Zip +
                                                Location + Phone + base.FilterString;

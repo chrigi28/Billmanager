@@ -9,6 +9,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
              xmlns:viewModels="clr-namespace:Billmanager.ViewModels;assembly=Billmanager"
+             xmlns:converters="clr-namespace:Muellerchur.Xamos.Mobile.Converters;assembly=Billmanager"
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateCustomerPageViewModel}}"
              mc:Ignorable="d helper"
              >
@@ -90,7 +91,9 @@
                 Margin="0,10,0,0"
                 Grid.Column="1"
                 Grid.Row="9"
-                IsEnabled="{Binding HasFirstName}"
+                x:Name="SaveButton"
+                IsEnabled="{Binding Model.CanSave}"
+                Opacity="{Binding Source={x:Reference SaveButton}, Path=IsEnabled, Converter={converters:BooleanOpacityConverter}}"
                 />
 
     </Grid>

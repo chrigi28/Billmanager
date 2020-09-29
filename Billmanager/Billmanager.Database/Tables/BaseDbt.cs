@@ -14,6 +14,7 @@ namespace Billmanager.Database.Tables
         public int Id { get; set; }
         public bool Deleted { get; set; }
         public string Remark { get; set; } = string.Empty;
+        public virtual bool CanSave { get; } = true;
         public virtual string FilterString => this.Id +  this.Remark;
     }
 }

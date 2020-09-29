@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Billmanager.Interfaces.Database.Datatables;
+using PropertyChanged;
 
 namespace Billmanager.Database.Tables
 {
@@ -17,6 +18,9 @@ namespace Billmanager.Database.Tables
         public string ChassisNo { get; set; }
         public string Plate { get; set; }
         public string Rootnumber { get; set; }
+
+        [AlsoNotifyFor(nameof(Customer), nameof(CarMake), nameof(Typ))]
+        public override bool CanSave => this.Customer != null || !string.IsNullOrEmpty(this.CarMake) && !string.IsNullOrEmpty(this.Typ);
 
         public override string FilterString => base.FilterString + CarMake + Typ + Typecertificate + EnginNo + FirstOnMarket + Cubic +
                                                ChassisNo + Plate + Rootnumber + base.FilterString;

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using Billmanager.Interfaces.Data;
 using Billmanager.Interfaces.Database.Datatables;
+using PropertyChanged;
 
 namespace Billmanager.Database.Tables
 {
@@ -26,6 +27,9 @@ namespace Billmanager.Database.Tables
         public decimal NettoPrice { get; set; }
         public decimal Total { get; }
         public bool Payed { get; set; }
+
+        [AlsoNotifyFor(nameof(Customer), nameof(Car), nameof(Conclusion))]
+        public override bool CanSave => this.Customer != null || this.Car != null || !string.IsNullOrEmpty(this.Conclusion);
 
         public override string FilterString => base.FilterString + Date + Conclusion + Customer.FilterString + Car.FilterString;
     }
