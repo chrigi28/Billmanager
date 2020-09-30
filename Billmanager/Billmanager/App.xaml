@@ -132,6 +132,12 @@
                                           CustomerTemplate="{StaticResource CustomerSelectionTemplate}"
                                           CarTemplate="{StaticResource CarSelectionTemplate}"
                                           BillTemplate="{StaticResource BillTemplate}"/>
+
+        <Style TargetType="Label"
+               ApplyToDerivedTypes="True">
+            <Setter Property="FontSize"
+                    Value="Medium" />
+        </Style>
         </ResourceDictionary>
 	</Application.Resources>
 </prism:PrismApplication>

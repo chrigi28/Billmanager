@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
       <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
       <LangVersion>8.0</LangVersion>
+<Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -84,5 +85,4 @@
       <DependentUpon>SelectionPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

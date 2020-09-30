@@ -10,7 +10,7 @@ namespace Billmanager.ViewModels
 {
     public class CreateWorkcardPageViewModel : ViewModelBase
     {
-        public CreateWorkcardPageViewModel(INavigationService ns) : base(ns)
+        public CreateWorkcardPageViewModel(INavigationService? ns) : base(ns)
         {
             this.Title = Resources.CreateWorkcard;
         }

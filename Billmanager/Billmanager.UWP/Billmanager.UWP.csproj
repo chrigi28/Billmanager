@@ -19,6 +19,7 @@
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <PackageCertificateKeyFile>Billmanager.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+<Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>

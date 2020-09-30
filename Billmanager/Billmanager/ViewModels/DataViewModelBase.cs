@@ -13,7 +13,7 @@ namespace Billmanager.ViewModels
     {
         private Command saveCommand;
 
-        public DataViewModelBase(INavigationService navigationService) : base(navigationService)
+        public DataViewModelBase(INavigationService? navigationService) : base(navigationService)
         {
             this.Model = new T();
         }

@@ -20,16 +20,16 @@ namespace Billmanager.ViewModels
 {
     public class CreateBillPageViewModel : DataViewModelBase<BillDbt>, ICreateBillViewModel
     {
-        private Command _selectCarCommand;
-        private Command _selectCustomerCommand;
-        private Command _addPositionCommand;
-        private string _description;
+        private Command? _selectCarCommand;
+        private Command? _selectCustomerCommand;
+        private Command? _addPositionCommand;
+        private string _description = string.Empty;
         private decimal _netPrice;
         private int _amount;
         private decimal _pricePerPiece;
-        private ItemPositionDbt latestItem;
+        private ItemPositionDbt? latestItem;
 
-        public CreateBillPageViewModel(INavigationService ns) : base(ns)
+        public CreateBillPageViewModel(INavigationService? ns) : base(ns)
         {
             this.Title = Resources.CreateBill;
         }
@@ -118,7 +118,7 @@ namespace Billmanager.ViewModels
             await base.Save(goBack: false);
 
             ////await Database.SqliteDatabase.AddRangeAsync(this._items).ConfigureAwait(false);
-            await this.NavigationService.GoBackAsync();
+            await this.NavigationService?.GoBackAsync();
         }
 
         public override void Initialize(INavigationParameters parameters)
@@ -157,8 +157,7 @@ namespace Billmanager.ViewModels
                 this.latestItem.PropertyChanged -= this.LatestItemOnPropertyChanged;
             }
 
-            this.latestItem = new ItemPositionDbt();
-            this.latestItem.Bill = this.Model;
+            this.latestItem = new ItemPositionDbt {Bill = this.Model};
             this.latestItem.PropertyChanged += this.LatestItemOnPropertyChanged;
             this.Model.ItemPositions.Add(this.latestItem);
         }
@@ -174,7 +173,7 @@ namespace Billmanager.ViewModels
             var data = await DependencyService.Get<ICustomerService>().GetCustomerSelection();
             navparm.Add(nameof(NavigationParameter.SelectionItems), data);
 
-            await this.NavigationService.NavigateAsync("SelectionPage", navparm);
+            await this.NavigationService?.NavigateAsync("SelectionPage", navparm);
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -210,7 +209,7 @@ namespace Billmanager.ViewModels
 
             navparm.Add(nameof(NavigationParameter.SelectionItems), cars);
 
-            await this.NavigationService.NavigateAsync("SelectionPage", navparm);
+            await this.NavigationService?.NavigateAsync("SelectionPage", navparm);
         }
 
         private void AddItemPosition()

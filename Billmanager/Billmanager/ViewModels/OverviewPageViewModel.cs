@@ -17,15 +17,15 @@ namespace Billmanager.ViewModels
 {
     public class OverviewPageViewModel : ViewModelBase
     {
-        private Command createCustomerCommand;
-        private Command createOffertCommand;
-        private Command createCarCommand;
-        private Command createWorkcardCommand;
-        private Command createAddresscardCommand;
-        private Command createBillCommand;
-        private CustomerDbt _selectedCustomer;
+        private Command? createCustomerCommand;
+        private Command? createOffertCommand;
+        private Command? createCarCommand;
+        private Command? createWorkcardCommand;
+        private Command? createAddresscardCommand;
+        private Command? createBillCommand;
+        private CustomerDbt? _selectedCustomer;
 
-        public OverviewPageViewModel(INavigationService ns) : base(ns)
+        public OverviewPageViewModel(INavigationService? ns) : base(ns)
         {
             this.Title = Resources.Overview;
         }
@@ -36,21 +36,21 @@ namespace Billmanager.ViewModels
             this.Customers = new ObservableCollection<ICustomerDbt>(await DependencyService.Get<ICustomerService>().GetCustomerSelection());
         }
 
-        public Command CreateCustomerCommand => this.createCustomerCommand ?? (this.createCustomerCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateCustomerPage))));
+        public Command CreateCustomerCommand => this.createCustomerCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateCustomerPage)));
 
-        public Command CreateCarCommand => this.createCarCommand ?? (this.createCarCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateCarPage))));
+        public Command CreateCarCommand => this.createCarCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateCarPage)));
 
-        public Command CreateBillCommand => this.createBillCommand ?? (this.createBillCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateBillPage))));
+        public Command CreateBillCommand => this.createBillCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateBillPage)));
 
-        public Command CreateWorkcardCommand => this.createWorkcardCommand ?? (this.createWorkcardCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateWorkcardPage))));
+        public Command CreateWorkcardCommand => this.createWorkcardCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateWorkcardPage)));
 
-        public Command CreateAddresscardCommand => this.createAddresscardCommand ?? (this.createAddresscardCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateAddresscardPage))));
+        public Command CreateAddresscardCommand => this.createAddresscardCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateAddresscardPage)));
 
-        public Command CreateOffertCommand => this.createOffertCommand ?? (this.createOffertCommand = new Command(async () => await this.NavigationService.NavigateAsync(nameof(CreateOffertPage))));
+        public Command CreateOffertCommand => this.createOffertCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateOffertPage)));
 
-        public ObservableCollection<ICustomerDbt> Customers { get; set; }
+        public ObservableCollection<ICustomerDbt>? Customers { get; set; }
 
-        public CustomerDbt SelectedCustomer
+        public CustomerDbt? SelectedCustomer
         {
             get => _selectedCustomer;
             set
@@ -62,29 +62,37 @@ namespace Billmanager.ViewModels
 
                 _selectedCustomer = value;
 
-                Device.InvokeOnMainThreadAsync(async () =>
+                if (value != null)
                 {
-                    var cars = await DependencyService.Get<ICarService>().GetCarSelectionFromCustomerAsync(value.Id);
-                    this.Cars = new ObservableCollection<ICarDbt>(cars);
+                    Device.InvokeOnMainThreadAsync(async () =>
+                    {
+                        var cars = await DependencyService.Get<ICarService>()
+                            .GetCarSelectionFromCustomerAsync(value.Id);
+                        this.Cars = new ObservableCollection<ICarDbt>(cars);
 
-                });
+                    });
 
-                Device.InvokeOnMainThreadAsync(async () =>
+                    Device.InvokeOnMainThreadAsync(async () =>
+                    {
+                        var bills = await DependencyService.Get<IBillService>().GetBillsOfCustomerAsync(value.Id);
+                        this.Bills = new ObservableCollection<IBillDbt>(bills);
+
+                    });
+                }
+                else
                 {
-                    var bills = await DependencyService.Get<IBillService>().GetBillsOfCustomerAsync(value.Id);
-                    this.Bills = new ObservableCollection<IBillDbt>(bills);
-
-                });
-
+                    this.Bills.Clear();
+                    this.Cars.Clear();
+                }
             }
         }
 
-        public ObservableCollection<ICarDbt> Cars { get; set; }
+        public ObservableCollection<ICarDbt>? Cars { get; set; }
 
-        public CarDbt SelectedCar { get; set; }
+        public CarDbt? SelectedCar { get; set; }
 
-        public ObservableCollection<IBillDbt> Bills { get; set; }
+        public ObservableCollection<IBillDbt>? Bills { get; set; }
 
-        public CarDbt SelectedBill { get; set; }
+        public CarDbt? SelectedBill { get; set; }
     }
 }

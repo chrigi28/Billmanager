@@ -10,7 +10,7 @@ namespace Billmanager.ViewModels
 {
     public class CreateAddresscardPageViewModel : ViewModelBase
     {
-        public CreateAddresscardPageViewModel(INavigationService ns) : base(ns)
+        public CreateAddresscardPageViewModel(INavigationService? ns) : base(ns)
         {
             this.Title = Resources.CreateAddresscard;
         }

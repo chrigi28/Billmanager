@@ -14,17 +14,17 @@ namespace Billmanager.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class ViewModelBase : BindableBase, IViewModelBase
     {
-        protected INavigationService NavigationService { get; private set; }
-        protected INavigationParameters navigationParameters; 
+        protected INavigationService? NavigationService { get; private set; }
+        protected INavigationParameters? navigationParameters; 
 
-        private string _title;
+        private string _title = string.Empty;
         public string Title
         {
             get { return _title; }
             set { SetProperty(ref _title, value); }
         }
 
-        public ViewModelBase(INavigationService navigationService)
+        public ViewModelBase(INavigationService? navigationService)
         {
             NavigationService = navigationService;
         }

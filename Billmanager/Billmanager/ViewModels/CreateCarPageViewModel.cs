@@ -19,7 +19,7 @@ namespace Billmanager.ViewModels
 {
     public class CreateCarPageViewModel : DataViewModelBase<CarDbt>, ICreateCarViewModel<CarDbt>
     {
-        public CreateCarPageViewModel(INavigationService ns) : base(ns)
+        public CreateCarPageViewModel(INavigationService? ns) : base(ns)
         {
             this.Title = Resources.CreateCar;
         }
@@ -33,7 +33,7 @@ namespace Billmanager.ViewModels
             var navparm = new NavigationParameters();
             navparm.Add(nameof(NavigationParameter.SelectionItems), await DependencyService.Get<ICustomerService>().GetCustomerSelection());
 
-            await this.NavigationService.NavigateAsync("SelectionPage", navparm);
+            await this.NavigationService?.NavigateAsync("SelectionPage", navparm);
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

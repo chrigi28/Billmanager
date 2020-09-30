@@ -19,7 +19,7 @@ namespace Billmanager.ViewModels
 {
     public class CreateCustomerPageViewModel : DataViewModelBase<CustomerDbt>, ICreateCustomerViewModel<CustomerDbt>
     {
-        public CreateCustomerPageViewModel(INavigationService ns) : base(ns)
+        public CreateCustomerPageViewModel(INavigationService? ns) : base(ns)
         {
             this.Title = Resources.CreateCustomer;
         }
@@ -28,7 +28,7 @@ namespace Billmanager.ViewModels
 
         private async Task SelectCustomer()
         {
-            await this.NavigationService.NavigateAsync("CustomerSelection");
+            await this.NavigationService?.NavigateAsync("CustomerSelection");
         }
     }
 

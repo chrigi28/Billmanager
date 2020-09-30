@@ -4,7 +4,7 @@ namespace Billmanager.Helper
 {
     public class DesignTimeViewModelLocator
     {
-        public static MainPageViewModel MainPageViewModel => null;
+        public static MainPageViewModel? MainPageViewModel => null;
         public static OverviewPageViewModel OverviewPageViewModel => new OverviewPageViewModel(null);
         
         ////create

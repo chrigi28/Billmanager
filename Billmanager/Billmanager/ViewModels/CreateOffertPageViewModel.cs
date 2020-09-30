@@ -11,7 +11,7 @@ namespace Billmanager.ViewModels
 {
     public class CreateOffertPageViewModel : ViewModelBase
     {
-        public CreateOffertPageViewModel(INavigationService ns) : base(ns)
+        public CreateOffertPageViewModel(INavigationService? ns) : base(ns)
         {
             this.Title = Resources.CreateOffer;
         }

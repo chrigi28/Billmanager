@@ -19,23 +19,22 @@ namespace Billmanager.ViewModels
 {
     public class SelectionPageViewModel : ViewModelBase
     {
-        private object selectedItem;
-        private string _filter;
-        private IEnumerable<IDatabaseTable> _itemSource;
+        private object? _selectedItem;
+        private string? _filter;
+        private IEnumerable<IDatabaseTable>? _itemSource;
         
-        public SelectionPageViewModel(INavigationService ns) : base(ns)
+        public SelectionPageViewModel(INavigationService? ns) : base(ns)
         {
         }
 
-        public object SelectedItem
+        public object? SelectedItem
         {
-            get => this.selectedItem;
+            get => this._selectedItem;
             set
             {
-                this.selectedItem = value;
-                var param = new NavigationParameters();
-                param.Add(nameof(NavigationParameter.Selection), this.SelectedItem);
-                this.NavigationService.GoBackAsync(param);
+                this._selectedItem = value;
+                var param = new NavigationParameters {{nameof(NavigationParameter.Selection), this.SelectedItem}};
+                this.NavigationService?.GoBackAsync(param);
             }
         }
 
@@ -59,7 +58,7 @@ namespace Billmanager.ViewModels
             }
         }
 
-        public string Filter
+        public string? Filter
         {
             get => _filter;
             set
@@ -76,8 +75,14 @@ namespace Billmanager.ViewModels
 
         public ObservableCollection<IDatabaseTable> FilteredItems { get; set; }
 
-        private void FilterItems(string filter)
+        private void FilterItems(string? filter)
         {
+            if (string.IsNullOrEmpty(filter))
+            {
+                this.FilteredItems = new ObservableCollection<IDatabaseTable>(this.ItemSource);
+                return;
+            }
+
             var filteredItems = this.ItemSource.Where(i => i.FilterString.Contains(filter)).ToList();
 
             this.FilteredItems = new ObservableCollection<IDatabaseTable>(filteredItems);
