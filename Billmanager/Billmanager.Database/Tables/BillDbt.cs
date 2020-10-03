@@ -12,18 +12,18 @@ namespace Billmanager.Database.Tables
     {
         [ForeignKey(nameof(CustomerDbt))]
         public int CustomerId { get; set; }
-        public CustomerDbt Customer { get; set; }
+        public virtual CustomerDbt Customer { get; set; }
 
         [ForeignKey(nameof(CarDbt))]
         public int CarId { get; set; }
-        public CarDbt Car { get; set; }
+        public virtual CarDbt Car { get; set; }
         
         [ForeignKey(nameof(ItemPositionDbt))]
-        public ObservableCollection<ItemPositionDbt> ItemPositions { get; set; } = new ObservableCollection<ItemPositionDbt>();
+        public virtual ObservableCollection<ItemPositionDbt> ItemPositions { get; set; } = new ObservableCollection<ItemPositionDbt>();
 
         public DateTime Date { get; set; } = DateTime.Now;
         public string Conclusion { get; set; }
-        public int kilometers { get; set; }
+        public int Kilometers { get; set; }
         public decimal NettoPrice { get; set; }
         public decimal Total { get; }
         public bool Payed { get; set; }

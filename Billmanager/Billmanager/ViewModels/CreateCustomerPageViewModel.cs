@@ -30,6 +30,19 @@ namespace Billmanager.ViewModels
         {
             await this.NavigationService?.NavigateAsync("CustomerSelection");
         }
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.TryGetValue(nameof(NavigationParameter.Selection), out object selection))
+            {
+                if (selection is CustomerDbt customer)
+                {
+                    this.Model = customer;
+                }
+            }
+
+            base.OnNavigatedTo(parameters);
+        }
     }
 
 

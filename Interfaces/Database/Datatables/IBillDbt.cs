@@ -14,7 +14,7 @@ namespace Billmanager.Interfaces.Database.Datatables
         ////IList<IItemPositionDbt> ItemPositions { get; set; }
         DateTime Date { get; set; }
         string Conclusion { get; set; }
-        int kilometers { get; set; }
+        int Kilometers { get; set; }
         decimal NettoPrice { get; set; }
         decimal Total { get; }
         bool Payed { get; set; }

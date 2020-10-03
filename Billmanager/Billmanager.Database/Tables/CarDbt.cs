@@ -8,7 +8,7 @@ namespace Billmanager.Database.Tables
     {
         [ForeignKey(nameof(CustomerDbt))]
         public int CustomerId { get; set; }
-        public CustomerDbt Customer { get; set; }
+        public virtual CustomerDbt Customer { get; set; }
         public string CarMake { get; set; }
         public string Typ { get; set; }
         public string Typecertificate { get; set; }

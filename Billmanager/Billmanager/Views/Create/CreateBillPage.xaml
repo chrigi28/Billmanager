@@ -226,7 +226,7 @@
                Grid.Row="7"
                Grid.Column="0"/>
 
-        <Entry Text="{Binding Model.kilometers}" 
+        <Entry Text="{Binding Model.Kilometers}" 
                Keyboard="Numeric"
                Grid.Row="7"
                Grid.Column="1"/>

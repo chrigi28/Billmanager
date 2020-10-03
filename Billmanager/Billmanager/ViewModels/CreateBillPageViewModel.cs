@@ -12,6 +12,7 @@ using Billmanager.Interface.ViewModels;
 using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
 using Billmanager.Translations.Texts;
+using Billmanager.Views;
 using Prism.Navigation;
 using PropertyChanged;
 using Xamarin.Forms;
@@ -173,7 +174,7 @@ namespace Billmanager.ViewModels
             var data = await DependencyService.Get<ICustomerService>().GetCustomerSelection();
             navparm.Add(nameof(NavigationParameter.SelectionItems), data);
 
-            await this.NavigationService?.NavigateAsync("SelectionPage", navparm);
+            await this.NavigationService?.NavigateAsync(nameof(SelectionPage), navparm);
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -190,6 +191,11 @@ namespace Billmanager.ViewModels
                 {
                     this.Model.CarId = car.Id;
                     this.Model.Car = car;
+                }
+
+                if (selection is BillDbt bill)
+                {
+                    this.Model = bill;
                 }
             }
         }

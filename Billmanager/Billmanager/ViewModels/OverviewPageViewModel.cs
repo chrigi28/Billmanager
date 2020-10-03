@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Billmanager.Database.Tables;
+using Billmanager.Helper;
 using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
 using Billmanager.Translations.Texts;
@@ -24,6 +25,7 @@ namespace Billmanager.ViewModels
         private Command? createAddresscardCommand;
         private Command? createBillCommand;
         private CustomerDbt? _selectedCustomer;
+        private Command? editCommand;
 
         public OverviewPageViewModel(INavigationService? ns) : base(ns)
         {
@@ -41,6 +43,8 @@ namespace Billmanager.ViewModels
         public Command CreateCarCommand => this.createCarCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateCarPage)));
 
         public Command CreateBillCommand => this.createBillCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateBillPage)));
+        
+        public Command EditCommand => this.editCommand  ??= new Command(async o => await this.Edit(o));
 
         public Command CreateWorkcardCommand => this.createWorkcardCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateWorkcardPage)));
 
@@ -84,6 +88,26 @@ namespace Billmanager.ViewModels
                     this.Bills.Clear();
                     this.Cars.Clear();
                 }
+            }
+        }
+
+        private async Task Edit(object item)
+        {
+            var param = new NavigationParameters();
+            switch (item)
+            {
+                case CustomerDbt customer:
+                    param.Add(nameof(NavigationParameter.Selection), customer);
+                    await this.NavigationService?.NavigateAsync(nameof(CreateCustomerPage), param);
+                    break;
+                case CarDbt car:
+                    param.Add(nameof(NavigationParameter.Selection), car);
+                    await this.NavigationService?.NavigateAsync(nameof(CreateCarPage), param);
+                    break;
+                case BillDbt bill:
+                    param.Add(nameof(NavigationParameter.Selection), bill);
+                    await this.NavigationService?.NavigateAsync(nameof(CreateBillPage), param);
+                    break;
             }
         }
 

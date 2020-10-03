@@ -14,7 +14,7 @@ namespace Billmanager.Database.Tables
 
         [ForeignKey(nameof(BillDbt.ItemPositions))]
         public int BillId { get; set; }
-        public BillDbt Bill { get; set; }
+        public virtual BillDbt Bill { get; set; }
 
         public string Description
         {

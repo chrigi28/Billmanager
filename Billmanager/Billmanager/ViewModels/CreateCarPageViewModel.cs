@@ -12,6 +12,7 @@ using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
 using Billmanager.StaticAppData;
 using Billmanager.Translations.Texts;
+using Billmanager.Views;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -30,20 +31,24 @@ namespace Billmanager.ViewModels
 
         private async Task SelectCustomer()
         {
-            var navparm = new NavigationParameters();
-            navparm.Add(nameof(NavigationParameter.SelectionItems), await DependencyService.Get<ICustomerService>().GetCustomerSelection());
+            var navparm = new NavigationParameters
+            {
+                {
+                    nameof(NavigationParameter.SelectionItems),
+                    await DependencyService.Get<ICustomerService>().GetCustomerSelection()
+                }
+            };
 
-            await this.NavigationService?.NavigateAsync("SelectionPage", navparm);
+            await this.NavigationService?.NavigateAsync(nameof(SelectionPage), navparm);
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters.TryGetValue(nameof(NavigationParameter.Selection), out object selection))
             {
-                if (selection is CustomerDbt dbo)
+                if (selection is CarDbt dbo)
                 {
-                    this.Model.CustomerId = dbo.Id;
-                    this.Model.Customer = dbo;
+                    this.Model = dbo;
                 }
             }
         }

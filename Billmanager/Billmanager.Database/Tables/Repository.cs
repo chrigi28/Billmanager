@@ -34,7 +34,7 @@ namespace Billmanager.Database.Tables
         {
             var connectionString = string.Format($"Filename={storagePath}");
             Debug.WriteLine($"DB-ConnectionString: {connectionString}");
-            optionsBuilder.UseSqlite(connectionString);
+            optionsBuilder.UseSqlite(connectionString).UseLazyLoadingProxies();;
             base.OnConfiguring(optionsBuilder);
         }
         

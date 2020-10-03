@@ -12,75 +12,82 @@
              xmlns:converters="clr-namespace:Muellerchur.Xamos.Mobile.Converters;assembly=Billmanager"
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.OverviewPageViewModel}}" 
              mc:Ignorable="d helper"
+             x:Name="Page"
              >
-    <ScrollView VerticalOptions="FillAndExpand" 
+    <!--<ScrollView VerticalOptions="FillAndExpand" 
         HorizontalOptions="FillAndExpand" 
         Margin="10,10,10,5"
-        >
-        <Grid VerticalOptions="FillAndExpand" 
+        >-->
+    <Grid VerticalOptions="FillAndExpand" 
           HorizontalOptions="FillAndExpand" 
           RowSpacing="5"
-          ColumnSpacing="10"        
+          ColumnSpacing="5"        
+          Margin="10"
             >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-               <RowDefinition Height="Auto" />
-                <!-- <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <!-- <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />-->
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <!-- #region left grid -->
-            <Label Text="{x:Static texts:Resources.Overview}"
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Text="{x:Static texts:Resources.Overview}"
                Grid.Row="0"
                Grid.Column="0" 
-               Grid.ColumnSpan="4"
+               Grid.ColumnSpan="3"
                VerticalOptions="FillAndExpand" 
                HorizontalOptions="CenterAndExpand" 
                FontSize="Large"/>
-            <StackLayout Orientation="Vertical"
+
+        <!-- buttons-->
+        <ScrollView Orientation="Vertical"
                          Grid.Row="2"
                          Grid.Column="0" 
+                         Grid.RowSpan="3"
                          >
-
-            <Button Text="{x:Static texts:Resources.CreateCustomer}"
-                    HorizontalOptions="FillAndExpand" 
-                    HeightRequest="50"
-                    Command="{Binding CreateCustomerCommand}"/>
-            <Button Text="{x:Static texts:Resources.CreateCar}"
+            <StackLayout Orientation="Vertical">
+                <Button Text="{x:Static texts:Resources.CreateCustomer}"
+                        HorizontalOptions="FillAndExpand" 
+                        HeightRequest="50"
+                        Command="{Binding CreateCustomerCommand}"/>
+                <Button Text="{x:Static texts:Resources.CreateCar}"
                     HorizontalOptions="FillAndExpand" 
                     HeightRequest="50"
                     Command="{Binding CreateCarCommand}"/>
-            <Button Text="{x:Static texts:Resources.CreateBill}"
+                <Button Text="{x:Static texts:Resources.CreateBill}"
                     HorizontalOptions="FillAndExpand" 
                     HeightRequest="50"
                     Command="{Binding CreateBillCommand}"/>
-            <Button Text="{x:Static texts:Resources.CreateOffer}"
+                <Button Text="{x:Static texts:Resources.CreateOffer}"
                     HorizontalOptions="FillAndExpand" 
                     HeightRequest="50"
                     Command="{Binding CreateOffertCommand}"/>
-            <Button Text="{x:Static texts:Resources.CreateWorkcard}"
+                <Button Text="{x:Static texts:Resources.CreateWorkcard}"
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateWorkcardCommand}"/>
-            <Button Text="{x:Static texts:Resources.CreateAddresscard}"
+                <Button Text="{x:Static texts:Resources.CreateAddresscard}"
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateAddresscardCommand}"/>
-<BoxView VerticalOptions="FillAndExpand"/>
+                <BoxView VerticalOptions="FillAndExpand"/>
             </StackLayout>
 
+        </ScrollView>
 
-            <Label Text="{x:Static texts:Resources.Customer}" 
+        <!-- Customer -->
+        <Label Text="{x:Static texts:Resources.Customer}" 
                    Grid.Row="1"
                    Grid.Column="1"
                    FontSize="Title" 
@@ -88,36 +95,41 @@
                    HorizontalOptions="Center"
                    VerticalTextAlignment="Center"
                    VerticalOptions="Center"/>
-            <Frame HasShadow="False"
+        <Frame HasShadow="False"
+               Padding="5"
                    BorderColor="DarkGray"
                    CornerRadius="5"
                    Grid.Column="1" 
                    Grid.Row="2"
-                   HorizontalOptions="Center"
-                   VerticalOptions="StartAndExpand">
-                <ListView 
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   >
+            <ListView 
                   ItemsSource="{Binding Customers}"
                   SelectedItem="{Binding SelectedCustomer}"
                   HorizontalOptions="FillAndExpand"
                   VerticalOptions="FillAndExpand"
-                >
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" x:DataType="tables:CustomerDbt" HeightRequest="35">
-                                    <Label Text="{Binding FirstName}" />
-                                    <Label Text="{Binding LastName}" />
-                                    <ImageButton ></ImageButton>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+            >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" x:DataType="tables:CustomerDbt" HeightRequest="35">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" CommandParameter="{Binding .}"/>
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{Binding FirstName}" />
+                                <Label Text="{Binding LastName}" />
+                                <ImageButton ></ImageButton>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-            </Frame>
-
-
-            <Label Text="{x:Static texts:Resources.Vehicle}" 
+        </Frame>
+        <!-- Customer End-->
+        <!-- Vehicle -->
+        <Label Text="{x:Static texts:Resources.Vehicle}" 
                    FontSize="Title" 
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
@@ -125,72 +137,84 @@
                    VerticalOptions="Center"
                    Grid.Row="1"
                    Grid.Column="2"/>
-                     <Frame HasShadow="False"
+        <Frame HasShadow="False"
                        BorderColor="DarkGray"
                        CornerRadius="5"
-                       HorizontalOptions="Center"
-                       VerticalOptions="StartAndExpand"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand"
                        Grid.Column="2" 
                        Grid.Row="2"
                        >
-                        <ListView ItemsSource="{Binding Cars}"
+            <ListView ItemsSource="{Binding Cars}"
                               SelectedItem="{Binding SelectedCar}"
                               HorizontalOptions="FillAndExpand"
                               VerticalOptions="FillAndExpand"
                               
                         >
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" x:DataType="tables:CarDbt" HeightRequest="35">
-                                            <Label Text="{Binding CarMake}" />
-                                            <Label Text="{Binding Typ}" />
-                                        </StackLayout>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Frame>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" x:DataType="tables:CarDbt" HeightRequest="35">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" CommandParameter="{Binding .}"/>
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{Binding CarMake}" />
+                                <Label Text="{Binding Typ}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
+        <!-- Vehicle End-->
 
-            <Label Text="{x:Static texts:Resources.Bill}" 
+        <!-- Bill-->
+        <Label Text="{x:Static texts:Resources.Bill}" 
                    FontSize="Title" 
                    FontAttributes="Bold"
-                   HorizontalOptions="Center"
+                   HorizontalOptions="Start"
                    VerticalTextAlignment="Center"
                    VerticalOptions="Center"
-                   Grid.Row="1"
-                   Grid.Column="3"/>
-                    <Frame HasShadow="False"
+                   Grid.Row="3"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"/>
+        <Frame HasShadow="False"
                            BorderColor="DarkGray"
                            CornerRadius="5"
-                           HorizontalOptions="Center"
-                           VerticalOptions="StartAndExpand"
-                           Grid.Column="3" 
-                           Grid.Row="2"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="FillAndExpand"
+                           Grid.Column="1" 
+                           Grid.Row="4"
+                           Grid.ColumnSpan="2"
                            >
 
-                        <ListView ItemsSource="{Binding Bills}"
+            <ListView ItemsSource="{Binding Bills}"
                                   SelectedItem="{Binding SelectedBill}"
                                   HorizontalOptions="FillAndExpand"
                                   VerticalOptions="FillAndExpand"
                         >
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <StackLayout Orientation="Horizontal" 
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" 
                                                      HorizontalOptions="Center" 
                                                      HeightRequest="35"
                                                      Spacing="10" 
                                                      x:DataType="tables:BillDbt">
-                                            <Label Text="{Binding Date}" />
-                                            <Label Text="{Binding Conclusion}" />
-                                            <Label Text="{Binding NettoPrice}" />
-                                        </StackLayout>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Frame>
-        </Grid>
-    </ScrollView>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" CommandParameter="{Binding .}"/>
+                                </StackLayout.GestureRecognizers>
+                                <Label Text="{Binding Date}" />
+                                <Label Text="{Binding Conclusion}" />
+                                <Label Text="{Binding NettoPrice}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
+
+        <!-- Bill End-->
+    </Grid>
+    <!--</ScrollView>-->
 </ContentPage>

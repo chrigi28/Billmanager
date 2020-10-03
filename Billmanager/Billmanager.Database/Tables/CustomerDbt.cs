@@ -19,6 +19,5 @@ namespace Billmanager.Database.Tables
 
         public override string FilterString => base.FilterString + this.Title_customer + LastName + Address + Zip +
                                                Location + Phone + base.FilterString;
-
     }
 }
