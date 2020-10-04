@@ -32,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Interfaces\Billmanager.Interfaces.csproj" />
     <ProjectReference Include="..\Billmanager.Database\Billmanager.Database.csproj" />
+    <ProjectReference Include="..\Billmanager.Pdf\Billmanager.Pdf\Billmanager.Pdf.csproj" />
     <ProjectReference Include="..\Billmanager.Translations\Billmanager.Translations.csproj" />
   </ItemGroup>
 
