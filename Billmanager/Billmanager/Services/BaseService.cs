@@ -19,7 +19,6 @@ namespace Billmanager.Services
             return await SqliteDatabase.AssureDb().GetItemAsync<T>(id);
         }
 
-
         public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class, IDatabaseTable
         {
             return await SqliteDatabase.AssureDb().GetItemsAsync<T>();

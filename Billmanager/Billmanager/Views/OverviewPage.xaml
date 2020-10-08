@@ -81,6 +81,10 @@
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateAddresscardCommand}"/>
+                <Button Text="{x:Static texts:Resources.Settings}"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding SettingsCommand}"/>
                 <Button Text="Testbutton"
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand" 

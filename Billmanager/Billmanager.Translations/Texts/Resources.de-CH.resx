@@ -192,6 +192,9 @@
   <data name="Edit" xml:space="preserve">
     <value>Bearbeiten</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="EngineNo" xml:space="preserve">
     <value>Motor Nr.</value>
   </data>
@@ -204,8 +207,14 @@
   <data name="FirstOnMarket" xml:space="preserve">
     <value>1. in Verkehrssetzung</value>
   </data>
+  <data name="Iban" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
   <data name="Location" xml:space="preserve">
     <value>Ort</value>
+  </data>
+  <data name="Logo" xml:space="preserve">
+    <value>Logo</value>
   </data>
   <data name="Material" xml:space="preserve">
     <value>Material</value>
@@ -252,6 +261,9 @@
   </data>
   <data name="Select" xml:space="preserve">
     <value>Auswählen</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
   </data>
   <data name="Titel_Customer" xml:space="preserve">
     <value>Anrede</value>

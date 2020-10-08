@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Billmanager.Views.SettingsPage"
+             xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+             xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
+             xmlns:viewModels="clr-namespace:Billmanager.ViewModels;assembly=Billmanager"
+             xmlns:converters="clr-namespace:Muellerchur.Xamos.Mobile.Converters;assembly=Billmanager"
+             d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.SettingViewModel}}"
+             mc:Ignorable="d helper"
+             >
+  
+    <Grid VerticalOptions="FillAndExpand"
+          HorizontalOptions="FillAndExpand"
+          Margin="10"
+    >
+<Grid.RowDefinitions>
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="Auto" />
+    <RowDefinition Height="*" />
+</Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+  
+        <Label Text="{x:Static texts:Resources.Settings}"
+               Grid.Row="0"
+               Grid.Column="1"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="CenterAndExpand" 
+               FontSize="Large"/>
+        <Entry Text="{Binding Model.Title}" Placeholder="{x:Static texts:Resources.Titel_Customer}" 
+               Grid.Row="1"
+               Grid.Column="1"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand"/>
+        <Entry Text="{Binding  Model.FirstName}" Placeholder="{x:Static texts:Resources.Firstname}" 
+               x:Name="FirstName"
+               Grid.Column="1" 
+               Grid.Row="2"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.LastName}" Placeholder="{x:Static texts:Resources.Name}" 
+               Grid.Column="1" 
+               Grid.Row="3"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Address}" Placeholder="{x:Static texts:Resources.Address}" 
+               Grid.Column="1"
+               Grid.Row="4"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Zip}" Placeholder="{x:Static texts:Resources.ZipCode}" 
+               Grid.Column="1" 
+               Grid.Row="5"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Location}" Placeholder="{x:Static texts:Resources.Location}" 
+               Grid.Column="1" 
+               Grid.Row="6"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Phone}" Placeholder="{x:Static texts:Resources.Phone}" 
+               Grid.Column="1" 
+               Grid.Row="7"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Email}" Placeholder="{x:Static texts:Resources.Email}" 
+               Grid.Column="1" 
+               Grid.Row="8"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.IBAN}" Placeholder="{x:Static texts:Resources.Iban}" 
+               Grid.Column="1" 
+               Grid.Row="9"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+        <Entry Text="{Binding  Model.Remark}" Placeholder="{x:Static texts:Resources.Remark}" 
+               Grid.Column="1" 
+               Grid.Row="10"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" />
+        <Image Source="{Binding Model.Logo}"
+               Grid.Column="1" 
+               Grid.Row="11"
+               BackgroundColor="Gray"
+               VerticalOptions="FillAndExpand" 
+               HorizontalOptions="FillAndExpand" 
+               HeightRequest="50"
+               >
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PickImageCommand}"/>
+                </Image.GestureRecognizers>
+        </Image>
+        <Button Text="{x:Static texts:Resources.Save}" 
+                Command="{Binding SaveCommand}"
+                Margin="0,10,0,0"
+                Grid.Column="1"
+                Grid.Row="12"
+                x:Name="SaveButton"
+                IsEnabled="{Binding Model.CanSave}"
+                Opacity="{Binding Source={x:Reference SaveButton}, Path=IsEnabled, Converter={converters:BooleanOpacityConverter}}"
+                />
+
+    </Grid>
+</ContentPage>

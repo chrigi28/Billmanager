@@ -8,5 +8,6 @@ namespace Billmanager.Interfaces.Service
     public interface IBaseService
     {
         Task<T> GetByIdAsync<T>(int id) where T : class, IDatabaseTable;
+        Task<IEnumerable<T>> GetAllAsync<T>() where T : class, IDatabaseTable;
     }
 }

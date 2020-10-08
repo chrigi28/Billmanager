@@ -20,14 +20,16 @@ namespace Billmanager.Database.Tables
         public Repository() : base()
         {
             this.storagePath = Path.Combine(DependencyService.Get<IDbPath>().GetDbStoragePath(), "Billmanager.sqlite");
-            
+
             Database.EnsureCreated();
+            //Database.Migrate();
         }
 
         public DbSet<CustomerDbt> Customer { get; set; }
         public DbSet<CarDbt> Car { get; set; }
         public DbSet<BillDbt> Bill { get; set; }
         public DbSet<ItemPositionDbt> ItemPosition { get; set; }
+        public DbSet<SettingsDbt> Setting { get; set; }
         ////public DbSet<CustomerDbt> Customer { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -36,6 +38,7 @@ namespace Billmanager.Database.Tables
             Debug.WriteLine($"DB-ConnectionString: {connectionString}");
             optionsBuilder.UseSqlite(connectionString).UseLazyLoadingProxies();;
             base.OnConfiguring(optionsBuilder);
+            
         }
         
         public async Task<bool> AddItemAsync<T>(T item) where T : class, IDatabaseTable

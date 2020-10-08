@@ -14,6 +14,7 @@ namespace Billmanager.Helper
         public static CreateCustomerPageViewModel CreateCustomerPageViewModel => new CreateCustomerPageViewModel(null);
         public static CreateOffertPageViewModel CreateOffertPageViewModel => new CreateOffertPageViewModel(null);
         public static CreateWorkcardPageViewModel CreateWorkcardPageViewModel => new CreateWorkcardPageViewModel(null);
+        public static SettingViewModel SettingViewModel => new SettingViewModel(null);
         
         ////select
         public static SelectionPageViewModel SelectionPageViewModel => new SelectionPageViewModel(null);

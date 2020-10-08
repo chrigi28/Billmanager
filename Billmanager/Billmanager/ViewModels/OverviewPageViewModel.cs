@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Billmanager.Annotations;
 using Billmanager.Database.Tables;
 using Billmanager.Helper;
 using Billmanager.Interfaces.Database.Datatables;
@@ -29,6 +30,7 @@ namespace Billmanager.ViewModels
         private CustomerDbt? _selectedCustomer;
         private Command? editCommand;
         private Command testCommand;
+        private Command settingsCommand;
 
         public OverviewPageViewModel(INavigationService? ns) : base(ns)
         {
@@ -47,6 +49,7 @@ namespace Billmanager.ViewModels
 
         public Command CreateBillCommand => this.createBillCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateBillPage)));
         
+        [UsedImplicitly]
         public Command EditCommand => this.editCommand  ??= new Command(async o => await this.Edit(o));
 
         public Command CreateWorkcardCommand => this.createWorkcardCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateWorkcardPage)));
@@ -55,6 +58,7 @@ namespace Billmanager.ViewModels
 
         public Command CreateOffertCommand => this.createOffertCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateOffertPage)));
         public Command TestCommand => this.testCommand ??= new Command(async () => await this.CreateTestPdf());
+        public Command SettingsCommand => this.settingsCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(SettingsPage)));
 
         public ObservableCollection<ICustomerDbt>? Customers { get; set; }
 
