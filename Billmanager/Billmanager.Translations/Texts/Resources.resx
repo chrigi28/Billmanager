@@ -135,6 +135,9 @@
   <data name="Billmanager" xml:space="preserve">
     <value>Billmanager</value>
   </data>
+  <data name="BillNumber" xml:space="preserve">
+    <value>Rechnungs-Nr.</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Abbrechen</value>
   </data>

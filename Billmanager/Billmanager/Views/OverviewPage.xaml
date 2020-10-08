@@ -81,6 +81,10 @@
                     HeightRequest="50"
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding CreateAddresscardCommand}"/>
+                <Button Text="Testbutton"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding TestCommand}"/>
                 <BoxView VerticalOptions="FillAndExpand"/>
             </StackLayout>
 

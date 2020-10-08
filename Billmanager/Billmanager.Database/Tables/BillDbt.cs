@@ -22,6 +22,7 @@ namespace Billmanager.Database.Tables
         public virtual ObservableCollection<ItemPositionDbt> ItemPositions { get; set; } = new ObservableCollection<ItemPositionDbt>();
 
         public DateTime Date { get; set; } = DateTime.Now;
+        public string BillNumber { get; set; }
         public string Conclusion { get; set; }
         public int Kilometers { get; set; }
         public decimal NettoPrice { get; set; }
