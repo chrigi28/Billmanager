@@ -11,7 +11,7 @@
         string Phone { get; set; }
         string Email { get; set; }
         string IBAN { get; set; }
-        byte[] Logo { get; set; }
+        string LogoPath { get; set; }
 
     }
 }

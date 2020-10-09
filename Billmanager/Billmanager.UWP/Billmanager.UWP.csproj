@@ -108,6 +108,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CopyDataToLocalStorageService.cs" />
     <Compile Include="Services\DbPath.cs" />
   </ItemGroup>
   <ItemGroup>

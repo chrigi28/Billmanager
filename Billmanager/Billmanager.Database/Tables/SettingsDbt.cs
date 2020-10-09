@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.IO;
+using Billmanager.Database.Annotations;
 using Billmanager.Interfaces.Database.Datatables;
 using PropertyChanged;
 using Xamarin.Forms;
@@ -17,21 +18,18 @@ namespace Billmanager.Database.Tables
         public string Phone { get; set; }
         public string Email { get; set; }
         public string IBAN { get; set; }
-        public byte[] Logo { get; set; }
-        public ImageSource Image 
-        {
-            get
-            {
-                return this.GetImage();
-            }
-        }
+        public string LogoPath { get; set; }
+        public ImageSource Image => GetImage();
 
-        private Image GetImage()
+        [CanBeNull]
+        private ImageSource GetImage()
         {
-            using (MemoryStream ms = new MemoryStream(Logo))
+            if (LogoPath != null)
             {
-                return Image.FromStream(ms);
+                return ImageSource.FromFile(LogoPath);
             }
+            
+            return null;
         }
 
         [AlsoNotifyFor(nameof(FirstName))]

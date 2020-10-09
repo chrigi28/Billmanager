@@ -59,18 +59,12 @@ namespace Billmanager.ViewModels
                     {
                         var Text = $"File Name: {result.FileName}";
                         if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
+                            result.FileName.EndsWith("jpeg", StringComparison.OrdinalIgnoreCase) ||
                             result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
                         {
-                            var stream = await result.OpenReadAsync();
-                            
-                            
-                            using (var streamReader = new MemoryStream())
-                            {
-                                stream.CopyTo(streamReader);
-                                byte[] bytes = streamReader.ToArray();
-                                this.Model.Logo = bytes;
-                            }
-                            
+                            var path = await DependencyService.Get<ICopyDataToLocalStorageService>().CopyDataToLocalStore(await FilePicker.PickAsync(options));
+
+                            Model.LogoPath = path;
                         }
                     }
                 }

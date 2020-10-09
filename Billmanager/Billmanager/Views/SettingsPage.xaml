@@ -99,7 +99,7 @@
                Grid.Row="10"
                VerticalOptions="FillAndExpand" 
                HorizontalOptions="FillAndExpand" />
-        <Image Source="{Binding Model.Logo}"
+        <Image Source="{Binding Model.Image}"
                Grid.Column="1" 
                Grid.Row="11"
                BackgroundColor="Gray"
