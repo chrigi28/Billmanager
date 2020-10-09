@@ -1,4 +1,6 @@
-﻿namespace Billmanager.Interfaces.Database.Datatables
+﻿using Xamarin.Forms;
+
+namespace Billmanager.Interfaces.Database.Datatables
 {
     public interface ISettingsDbt : IDatabaseTable
     {
@@ -12,6 +14,7 @@
         string Email { get; set; }
         string IBAN { get; set; }
         string LogoPath { get; set; }
+        ImageSource Image { get; }
 
     }
 }

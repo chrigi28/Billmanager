@@ -10,7 +10,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(CustomerService))]
 namespace Billmanager.Services
 {
-    public class CustomerService : ICustomerService
+    public class CustomerService : BaseService, ICustomerService
     {
         public async Task<IEnumerable<ICustomerDbt>> GetCustomerSelection()
         {

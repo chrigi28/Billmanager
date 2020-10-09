@@ -28,51 +28,24 @@ namespace Billmanager.ViewModels
             this.Title = Resources.CreateCustomer;
         }
 
-        public Command PickImageCommand => this.pickImgeCommand ??= new Command(async () => await this.PickImage());
+        public Command PickImageCommand => this.pickImgeCommand ??= new Command(async () => await this.PickAndShow());
 
-        private async Task PickImage()
+        async Task PickAndShow()
         {
-            var customFileType =
-                new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
-                {
-                    { DevicePlatform.iOS, new[] { "public.my.comic.extension" } }, // or general UTType values
-                    { DevicePlatform.Android, new[] { "application/comics" } },
-                    { DevicePlatform.UWP, new[] { ".cbr", ".cbz" } },
-                    { DevicePlatform.Tizen, new[] { "*/*" } },
-                    { DevicePlatform.macOS, new[] { "cbr", "cbz" } }, // or general UTType values
-                });
-            var options = new PickOptions
+            try
             {
-                PickerTitle = "Please select a comic file",
-                FileTypes = customFileType,
-            };
-            
-            await this.PickAndShow(options);
-        }
-        
-        async Task PickAndShow(PickOptions options)
-            {
-                try
+                var result = await FilePicker.PickAsync(PickOptions.Images);
+                if (result != null)
                 {
-                    var result = await FilePicker.PickAsync();
-                    if (result != null)
-                    {
-                        var Text = $"File Name: {result.FileName}";
-                        if (result.FileName.EndsWith("jpg", StringComparison.OrdinalIgnoreCase) ||
-                            result.FileName.EndsWith("jpeg", StringComparison.OrdinalIgnoreCase) ||
-                            result.FileName.EndsWith("png", StringComparison.OrdinalIgnoreCase))
-                        {
-                            var path = await DependencyService.Get<ICopyDataToLocalStorageService>().CopyDataToLocalStore(await FilePicker.PickAsync(options));
-
-                            Model.LogoPath = path;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // The user canceled or something went wrong
+                    var path = await DependencyService.Get<ICopyDataToLocalStorageService>().CopyDataToLocalStore(result);
+                    Model.LogoPath = path;
                 }
             }
+            catch (Exception ex)
+            {
+                // The user canceled or something went wrong
+            }
+        }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {

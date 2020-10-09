@@ -6,8 +6,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Billmanager.Database.Tables;
+using Billmanager.Interfaces.Database.Datatables;
+using Billmanager.Interfaces.Service;
 using Billmanager.Translations.Texts;
 using SkiaSharp;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace SkiaSharpSample.Samples
@@ -25,8 +28,10 @@ namespace SkiaSharpSample.Samples
 
         private static float startBill = pageHeight / 3;
 
-        public static void CreateBill(string path, BillDbt bill)
+        public async static void CreateBill(string path, BillDbt bill)
         {
+            var setting = (await DependencyService.Get<IBaseService>().GetAllAsync<ISettingsDbt>()).FirstOrDefault();
+
             using var document = SKDocument.CreatePdf(path);
 
             if (document == null)
@@ -51,9 +56,14 @@ namespace SkiaSharpSample.Samples
             // draw page 1
             using (var page1 = document.BeginPage(pageWidth, pageHeight))
             {
-                DrawLogo(page1);
+                if (setting == null)
+                {
+                    Console.WriteLine("No settings available");
+                }
+
+                DrawLogo(page1, setting.Image);
                 DrawCustomerAdress(page1, defaultPaint, bill);
-                DrawHolderAdress(page1, defaultPaint);
+                DrawHolderAdress(page1, setting, defaultPaint);
 
                 DrawDetails(document, page1, defaultPaint, bill);
 
@@ -64,10 +74,12 @@ namespace SkiaSharpSample.Samples
             document.Close();
         }
 
-        private static void DrawLogo(SKCanvas pdfCanvas)
+        private static void DrawLogo(SKCanvas pdfCanvas, string imagePath)
         {
+            SKImage.FromEncodedData()
+            image
             //// todo var path to image
-            ////pdfCanvas.DrawImage();
+            pdfCanvas.DrawImage(image, );
         }
 
         private static void DrawCustomerAdress(SKCanvas pdfCanvas, SKPaint paint, BillDbt bill)

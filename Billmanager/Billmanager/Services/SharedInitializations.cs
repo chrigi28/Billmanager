@@ -27,6 +27,7 @@ namespace Billmanager.Services
             DependencyService.Register<ICustomerService>();
             DependencyService.Register<ICarService>();
             DependencyService.Register<IBillService>();
+            DependencyService.Register<IBaseService>();
         }
     }
 }
