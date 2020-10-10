@@ -196,6 +196,7 @@ namespace Billmanager.ViewModels
                 if (selection is BillDbt bill)
                 {
                     this.Model = bill;
+                    this.AddExtraItem();
                 }
             }
         }

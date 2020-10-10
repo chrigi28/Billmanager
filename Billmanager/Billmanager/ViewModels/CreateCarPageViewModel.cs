@@ -50,6 +50,11 @@ namespace Billmanager.ViewModels
                 {
                     this.Model = dbo;
                 }
+
+                if (selection is CustomerDbt cust)
+                {
+                    this.Model.Customer = cust;
+                }
             }
         }
     }
