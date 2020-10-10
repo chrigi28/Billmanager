@@ -17,7 +17,8 @@ namespace SkiaSharpSample.Samples
 {
     public static class PdfFactory
     {
-        private static float offsetTop = 180;
+        private static float offsetTop = 50;
+        private static float logoHeight = 210;
         private static float offsetBottom = 100;
         private static float offsetLeft = 100;
         private static float offsetRight = 100;
@@ -28,9 +29,12 @@ namespace SkiaSharpSample.Samples
 
         private static float startBill = pageHeight / 3;
 
+        /// <summary>Creates A printable Bill</summary>
+        /// <param name="path">file save path</param>
+        /// <param name="bill">bill data</param>
         public async static void CreateBill(string path, BillDbt bill)
         {
-            var setting = (await DependencyService.Get<IBaseService>().GetAllAsync<ISettingsDbt>()).FirstOrDefault();
+            var setting = (await DependencyService.Get<IBaseService>().GetAllAsync<SettingsDbt>()).FirstOrDefault();
 
             using var document = SKDocument.CreatePdf(path);
 
@@ -53,7 +57,34 @@ namespace SkiaSharpSample.Samples
                     SKFontStyleSlant.Upright)
             };
 
-            // draw page 1
+            int pages = ProceedPdf(bill, document, setting, defaultPaint);
+
+            if (pages > 1)
+            {
+                // HACK cancel document and do it again with page count  very imperformant 
+                document.Abort();
+                document.Close();
+                document.Dispose();
+                using var numberedDocument = SKDocument.CreatePdf(path);
+                ProceedPdf(bill, numberedDocument, setting, defaultPaint, pages);
+                numberedDocument.Close();
+            }
+            else
+            {
+                document.Close();
+            }
+        }
+
+        /// <summary>Proceeds the pdf draws the logo, customer, holder, positions, footer</summary>
+        /// <param name="bill">data</param>
+        /// <param name="document">document</param>
+        /// <param name="setting">settings for holder infos</param>
+        /// <param name="defaultPaint">default text style</param>
+        /// <param name="totalPages">number of total generated pages</param>
+        /// <returns>number of total generated pages</returns>
+        private static int ProceedPdf(BillDbt bill, SKDocument document, SettingsDbt setting, SKPaint defaultPaint, int? totalPages = null)
+        {
+            int pages;
             using (var page1 = document.BeginPage(pageWidth, pageHeight))
             {
                 if (setting == null)
@@ -61,31 +92,41 @@ namespace SkiaSharpSample.Samples
                     Console.WriteLine("No settings available");
                 }
 
-                DrawLogo(page1, setting.Image);
+                DrawLogo(page1, setting.LogoPath);
                 DrawCustomerAdress(page1, defaultPaint, bill);
-                DrawHolderAdress(page1, setting, defaultPaint);
-
-                DrawDetails(document, page1, defaultPaint, bill);
+                DrawHolderInfo(page1, setting, defaultPaint);
+                pages = DrawDetails(document, page1, setting, defaultPaint, bill, totalPages);
 
                 document.EndPage();
             }
-            
-            // end the doc
-            document.Close();
+
+            return pages;
         }
 
+        /// <summary>Draws the logo at the top left corner</summary>
+        /// <param name="pdfCanvas">page to draw on</param>
+        /// <param name="imagePath">path to logo</param>
         private static void DrawLogo(SKCanvas pdfCanvas, string imagePath)
         {
-            SKImage.FromEncodedData()
-            image
-            //// todo var path to image
-            pdfCanvas.DrawImage(image, );
+            if (!File.Exists(imagePath))
+            {
+                return; 
+            }
+
+            var file = File.ReadAllBytes(imagePath);
+            using (var bitmap = SKImage.FromEncodedData(file))
+            {
+                pdfCanvas.DrawImage(bitmap,offsetLeft, offsetTop);
+            }
         }
 
+        /// <summary>prints the Customer infos to the pdf</summary>
+        /// <param name="pdfCanvas">page</param>
+        /// <param name="paint">textstyle</param>
+        /// <param name="bill">data</param>
         private static void DrawCustomerAdress(SKCanvas pdfCanvas, SKPaint paint, BillDbt bill)
         {
-            float logoheight = 30;
-            var yStart = offsetTop + logoheight;
+            var yStart = offsetTop + logoHeight;
             pdfCanvas.DrawText(bill.Customer.Title_customer, offsetLeft, yStart, paint);
             yStart += rowSpacing;
             pdfCanvas.DrawText($"{bill.Customer.FirstName} {bill.Customer.LastName}", offsetLeft, yStart, paint);
@@ -95,19 +136,22 @@ namespace SkiaSharpSample.Samples
             pdfCanvas.DrawText($"{bill.Customer.Zip} {bill.Customer.Location}", offsetLeft, yStart, paint);
         }
 
-        private static void DrawHolderAdress(SKCanvas pdfCanvas, SKPaint paint)
+        /// <summary>prints the holders infos from the settings to the pdf </summary>
+        /// <param name="pdfCanvas">page</param>
+        /// <param name="setting">settings</param>
+        /// <param name="paint">style</param>
+        private static void DrawHolderInfo(SKCanvas pdfCanvas, SettingsDbt setting, SKPaint paint)
         {
-            
-            float logoheight = 30;
-            var yStart = offsetTop + logoheight;
-            float startRight = pageWidth - offsetRight - 150;
+            var yStart = logoHeight;
+            float startRight = pageWidth - offsetRight - 200;
 
-            var firm = "Züger Fahrzeugelektronik";
-            var name = "Edgar Züger";
-            var adress = "Kantonsstrasse 6";
-            var zip = 8863;
-            var loc = "Schübelbach";
-            var tel = "078 638 29 95";
+            var firm = setting.Title;
+            var name = setting.FirstName + " " + setting.LastName;
+            var adress = setting.Address;
+            var zip = setting.Zip;
+            var loc = setting.Location;
+            var tel = setting.Phone;
+            var mail = setting.Email;
 
             pdfCanvas.DrawText($"{firm}", startRight, yStart, paint);
             yStart += rowSpacing;
@@ -117,15 +161,24 @@ namespace SkiaSharpSample.Samples
             yStart += rowSpacing;
             pdfCanvas.DrawText($"{zip} {loc}", startRight, yStart, paint);
             yStart += rowSpacing + 5;
+            pdfCanvas.DrawText($"{mail}", startRight, yStart, paint);
+            yStart += rowSpacing;
             pdfCanvas.DrawText($"{tel}", startRight, yStart, paint);
         }
 
-        private static void DrawDetails(SKDocument document, SKCanvas currentPage, SKPaint textPaint, BillDbt bill)
+        /// <summary>Draw the Bill details and Positions </summary>
+        /// <param name="document">document needed to add new pages</param>
+        /// <param name="currentPage">current page</param>
+        /// <param name="settings">settings for holders logo</param>
+        /// <param name="textPaint">style</param>
+        /// <param name="bill">data</param>
+        /// <param name="totalPages">page count</param>
+        /// <returns>page count</returns>
+        private static int DrawDetails(SKDocument document, SKCanvas currentPage, SettingsDbt settings, SKPaint textPaint, BillDbt bill, int? totalPages = null)
         {
-
             #region Styles
 
-            var titelHeight = textHeight + textHeight / 3 + 3;
+            var titelHeight = textHeight + textHeight / 3 + 5;
             using var boldTitel = new SKPaint
             {
                 TextSize = titelHeight,
@@ -193,19 +246,19 @@ namespace SkiaSharpSample.Samples
                 if (pageHeight / 5 * 4 <= yStart)
                 {
                     // todo add some page info  pagesize etc.
-                    WritePageNumber(currentPage, textPaint, pageCount);                    
+                    WritePageNumber(currentPage, textPaint, pageCount, totalPages);                    
                     document.EndPage();
                     currentPage = document.BeginPage(pageWidth, pageHeight);
                     pageCount++;
-                    DrawLogo(currentPage);
-                    yStart = offsetTop;
+                    DrawLogo(currentPage, settings.LogoPath);
+                    yStart = offsetTop + logoHeight;
                     DrawItemHeader(currentPage, textPaint, ref yStart, linePaint);
                 }
             }
 
             if (pageCount > 1)
             {
-                WritePageNumber(currentPage, textPaint, pageCount);   
+                WritePageNumber(currentPage, textPaint, pageCount, totalPages);   
             }
 
             #endregion
@@ -234,16 +287,35 @@ namespace SkiaSharpSample.Samples
 
             #endregion
 
+
+            return pageCount;
             ////pdfCanvas.DrawText($"{bill.Customer.Address}", offsetLeft, offsetTop + logoheight + 30, textPaint);
             ////pdfCanvas.DrawText($"{bill.Customer.Zip} {bill.Customer.Location}", offsetLeft, offsetTop + logoheight + 45, textPaint);
         }
 
-        private static void WritePageNumber(SKCanvas currentPage, SKPaint textPaint, int pageCount)
+        /// <summary>Adds the pagenumber to the bottom right</summary>
+        /// <param name="currentPage">page to draw on</param>
+        /// <param name="textPaint">style</param>
+        /// <param name="pageCount">current page number</param>
+        /// <param name="totalPages">total page count</param>
+        private static void WritePageNumber(SKCanvas currentPage, SKPaint textPaint, int pageCount, int? totalPages = null)
         {
+            if (totalPages != null)
+            {
+                currentPage.DrawText($"Seite {pageCount} / {totalPages}", pageWidth - offsetRight - 50, pageHeight - offsetBottom, textPaint);
+                return;
+            }
+
             currentPage.DrawText($"Seite {pageCount}", pageWidth - offsetRight - 50, pageHeight - offsetBottom, textPaint);
         }
 
-        private static float DrawItemHeader(SKCanvas pdfCanvas, SKPaint textPaint, ref float yStart, SKPaint linePaint)
+        /// <summary>Draws the header to the bill</summary>
+        /// <param name="pdfCanvas">page</param>
+        /// <param name="textPaint">style</param>
+        /// <param name="yStart">vertical page start</param>
+        /// <param name="linePaint">line stlye</param>
+        /// <returns></returns>
+        private static void DrawItemHeader(SKCanvas pdfCanvas, SKPaint textPaint, ref float yStart, SKPaint linePaint)
         {
             pdfCanvas.DrawLine(offsetLeft, yStart, pageWidth - offsetRight, yStart, linePaint);
             yStart += rowSpacing;
@@ -252,18 +324,17 @@ namespace SkiaSharpSample.Samples
             var hStart = offsetLeft;
             pdfCanvas.DrawText($"Pos", hStart, yStart, textPaint);
             hStart += 50;
-            pdfCanvas.DrawText($"Bezeichnung", hStart, yStart, textPaint);
+            pdfCanvas.DrawText($"{Resources.Description}", hStart, yStart, textPaint);
             hStart += 350;
-            pdfCanvas.DrawText($"Menge", hStart, yStart, textPaint);
+            pdfCanvas.DrawText($"{Resources.Amount}", hStart, yStart, textPaint);
             hStart += 50;
-            pdfCanvas.DrawText($"Preis/Stk", hStart, yStart, textPaint);
+            pdfCanvas.DrawText($"{Resources.PricePerPcs}", hStart, yStart, textPaint);
             hStart += 100;
-            pdfCanvas.DrawText($"Gesamt", hStart, yStart, textPaint);
+            pdfCanvas.DrawText($"{Resources.Total}", hStart, yStart, textPaint);
 
             yStart += 10;
             pdfCanvas.DrawLine(offsetLeft, yStart, pageWidth - offsetRight, yStart, linePaint);
             yStart += rowSpacing;
-            return yStart;
         }
     }
 }

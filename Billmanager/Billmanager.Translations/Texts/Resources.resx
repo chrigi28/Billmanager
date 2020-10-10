@@ -247,6 +247,9 @@
   <data name="Ppp" xml:space="preserve">
     <value>Stk. Preis</value>
   </data>
+  <data name="PricePerPcs" xml:space="preserve">
+    <value>Preis/Stk.</value>
+  </data>
   <data name="Print" xml:space="preserve">
     <value>Drucken</value>
   </data>

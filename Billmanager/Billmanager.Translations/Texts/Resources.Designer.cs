@@ -155,6 +155,8 @@ namespace  Billmanager.Translations.Texts {
         public static string Plate => ResourceManager.GetString("Plate", resourceCulture);       
         /// <summary>Looks up a localized string similar to Ppp.</summary>
         public static string Ppp => ResourceManager.GetString("Ppp", resourceCulture);       
+        /// <summary>Looks up a localized string similar to PricePerPcs.</summary>
+        public static string PricePerPcs => ResourceManager.GetString("PricePerPcs", resourceCulture);       
         /// <summary>Looks up a localized string similar to Print.</summary>
         public static string Print => ResourceManager.GetString("Print", resourceCulture);       
         /// <summary>Looks up a localized string similar to Remark.</summary>

@@ -193,6 +193,9 @@
   <data name="Plate" xml:space="preserve">
     <value>plate</value>
   </data>
+  <data name="PricePerPcs" xml:space="preserve">
+    <value>Price/Pcs.</value>
+  </data>
   <data name="Print" xml:space="preserve">
     <value>print</value>
   </data>
