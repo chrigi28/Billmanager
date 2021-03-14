@@ -136,7 +136,12 @@
         <Style TargetType="Label"
                ApplyToDerivedTypes="True">
             <Setter Property="FontSize"
-                    Value="Medium" />
+                    Value="{OnIdiom Default=Medium, Phone=Small}" />
+        </Style>
+        <Style TargetType="Button"
+               ApplyToDerivedTypes="True">
+            <Setter Property="FontSize"
+                    Value="{OnIdiom Default=Medium, Phone=Small}"  />
         </Style>
         <Style TargetType="Frame">
             <Setter Property="HasShadow" Value="False" />

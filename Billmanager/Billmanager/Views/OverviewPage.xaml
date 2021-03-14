@@ -10,6 +10,7 @@
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
              xmlns:tables="clr-namespace:Billmanager.Database.Tables;assembly=Billmanager.Database"
              xmlns:converters="clr-namespace:Muellerchur.Xamos.Mobile.Converters;assembly=Billmanager"
+             xmlns:xtk="http://xamarin.com/schemas/2020/toolkit"
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.OverviewPageViewModel}}" 
              mc:Ignorable="d helper"
              x:Name="Page"
@@ -37,7 +38,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -51,12 +52,12 @@
                FontSize="Large"/>
 
         <!-- buttons-->
-        <ScrollView Orientation="Vertical"
-                         Grid.Row="2"
-                         Grid.Column="0" 
-                         Grid.RowSpan="3"
-                         >
-            <StackLayout Orientation="Vertical">
+
+            <ScrollView Orientation="Vertical"  Grid.Row="2"
+                      Grid.Column="0" 
+                      Grid.RowSpan="3">
+            <StackLayout Orientation="Vertical"
+                         WidthRequest="150">
                 <Button Text="{x:Static texts:Resources.CreateCustomer}"
                         HorizontalOptions="FillAndExpand" 
                         HeightRequest="50"
