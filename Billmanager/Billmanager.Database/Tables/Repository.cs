@@ -19,7 +19,10 @@ namespace Billmanager.Database.Tables
         
         public Repository() : base()
         {
-            this.storagePath = Path.Combine(DependencyService.Get<IDbPath>().GetDbStoragePath(), "Billmanager.sqlite");
+            var path = DependencyService.Get<IDbPath>().GetDbStoragePath();
+            this.storagePath = Path.Combine(path, "Billmanager.sqlite");
+
+            Directory.CreateDirectory(path);
 
             Database.EnsureCreated();
             //Database.Migrate();

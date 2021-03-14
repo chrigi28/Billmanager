@@ -138,6 +138,12 @@
             <Setter Property="FontSize"
                     Value="Medium" />
         </Style>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow" Value="False" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="BorderColor" Value="DarkGray" />
+            <Setter Property="CornerRadius" Value="5" />
+        </Style>
         </ResourceDictionary>
 	</Application.Resources>
 </prism:PrismApplication>

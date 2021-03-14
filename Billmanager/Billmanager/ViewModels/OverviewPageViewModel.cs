@@ -15,6 +15,7 @@ using Billmanager.Services;
 using Billmanager.Translations.Texts;
 using Billmanager.Views;
 using Prism.Navigation;
+using PropertyChanged;
 using SkiaSharpSample.Samples;
 using Xamarin.Forms;
 
@@ -77,20 +78,7 @@ namespace Billmanager.ViewModels
 
                 if (value != null)
                 {
-                    Device.InvokeOnMainThreadAsync(async () =>
-                    {
-                        var cars = await DependencyService.Get<ICarService>()
-                            .GetCarSelectionFromCustomerAsync(value.Id);
-                        this.Cars = new ObservableCollection<ICarDbt>(cars);
-
-                    });
-
-                    Device.InvokeOnMainThreadAsync(async () =>
-                    {
-                        var bills = await DependencyService.Get<IBillService>().GetBillsOfCustomerAsync(value.Id);
-                        this.Bills = new ObservableCollection<IBillDbt>(bills);
-
-                    });
+                    this.LoadVehiclesAndBills(value);
                 }
                 else
                 {
@@ -98,6 +86,21 @@ namespace Billmanager.ViewModels
                     this.Cars.Clear();
                 }
             }
+        }
+
+        private void LoadVehiclesAndBills(CustomerDbt Customer)
+        {
+            Device.InvokeOnMainThreadAsync(async () =>
+            {
+                var cars = await DependencyService.Get<ICarService>().GetCarSelectionFromCustomerAsync(Customer.Id);
+                this.Cars = new ObservableCollection<ICarDbt>(cars);
+            });
+
+            Device.InvokeOnMainThreadAsync(async () =>
+            {
+                var bills = await DependencyService.Get<IBillService>().GetBillsOfCustomerAsync(Customer.Id);
+                this.Bills = new ObservableCollection<IBillDbt>(bills);
+            });
         }
 
         private async Task Edit(object item)

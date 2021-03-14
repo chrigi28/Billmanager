@@ -11,7 +11,7 @@
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateCarPageViewModel}}"
              mc:Ignorable="d helper"
 >
-  
+  <ScrollView Orientation="Vertical">
     <Grid VerticalOptions="FillAndExpand"
           HorizontalOptions="FillAndExpand">
         <Grid.RowDefinitions>
@@ -108,4 +108,5 @@
                    Opacity="{Binding Source={x:Reference SaveButton}, Path=IsEnabled, Converter={converters:BooleanOpacityConverter}}"/>
 
     </Grid>
+  </ScrollView>
 </ContentPage>

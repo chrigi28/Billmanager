@@ -23,7 +23,7 @@
           RowSpacing="5"
           ColumnSpacing="5"        
           Margin="10"
-            >
+    >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -103,15 +103,11 @@
                    HorizontalOptions="Center"
                    VerticalTextAlignment="Center"
                    VerticalOptions="Center"/>
-        <Frame HasShadow="False"
-               Padding="5"
-                   BorderColor="DarkGray"
-                   CornerRadius="5"
-                   Grid.Column="1" 
-                   Grid.Row="2"
-                   HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
-                   >
+        <Frame Grid.Column="1" 
+               Grid.Row="2"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+        >
             <ListView 
                   ItemsSource="{Binding Customers}"
                   SelectedItem="{Binding SelectedCustomer}"
@@ -121,12 +117,23 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" x:DataType="tables:CustomerDbt" HeightRequest="35">
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" CommandParameter="{Binding .}"/>
-                                </StackLayout.GestureRecognizers>
-                                <Label Text="{Binding FirstName}" />
-                                <Label Text="{Binding LastName}" />
+                            <StackLayout Orientation="Horizontal" 
+                                         HorizontalOptions="FillAndExpand" 
+                                         VerticalOptions="FillAndExpand" 
+                                         Spacing="10" 
+                                         x:DataType="tables:CustomerDbt" 
+                                         HeightRequest="{OnIdiom Default=35, Phone=20}">
+                                <!--<StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="2" 
+                                                          Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" 
+                                                          CommandParameter="{Binding .}"/>
+                                </StackLayout.GestureRecognizers>-->
+                                <Label Text="{Binding FirstName}"
+                                       VerticalOptions="FillAndExpand"
+                                       VerticalTextAlignment="Center"/>
+                                <Label Text="{Binding LastName}" 
+                                       VerticalOptions="FillAndExpand"
+                                       VerticalTextAlignment="Center"/>
                                 <ImageButton ></ImageButton>
                             </StackLayout>
                         </ViewCell>
@@ -145,27 +152,29 @@
                    VerticalOptions="Center"
                    Grid.Row="1"
                    Grid.Column="2"/>
-        <Frame HasShadow="False"
-                       BorderColor="DarkGray"
-                       CornerRadius="5"
-                       HorizontalOptions="FillAndExpand"
-                       VerticalOptions="FillAndExpand"
-                       Grid.Column="2" 
-                       Grid.Row="2"
-                       >
+        <Frame HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Grid.Column="2" 
+                Grid.Row="2"
+                BackgroundColor="Lime"
+        >
             <ListView ItemsSource="{Binding Cars}"
-                              SelectedItem="{Binding SelectedCar}"
-                              HorizontalOptions="FillAndExpand"
-                              VerticalOptions="FillAndExpand"
-                              
-                        >
+                      SelectedItem="{Binding SelectedCar}"
+                      HorizontalOptions="FillAndExpand"
+                      VerticalOptions="FillAndExpand" 
+                      BackgroundColor="Aquamarine">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" x:DataType="tables:CarDbt" HeightRequest="35">
-                                <StackLayout.GestureRecognizers>
+                            <StackLayout Orientation="Horizontal" 
+                                         HorizontalOptions="Center" 
+                                         Spacing="10" 
+                                         x:DataType="tables:CarDbt" 
+                                         HeightRequest="35"
+                                         BackgroundColor="MediumPurple">
+                                <!--<StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" CommandParameter="{Binding .}"/>
-                                </StackLayout.GestureRecognizers>
+                                </StackLayout.GestureRecognizers>-->
                                 <Label Text="{Binding CarMake}" />
                                 <Label Text="{Binding Typ}" />
                             </StackLayout>
@@ -186,15 +195,12 @@
                    Grid.Row="3"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"/>
-        <Frame HasShadow="False"
-                           BorderColor="DarkGray"
-                           CornerRadius="5"
-                           HorizontalOptions="FillAndExpand"
-                           VerticalOptions="FillAndExpand"
-                           Grid.Column="1" 
-                           Grid.Row="4"
-                           Grid.ColumnSpan="2"
-                           >
+        <Frame HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               Grid.Column="1" 
+               Grid.Row="4"
+               Grid.ColumnSpan="2"
+        >
 
             <ListView ItemsSource="{Binding Bills}"
                                   SelectedItem="{Binding SelectedBill}"

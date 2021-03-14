@@ -9,7 +9,7 @@
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateOffertPageViewModel}}"
              mc:Ignorable="d helper">
-  
+    <ScrollView>
     <Grid VerticalOptions="FillAndExpand"
           HorizontalOptions="FillAndExpand">
         <Grid.RowDefinitions>
@@ -23,4 +23,5 @@
         </Grid.RowDefinitions>
 
     </Grid>
+    </ScrollView>
 </ContentPage>
