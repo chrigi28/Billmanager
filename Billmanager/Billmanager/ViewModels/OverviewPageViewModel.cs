@@ -43,6 +43,10 @@ namespace Billmanager.ViewModels
         {
             base.OnNavigatedTo(parameters);
             this.Customers = new ObservableCollection<ICustomerDbt>(await DependencyService.Get<ICustomerService>().GetCustomerSelection());
+            if (this._selectedCustomer != null)
+            {
+                await this.LoadVehiclesAndBills(this._selectedCustomer);
+            }
         }
 
         public Command CreateCustomerCommand => this.createCustomerCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateCustomerPage)));
@@ -88,18 +92,17 @@ namespace Billmanager.ViewModels
             }
         }
 
-        private void LoadVehiclesAndBills(CustomerDbt Customer)
+        private async Task LoadVehiclesAndBills(CustomerDbt Customer)
         {
-            Device.InvokeOnMainThreadAsync(async () =>
-            {
-                var cars = await DependencyService.Get<ICarService>().GetCarSelectionFromCustomerAsync(Customer.Id);
-                this.Cars = new ObservableCollection<ICarDbt>(cars);
-            });
+            var bills = DependencyService.Get<IBillService>().GetBillsOfCustomerAsync(Customer.Id);
+            var cars = DependencyService.Get<ICarService>().GetCarSelectionFromCustomerAsync(Customer.Id);
+            
+            await Task.WhenAll(bills, cars);
 
-            Device.InvokeOnMainThreadAsync(async () =>
+            await Device.InvokeOnMainThreadAsync(async () =>
             {
-                var bills = await DependencyService.Get<IBillService>().GetBillsOfCustomerAsync(Customer.Id);
-                this.Bills = new ObservableCollection<IBillDbt>(bills);
+                this.Cars = new ObservableCollection<ICarDbt>(await cars);
+                this.Bills = new ObservableCollection<IBillDbt>(await bills);
             });
         }
 
@@ -226,7 +229,10 @@ namespace Billmanager.ViewModels
                 ItemPositions = itempos
             };
 
-            PdfFactory.CreateBill(Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "PdfFile.pdf"), testBill);
+            var path = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "PdfFile.pdf");
+            PdfFactory.CreateBill(path, testBill);
+
+            await Xamarin.Essentials.Launcher.OpenAsync(path);
         }        
     }
 }

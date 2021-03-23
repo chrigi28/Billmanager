@@ -137,6 +137,8 @@ namespace  Billmanager.Translations.Texts {
         public static string Logo => ResourceManager.GetString("Logo", resourceCulture);       
         /// <summary>Looks up a localized string similar to Material.</summary>
         public static string Material => ResourceManager.GetString("Material", resourceCulture);       
+        /// <summary>Looks up a localized string similar to Mileage.</summary>
+        public static string Mileage => ResourceManager.GetString("Mileage", resourceCulture);       
         /// <summary>Looks up a localized string similar to Name.</summary>
         public static string Name => ResourceManager.GetString("Name", resourceCulture);       
         /// <summary>Looks up a localized string similar to NetPrice.</summary>

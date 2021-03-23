@@ -32,9 +32,15 @@ namespace SkiaSharpSample.Samples
         /// <summary>Creates A printable Bill</summary>
         /// <param name="path">file save path</param>
         /// <param name="bill">bill data</param>
-        public async static void CreateBill(string path, BillDbt bill)
+        public async static Task CreateBill(string path, BillDbt bill)
         {
             var setting = (await DependencyService.Get<IBaseService>().GetAllAsync<SettingsDbt>()).FirstOrDefault();
+            
+            if (setting == null)
+            {
+                Console.WriteLine("No settings available");
+                return;
+            }
 
             using var document = SKDocument.CreatePdf(path);
 
@@ -87,12 +93,12 @@ namespace SkiaSharpSample.Samples
             int pages;
             using (var page1 = document.BeginPage(pageWidth, pageHeight))
             {
-                if (setting == null)
+
+                if (setting.LogoPath !=null)
                 {
-                    Console.WriteLine("No settings available");
+                    DrawLogo(page1, setting.LogoPath);
                 }
 
-                DrawLogo(page1, setting.LogoPath);
                 DrawCustomerAdress(page1, defaultPaint, bill);
                 DrawHolderInfo(page1, setting, defaultPaint);
                 pages = DrawDetails(document, page1, setting, defaultPaint, bill, totalPages);

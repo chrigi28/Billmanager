@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Billmanager.Interfaces", "I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Billmanager.Database", "Billmanager\Billmanager.Database\Billmanager.Database.csproj", "{E701A4BF-42B3-4199-AC82-2D800B026D68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billmanager.Pdf", "Billmanager\Billmanager.Pdf\Billmanager.Pdf\Billmanager.Pdf.csproj", "{62F81F74-36BF-45DC-B1C6-B7C84CF3127A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Billmanager.Pdf", "Billmanager\Billmanager.Pdf\Billmanager.Pdf\Billmanager.Pdf.csproj", "{62F81F74-36BF-45DC-B1C6-B7C84CF3127A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -236,6 +236,7 @@ Global
 		{B4899EBF-5026-41C6-9F9C-0A2A56B22EFA}.AppStore|x86.Build.0 = Release|x86
 		{B4899EBF-5026-41C6-9F9C-0A2A56B22EFA}.AppStore|x86.Deploy.0 = Release|x86
 		{B4899EBF-5026-41C6-9F9C-0A2A56B22EFA}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B4899EBF-5026-41C6-9F9C-0A2A56B22EFA}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{B4899EBF-5026-41C6-9F9C-0A2A56B22EFA}.Debug|ARM.ActiveCfg = Debug|ARM
 		{B4899EBF-5026-41C6-9F9C-0A2A56B22EFA}.Debug|ARM.Build.0 = Debug|ARM
 		{B4899EBF-5026-41C6-9F9C-0A2A56B22EFA}.Debug|ARM.Deploy.0 = Debug|ARM

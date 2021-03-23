@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Billmanager.Database.Tables;
 using Billmanager.Helper;
 using Billmanager.Interface.ViewModels;
+using Billmanager.Interfaces.Data;
 using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
 using Billmanager.Translations.Texts;
@@ -33,76 +34,35 @@ namespace Billmanager.ViewModels
         public CreateBillPageViewModel(INavigationService? ns) : base(ns)
         {
             this.Title = Resources.CreateBill;
+            MessagingCenter.Subscribe<ItemPositionDbt>(new WeakReference(this), BillmanagerMessages.BillTotalChanged, (sender) => this.RaisePropertyChanged(nameof(Model.Total)));
+        }
+
+        ~CreateBillPageViewModel()
+        {
+            MessagingCenter.Unsubscribe<ItemPositionDbt>(new WeakReference(this), BillmanagerMessages.BillTotalChanged);
         }
 
         public Command SelectCarCommand => this._selectCarCommand ??= new Command(async () => await this.SelectCar());
 
         public Command SelectCustomerCommand => this._selectCustomerCommand ??= new Command(async () => await this.SelectCustomer());
 
-        public Command AddPositionCommand => this._addPositionCommand ??= new Command(this.AddItemPosition);
+        ////public Command AddPositionCommand => this._addPositionCommand ??= new Command(this.AddItemPosition);
 
-        public string Description
-        {
-            get => this._description;
-            set
-            {
-                if (this._description != value)
-                {
-                    this._description = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
-
-        public decimal NetPrice
-        {
-            get => this._netPrice;
-            set
-            {
-                if (this._netPrice != value)
-                {
-                    this._netPrice = value;
-                    this.RaisePropertyChanged();
-                }
-            }
-        }
-
-        /// <summary> The Amount of the new Item </summary>
-        public int Amount
-        {
-            get => this._amount;
-            set
-            {
-                if (this._amount != value)
-                {
-                    this._amount = value;
-                    this.RaisePropertyChanged();
-                    this.RaisePropertyChanged(nameof(this.ItemTotal));
-                }
-            }
-        }
-
-        /// <summary> The price per pice of the new Item.</summary>
-        public decimal PricePerPiece
-        {
-            get => this._pricePerPiece;
-            set
-            {
-                if (this._pricePerPiece != value)
-                {
-                    this._pricePerPiece = value;
-                    this.RaisePropertyChanged();
-                    this.RaisePropertyChanged(nameof(this.ItemTotal));
-                }
-            }
-        }
+        ////public string Description
+        ////{
+        ////    get => this._description;
+        ////    set
+        ////    {
+        ////        if (this._description != value)
+        ////        {
+        ////            this._description = value;
+        ////            this.RaisePropertyChanged();
+        ////        }
+        ////    }
+        ////}
 
         public ICommand DeletePosition => new Command(this.DeleteItemPosition);
-
-        public decimal ItemTotal => this.Amount * this.PricePerPiece;
-
-        public decimal Total => this.Model.ItemPositions.Sum(f => f.Total);
-
+        
         [AlsoNotifyFor(nameof(Model))]
         public string SelectedCustomerText
         {
@@ -219,22 +179,22 @@ namespace Billmanager.ViewModels
             await this.NavigationService?.NavigateAsync("SelectionPage", navparm);
         }
 
-        private void AddItemPosition()
-        {
-            if (!this.Description.IsNullOrEmpty())
-            {
-                var item = new ItemPositionDbt()
-                {
-                    Bill = this.Model,
-                    Amount = this.Amount,
-                    Description = this.Description,
-                    Price = this.PricePerPiece,
-                };
+        ////private void AddItemPosition()
+        ////{
+        ////    if (!this.Description.IsNullOrEmpty())
+        ////    {
+        ////        var item = new ItemPositionDbt()
+        ////        {
+        ////            Bill = this.Model,
+        ////            Amount = this.Amount,
+        ////            Description = this.Description,
+        ////            Price = this.PricePerPiece,
+        ////        };
 
-                this.Model.ItemPositions.Add(item);
-                this.RaisePropertyChanged(nameof(this.Model.ItemPositions));
-            }
-        }
+        ////        this.Model.ItemPositions.Add(item);
+        ////        this.RaisePropertyChanged(nameof(this.Model.ItemPositions));
+        ////    }
+        ////}
 
         private void DeleteItemPosition(object item)
         {

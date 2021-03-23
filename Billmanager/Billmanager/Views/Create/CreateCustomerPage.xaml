@@ -9,12 +9,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
              xmlns:viewModels="clr-namespace:Billmanager.ViewModels;assembly=Billmanager"
+             xmlns:xtk="http://xamarin.com/schemas/2020/toolkit"
              xmlns:converters="clr-namespace:Muellerchur.Xamos.Mobile.Converters;assembly=Billmanager"
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateCustomerPageViewModel}}"
              mc:Ignorable="d helper"
              >
     <!--x:DataType="viewModels:CreateCustomerViewModel" >-->
-  
+  <ScrollView Orientation="Vertical">
     <Grid VerticalOptions="FillAndExpand"
           HorizontalOptions="FillAndExpand"
           Margin="10"
@@ -97,4 +98,5 @@
                 />
 
     </Grid>
+  </ScrollView>
 </ContentPage>

@@ -129,6 +129,10 @@
                                                           Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" 
                                                           CommandParameter="{Binding .}"/>
                                 </StackLayout.GestureRecognizers>-->
+                                <ImageButton Source="{xtk:ImageResource Billmanager.Images.edit.png}"
+                                             WidthRequest="25"
+                                             Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" 
+                                             CommandParameter="{Binding .}"/>
                                 <Label Text="{Binding FirstName}"
                                        VerticalOptions="FillAndExpand"
                                        VerticalTextAlignment="Center"/>
@@ -157,27 +161,33 @@
                 VerticalOptions="FillAndExpand"
                 Grid.Column="2" 
                 Grid.Row="2"
-                BackgroundColor="Lime"
         >
             <ListView ItemsSource="{Binding Cars}"
                       SelectedItem="{Binding SelectedCar}"
                       HorizontalOptions="FillAndExpand"
-                      VerticalOptions="FillAndExpand" 
-                      BackgroundColor="Aquamarine">
+                      VerticalOptions="FillAndExpand" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" 
-                                         HorizontalOptions="Center" 
+                                         HorizontalOptions="FillAndExpand" 
+                                         VerticalOptions="FillAndExpand"
                                          Spacing="10" 
                                          x:DataType="tables:CarDbt" 
-                                         HeightRequest="35"
-                                         BackgroundColor="MediumPurple">
+                                         HeightRequest="35">
+                                <ImageButton Source="{xtk:ImageResource Billmanager.Images.edit.png}"
+                                             WidthRequest="25"
+                                             Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" 
+                                             CommandParameter="{Binding .}"/>
                                 <!--<StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" CommandParameter="{Binding .}"/>
                                 </StackLayout.GestureRecognizers>-->
-                                <Label Text="{Binding CarMake}" />
-                                <Label Text="{Binding Typ}" />
+                                <Label VerticalOptions="FillAndExpand"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding CarMake}" />
+                                <Label VerticalOptions="FillAndExpand"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding Typ}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -212,16 +222,24 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" 
-                                                     HorizontalOptions="Center" 
+                                                     HorizontalOptions="FillAndExpand" 
+                                                     VerticalOptions="FillAndExpand"
                                                      HeightRequest="35"
                                                      Spacing="10" 
                                                      x:DataType="tables:BillDbt">
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" CommandParameter="{Binding .}"/>
-                                </StackLayout.GestureRecognizers>
-                                <Label Text="{Binding Date}" />
-                                <Label Text="{Binding Conclusion}" />
-                                <Label Text="{Binding NettoPrice}" />
+                                <ImageButton Source="{xtk:ImageResource Billmanager.Images.edit.png}"
+                                             WidthRequest="25"
+                                             Command="{Binding Source={x:Reference Page}, Path=BindingContext.EditCommand}" 
+                                             CommandParameter="{Binding .}"/>
+                                <Label VerticalOptions="FillAndExpand"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding Date}" />
+                                <Label VerticalOptions="FillAndExpand"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding Conclusion}" />
+                                <Label VerticalOptions="FillAndExpand"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding NettoPrice}" />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

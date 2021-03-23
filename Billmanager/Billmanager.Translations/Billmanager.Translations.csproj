@@ -30,24 +30,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Texts\Resources.en-US.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Texts\Resources.de-AT.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Texts\Resources.de-DE.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Texts\Resources.en.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Texts\Resources.fr-CH.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Texts\Resources.it-CH.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Texts\Resources.resx">
       <Generator></Generator>
     </EmbeddedResource>
@@ -59,10 +41,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ResxFiles Remove="Texts\Resources.en-US.resx" />
   </ItemGroup>
 
   <ItemGroup>

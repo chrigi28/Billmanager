@@ -15,12 +15,12 @@ namespace Billmanager.Interface.ViewModels
     {
         Command SelectCarCommand { get; }
         Command SelectCustomerCommand { get; }
-        Command AddPositionCommand { get; }
-        string Description { get; set; }
-        decimal NetPrice { get; set; }
-        int Amount { get; set; }
-        decimal PricePerPiece { get; set; }
-        decimal ItemTotal { get; }
-        decimal Total { get; }
+        ////Command AddPositionCommand { get; }
+        ////string Description { get; set; }
+        ////decimal NetPrice { get; set; }
+        ////int Amount { get; set; }
+        ////decimal PricePerPiece { get; set; }
+        ////decimal ItemTotal { get; }
+        ////decimal Total { get; }
     }
 }

@@ -219,6 +219,9 @@
   <data name="Material" xml:space="preserve">
     <value>Material</value>
   </data>
+  <data name="Mileage" xml:space="preserve">
+    <value>Kilometerstand</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>

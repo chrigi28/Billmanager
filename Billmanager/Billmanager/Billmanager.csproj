@@ -14,7 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Images\edit.png" />
+    <None Remove="Images\edit.svg" />
+    <None Remove="Images\edit_c.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" Link="CommonAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\edit.png" />
   </ItemGroup>
 
   <ItemGroup>

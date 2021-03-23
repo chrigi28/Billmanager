@@ -2,11 +2,16 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using Billmanager.Interfaces.Data;
 using Billmanager.Interfaces.Database.Datatables;
+using Xamarin.CommunityToolkit.Helpers;
+using Xamarin.Forms;
+
+using static Billmanager.Interfaces.Data.BillmanagerMessages;
 
 namespace Billmanager.Database.Tables
 {
-    public class ItemPositionDbt : BaseDbt, IItemPositionDbt, INotifyPropertyChanged
+    public class ItemPositionDbt : BaseDbt, IItemPositionDbt
     {
         private decimal _price;
         private int _amount;
@@ -31,8 +36,6 @@ namespace Billmanager.Database.Tables
                 this.OnPropertyChanged();
             }
         }
-
-        public event EventHandler ItemChanged;
 
         public int Amount
         {
@@ -65,18 +68,16 @@ namespace Billmanager.Database.Tables
         }
 
         public decimal Total => this.Price * this.Amount;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (propertyName == nameof(this.Amount) || propertyName == nameof(this.Price))
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(this.Total)));
+                base.OnPropertyChanged(nameof(Total));
+                MessagingCenter.Send<ItemPositionDbt>(this, BillTotalChanged);
             }
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            this.ItemChanged?.Invoke(this, new EventArgs());
+            base.OnPropertyChanged(propertyName);
         }
     }
-}
+}''

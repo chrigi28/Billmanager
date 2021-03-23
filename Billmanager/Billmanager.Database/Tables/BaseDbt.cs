@@ -8,7 +8,7 @@ using PropertyChanged;
 namespace Billmanager.Database.Tables
 {
     [AddINotifyPropertyChangedInterface]
-    public class BaseDbt : IDatabaseTable
+    public class BaseDbt : IDatabaseTable, INotifyPropertyChanged 
     {
         [Key]
         public int Id { get; set; }
@@ -16,5 +16,12 @@ namespace Billmanager.Database.Tables
         public string Remark { get; set; } = string.Empty;
         public virtual bool CanSave { get; } = true;
         public virtual string FilterString => this.Id +  this.Remark;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
