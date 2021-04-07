@@ -10,7 +10,7 @@ using Billmanager.Helper;
 using Billmanager.Interfaces.Database;
 using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
-using Billmanager.StaticAppData;
+using Billmanager.SharedAppData;
 using Billmanager.Views;
 using Prism.Navigation;
 using Xamarin.Forms;

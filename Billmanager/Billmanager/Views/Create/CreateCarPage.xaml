@@ -44,7 +44,7 @@
                HorizontalOptions="CenterAndExpand" 
                FontSize="Large"/>
 
-        <Button Text="{x:Static texts:Resources.Customer}"
+        <Button Text="{Binding SelectedCustomerText}"
                 Command="{Binding SelectCustomerCommand}"
                 Grid.Row="1"
                 Grid.Column="1" />

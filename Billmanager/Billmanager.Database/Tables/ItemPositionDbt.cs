@@ -80,4 +80,4 @@ namespace Billmanager.Database.Tables
             base.OnPropertyChanged(propertyName);
         }
     }
-}''
+}

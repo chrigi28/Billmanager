@@ -9,10 +9,13 @@
              xmlns:helper="clr-namespace:Billmanager.Helper;assembly=Billmanager"
              xmlns:texts="clr-namespace:Billmanager.Translations.Texts;assembly=Billmanager.Translations"
              xmlns:converters="clr-namespace:Muellerchur.Xamos.Mobile.Converters;assembly=Billmanager"
+             xmlns:viewModels="clr-namespace:Billmanager.ViewModels;assembly=Billmanager"
+             xmlns:tables="clr-namespace:Billmanager.Database.Tables;assembly=Billmanager.Database"
              d:BindingContext="{Binding Source={x:Static helper:DesignTimeViewModelLocator.CreateBillPageViewModel}}"
              mc:Ignorable="d"
              Padding="10,5"
              x:Name="Page"
+             x:DataType="viewModels:CreateBillPageViewModel"
              >
 <ScrollView>
     <Grid VerticalOptions="FillAndExpand"
@@ -36,13 +39,21 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Text="{x:Static texts:Resources.Bill}"
-               Grid.Row="0"
+        <Label Grid.Row="0"
                Grid.Column="0"
                Grid.ColumnSpan="3"
                VerticalOptions="FillAndExpand" 
                HorizontalOptions="CenterAndExpand" 
-               FontSize="Large"/>
+               FontSize="Large">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static texts:Resources.Bill}" />
+                    <Span Text=" " />
+                    <Span Text="{Binding Model.BillNumber}"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+               
 
         <BoxView Grid.Column="0"
                  Grid.Row="1"
@@ -73,7 +84,7 @@
                 </FormattedString>
             </Label.FormattedText>
         </Label>
-        <Button Text="{x:Static texts:Resources.Vehicle}"
+        <Button Text="{Binding SelectedCarText}"
                 Command="{Binding SelectCarCommand}"
                 Grid.Row="2"
                 Grid.Column="1" />
@@ -142,7 +153,8 @@
                     <DataTemplate>
                         <Grid HorizontalOptions="FillAndExpand" 
                               ColumnDefinitions="*,0.15*,0.15*,0.2*,50" 
-                              Margin="1">
+                              Margin="1"
+                              x:DataType="tables:ItemPositionDbt">
                             <Entry Text="{Binding Description}" 
                                    Grid.Column="0"/>
                             <Entry Text="{Binding Amount}" 

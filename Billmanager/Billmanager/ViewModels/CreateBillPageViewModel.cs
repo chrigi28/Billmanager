@@ -34,12 +34,16 @@ namespace Billmanager.ViewModels
         public CreateBillPageViewModel(INavigationService? ns) : base(ns)
         {
             this.Title = Resources.CreateBill;
-            MessagingCenter.Subscribe<ItemPositionDbt>(new WeakReference(this), BillmanagerMessages.BillTotalChanged, (sender) => this.RaisePropertyChanged(nameof(Model.Total)));
+            MessagingCenter.Subscribe<ItemPositionDbt>(this, BillmanagerMessages.BillTotalChanged, (sender) =>
+            {
+                this.RaisePropertyChanged(nameof(Model.Total));
+                this.RaisePropertyChanged(nameof(Model));
+            });
         }
 
         ~CreateBillPageViewModel()
         {
-            MessagingCenter.Unsubscribe<ItemPositionDbt>(new WeakReference(this), BillmanagerMessages.BillTotalChanged);
+            MessagingCenter.Unsubscribe<ItemPositionDbt>(this, BillmanagerMessages.BillTotalChanged);
         }
 
         public Command SelectCarCommand => this._selectCarCommand ??= new Command(async () => await this.SelectCar());
@@ -71,43 +75,29 @@ namespace Billmanager.ViewModels
                 : string.Format(CultureInfo.CurrentCulture,
                     $"{this.Model.Customer.FirstName} {this.Model.Customer.LastName}");
         }
+        
+        [AlsoNotifyFor(nameof(Model))]
+        public string SelectedCarText
+        {
+            get => this.Model.Car == null
+                ? Resources.Vehicle
+                : string.Format(CultureInfo.CurrentCulture,
+                    $"{this.Model.Car.CarMake} {this.Model.Car.Typ} {this.Model.Car.Plate}");
+        }
 
         public override async Task Save(bool goBack = true)
         {
-            this.Model.ItemPositions.Remove(this.latestItem);
-            this.latestItem = null;
+            this.RemoveAdditionalItemPosition();
             await base.Save(goBack: false);
 
             ////await Database.SqliteDatabase.AddRangeAsync(this._items).ConfigureAwait(false);
             await this.NavigationService?.GoBackAsync();
         }
 
-        public override void Initialize(INavigationParameters parameters)
+        private void RemoveAdditionalItemPosition()
         {
-            base.Initialize(parameters);
-
-            if (StaticAppData.SelectionData.SelectedBill != null)
-            {
-                this.Model = (BillDbt)StaticAppData.SelectionData.SelectedBill;
-            }
-            else
-            {
-                this.Model = new BillDbt();
-            }
-
-            this.AddExtraItem();
-
-            if (StaticAppData.SelectionData.SelectedCar != null)
-            {
-                // todo
-            }
-
-            if (StaticAppData.SelectionData.SelectedBill != null)
-            {
-                // todo
-            }
-
-            this.RaisePropertyChanged(nameof(this.Model));
+            this.Model.ItemPositions.Remove(this.latestItem);
+            this.latestItem = null;
         }
 
         private void AddExtraItem()
@@ -137,27 +127,54 @@ namespace Billmanager.ViewModels
             await this.NavigationService?.NavigateAsync(nameof(SelectionPage), navparm);
         }
 
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            if (latestItem != null)
+            {
+                this.Model.ItemPositions.Remove(this.latestItem);
+                this.latestItem.PropertyChanged -= this.LatestItemOnPropertyChanged;
+                this.latestItem = null;
+            }
+
+            base.OnNavigatedFrom(parameters);
+        }
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters.TryGetValue(nameof(NavigationParameter.Selection), out object selection))
             {
-                if (selection is CustomerDbt customer)
-                {
-                    this.Model.CustomerId = customer.Id;
-                    this.Model.Customer = customer;
-                }
-
-                if (selection is CarDbt car)
-                {
-                    this.Model.CarId = car.Id;
-                    this.Model.Car = car;
-                }
 
                 if (selection is BillDbt bill)
                 {
                     this.Model = bill;
                     this.AddExtraItem();
                 }
+                else
+                {
+                    this.Model = new BillDbt();
+                    this.AddExtraItem();
+                    this.RaisePropertyChanged(nameof(this.Model));
+                }
+
+                if (selection is CarDbt car)
+                {
+                    this.Model.CarId = car.Id;
+                    this.Model.Car = car;
+                    if (car.Customer != null)
+                    {
+                        this.Model.CustomerId = car.Customer.Id;
+                        this.Model.Customer = car.Customer;
+                    }
+                }
+
+                if (selection is CustomerDbt customer)
+                {
+                    this.Model.CustomerId = customer.Id;
+                    this.Model.Customer = customer;
+                }
+
+                this.RaisePropertyChanged(nameof(SelectedCustomerText));
+                this.RaisePropertyChanged(nameof(SelectedCarText));
             }
         }
 
@@ -178,23 +195,6 @@ namespace Billmanager.ViewModels
 
             await this.NavigationService?.NavigateAsync("SelectionPage", navparm);
         }
-
-        ////private void AddItemPosition()
-        ////{
-        ////    if (!this.Description.IsNullOrEmpty())
-        ////    {
-        ////        var item = new ItemPositionDbt()
-        ////        {
-        ////            Bill = this.Model,
-        ////            Amount = this.Amount,
-        ////            Description = this.Description,
-        ////            Price = this.PricePerPiece,
-        ////        };
-
-        ////        this.Model.ItemPositions.Add(item);
-        ////        this.RaisePropertyChanged(nameof(this.Model.ItemPositions));
-        ////    }
-        ////}
 
         private void DeleteItemPosition(object item)
         {

@@ -3,6 +3,7 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Billmanager.Database.Tables;
@@ -10,10 +11,11 @@ using Billmanager.Helper;
 using Billmanager.Interface.ViewModels;
 using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
-using Billmanager.StaticAppData;
+using Billmanager.SharedAppData;
 using Billmanager.Translations.Texts;
 using Billmanager.Views;
 using Prism.Navigation;
+using PropertyChanged;
 using Xamarin.Forms;
 
 namespace Billmanager.ViewModels
@@ -24,8 +26,15 @@ namespace Billmanager.ViewModels
         {
             this.Title = Resources.CreateCar;
         }
-
-        public ICustomerDbt SelectedCustomer => SelectionData.SelectedCustomer;
+        
+        [AlsoNotifyFor(nameof(Model))]
+        public string SelectedCustomerText
+        {
+            get => this.Model.Customer == null
+                ? Resources.Customer
+                : string.Format(CultureInfo.CurrentCulture,
+                    $"{this.Model.Customer.FirstName} {this.Model.Customer.LastName}");
+        }
 
         public Command SelectCustomerCommand => new Command(async () => await this.SelectCustomer());
 
@@ -55,6 +64,8 @@ namespace Billmanager.ViewModels
                 {
                     this.Model.Customer = cust;
                 }
+                
+                this.RaisePropertyChanged(nameof(SelectedCustomerText));
             }
         }
     }

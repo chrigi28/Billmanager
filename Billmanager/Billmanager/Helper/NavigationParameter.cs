@@ -3,6 +3,7 @@
     public enum NavigationParameter
     {
         Selection,
+        Selection2,
         SelectionItems,
         SelectionPropertiesToDisplay
     }

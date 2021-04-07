@@ -1,5 +1,4 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,54 +16,50 @@ using Billmanager.Views;
 using Prism.Navigation;
 using PropertyChanged;
 using SkiaSharpSample.Samples;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace Billmanager.ViewModels
 {
     public class OverviewPageViewModel : ViewModelBase
     {
-        private Command? createCustomerCommand;
-        private Command? createOffertCommand;
-        private Command? createCarCommand;
-        private Command? createWorkcardCommand;
-        private Command? createAddresscardCommand;
-        private Command? createBillCommand;
+        private AsyncCommand? createCustomerCommand;
+        private AsyncCommand? createOffertCommand;
+        private AsyncCommand? createCarCommand;
+        private AsyncCommand? createWorkcardCommand;
+        private AsyncCommand? createAddresscardCommand;
+        private AsyncCommand? createBillCommand;
         private CustomerDbt? _selectedCustomer;
-        private Command? editCommand;
-        private Command testCommand;
-        private Command settingsCommand;
+        private AsyncCommand<object>? editCommand;
+        private AsyncCommand testCommand;
+        private AsyncCommand settingsCommand;
 
         public OverviewPageViewModel(INavigationService? ns) : base(ns)
         {
             this.Title = Resources.Overview;
         }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public AsyncCommand CreateCustomerCommand => this.createCustomerCommand ??= new AsyncCommand(() => this.NavigationService?.NavigateAsync(nameof(CreateCustomerPage)));
+
+        public AsyncCommand CreateCarCommand => this.createCarCommand ??= new AsyncCommand(() =>
         {
-            base.OnNavigatedTo(parameters);
-            this.Customers = new ObservableCollection<ICustomerDbt>(await DependencyService.Get<ICustomerService>().GetCustomerSelection());
-            if (this._selectedCustomer != null)
-            {
-                await this.LoadVehiclesAndBills(this._selectedCustomer);
-            }
-        }
+            var param = new NavigationParameters();
+            param.Add(nameof(NavigationParameter.Selection), this.SelectedCustomer);
+            return this.NavigationService?.NavigateAsync(nameof(CreateCarPage), param);
+        });
 
-        public Command CreateCustomerCommand => this.createCustomerCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateCustomerPage)));
+        public AsyncCommand CreateBillCommand => this.createBillCommand ??= new AsyncCommand(this.NavigateToBillPage);
 
-        public Command CreateCarCommand => this.createCarCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateCarPage)));
-
-        public Command CreateBillCommand => this.createBillCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateBillPage)));
-        
         [UsedImplicitly]
-        public Command EditCommand => this.editCommand  ??= new Command(async o => await this.Edit(o));
+        public AsyncCommand<object> EditCommand => this.editCommand  ??= new AsyncCommand<object>(this.Edit);
 
-        public Command CreateWorkcardCommand => this.createWorkcardCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateWorkcardPage)));
+        public AsyncCommand CreateWorkcardCommand => this.createWorkcardCommand ??= new AsyncCommand(async () => await this.NavigationService?.NavigateAsync(nameof(CreateWorkcardPage)));
 
-        public Command CreateAddresscardCommand => this.createAddresscardCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateAddresscardPage)));
+        public AsyncCommand CreateAddresscardCommand => this.createAddresscardCommand ??= new AsyncCommand(async () => await this.NavigationService?.NavigateAsync(nameof(CreateAddresscardPage)));
 
-        public Command CreateOffertCommand => this.createOffertCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(CreateOffertPage)));
-        public Command TestCommand => this.testCommand ??= new Command(async () => await this.CreateTestPdf());
-        public Command SettingsCommand => this.settingsCommand ??= new Command(async () => await this.NavigationService?.NavigateAsync(nameof(SettingsPage)));
+        public AsyncCommand CreateOffertCommand => this.createOffertCommand ??= new AsyncCommand(async () => await this.NavigationService?.NavigateAsync(nameof(CreateOffertPage)));
+        public AsyncCommand TestCommand => this.testCommand ??= new AsyncCommand(this.CreateTestPdf);
+        public AsyncCommand SettingsCommand => this.settingsCommand ??= new AsyncCommand(() => this.NavigationService?.NavigateAsync(nameof(SettingsPage)));
 
         public ObservableCollection<ICustomerDbt>? Customers { get; set; }
 
@@ -90,6 +85,39 @@ namespace Billmanager.ViewModels
                     this.Cars.Clear();
                 }
             }
+        }
+
+        public CarDbt? SelectedCar { get; set; }
+
+        public CarDbt? SelectedBill { get; set; }
+
+        public ObservableCollection<ICarDbt>? Cars { get; set; }
+
+        public ObservableCollection<IBillDbt>? Bills { get; set; }
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            this.Customers = new ObservableCollection<ICustomerDbt>(await DependencyService.Get<ICustomerService>().GetCustomerSelection());
+            if (this._selectedCustomer != null)
+            {
+                await this.LoadVehiclesAndBills(this._selectedCustomer);
+            }
+        }
+
+        private async Task NavigateToBillPage()
+        {
+            var param = new NavigationParameters();
+            if (this.SelectedCar != null)
+            {
+                param.Add(nameof(NavigationParameter.Selection), this.SelectedCar);
+            }
+            else if (this.SelectedCustomer != null)
+            {
+                param.Add(nameof(NavigationParameter.Selection), this.SelectedCustomer);
+            }
+
+            await this.NavigationService?.NavigateAsync(nameof(CreateBillPage), param);
         }
 
         private async Task LoadVehiclesAndBills(CustomerDbt Customer)
@@ -125,15 +153,6 @@ namespace Billmanager.ViewModels
                     break;
             }
         }
-
-        public ObservableCollection<ICarDbt>? Cars { get; set; }
-
-        public CarDbt? SelectedCar { get; set; }
-
-        public ObservableCollection<IBillDbt>? Bills { get; set; }
-
-        public CarDbt? SelectedBill { get; set; }
-
 
         private async Task CreateTestPdf()
         {
@@ -220,7 +239,6 @@ namespace Billmanager.ViewModels
             {
                 Customer = testCust,
                 Car = testCar,
-                BillNumber = "R55555",
                 Conclusion = "Das ist eine zusammenfassung und kann über mehrer zeilen gehen" + Environment.NewLine + "Das wäre die 2. Zeile",
                 Date = DateTime.Now,
                 Kilometers = 123456,
