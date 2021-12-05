@@ -14,6 +14,8 @@ using Billmanager.Interfaces.Database.Datatables;
 using Billmanager.Interfaces.Service;
 using Billmanager.Translations.Texts;
 using Billmanager.Views;
+using Prism.Events;
+using Prism.Services;
 using Prism.Navigation;
 using PropertyChanged;
 using Xamarin.Forms;

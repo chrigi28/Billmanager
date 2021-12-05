@@ -4,6 +4,7 @@ using Billmanager.Interfaces.Service;
 using Billmanager.SharedAppData;
 using Billmanager.Translations.Texts;
 using Microsoft.EntityFrameworkCore.Query;
+using Prism.Events;
 using Xamarin.Forms;
 
 namespace Billmanager.Services
@@ -29,6 +30,7 @@ namespace Billmanager.Services
             DependencyService.Register<ICarService>();
             DependencyService.Register<IBillService>();
             DependencyService.Register<IBaseService>();
+            DependencyService.RegisterSingleton<IEventAggregator>(new EventAggregator());
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Billmanager.Interfaces.Data;
 using Billmanager.Interfaces.Database.Datatables;
 using Xamarin.CommunityToolkit.Helpers;
@@ -14,7 +15,7 @@ namespace Billmanager.Database.Tables
     public class ItemPositionDbt : BaseDbt, IItemPositionDbt
     {
         private decimal _price;
-        private int _amount;
+        private decimal _amount;
         private string _description;
 
         [ForeignKey(nameof(BillDbt.ItemPositions))]
@@ -24,60 +25,27 @@ namespace Billmanager.Database.Tables
         public string Description
         {
             get => _description;
-            set
-            {
-                if (value == _description)
-                {
-                    return;
-
-                }
-
-                this._description = value;
-                this.OnPropertyChanged();
-            }
+            set => this.SetProperty(ref this._description, value);
         }
 
-        public int Amount
+        public decimal Amount
         {
             get => _amount;
-            set 
-            {
-                if (_amount == value)
-                {
-                    return;
-                }
-
-                _amount = value;
-                this.OnPropertyChanged();
-            }
+            set => this.SetProperty(ref this._amount, value, onChanged: this.NotifyTotalChanged);
         }
 
         public decimal Price
         {
             get => _price;
-            set
-            {
-                if (_price == value)
-                {
-                    return;
-                }
-
-                _price = value;
-                this.OnPropertyChanged();
-            }
+            set => this.SetProperty(ref this._price, value, onChanged: this.NotifyTotalChanged);
         }
 
         public decimal Total => this.Price * this.Amount;
-        
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            if (propertyName == nameof(this.Amount) || propertyName == nameof(this.Price))
-            {
-                base.OnPropertyChanged(nameof(Total));
-                MessagingCenter.Send<ItemPositionDbt>(this, BillTotalChanged);
-            }
 
-            base.OnPropertyChanged(propertyName);
+        private void NotifyTotalChanged()
+        {
+            this.OnPropertyChanged(nameof(this.Total));
+            
         }
     }
 }

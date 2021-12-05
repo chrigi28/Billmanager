@@ -3,12 +3,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using Billmanager.Database.Annotations;
 using Billmanager.Interfaces.Database;
+using MvvmHelpers;
 using PropertyChanged;
 
 namespace Billmanager.Database.Tables
 {
     [AddINotifyPropertyChangedInterface]
-    public class BaseDbt : IDatabaseTable, INotifyPropertyChanged 
+    public class BaseDbt : ObservableObject, IDatabaseTable, INotifyPropertyChanged 
     {
         [Key]
         public int Id { get; set; }

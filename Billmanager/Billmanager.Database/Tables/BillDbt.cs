@@ -5,13 +5,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Billmanager.Interfaces.Data;
 using Billmanager.Interfaces.Database.Datatables;
+using Prism.Events;
 using PropertyChanged;
+using Xamarin.Forms;
 
 namespace Billmanager.Database.Tables
 {
     public class BillDbt : BaseDbt, IBillDbt
     {
         private int _customerId;
+        private readonly IEventAggregator eventaggregator;
+
+        public BillDbt()
+        {
+        }
 
         [ForeignKey(nameof(CustomerDbt))]
         public int CustomerId
