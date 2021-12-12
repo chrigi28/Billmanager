@@ -9,45 +9,44 @@ using Billmanager.Database;
 using Billmanager.Interface.ViewModels;
 using PropertyChanged;
 
-namespace Billmanager.ViewModels
+namespace Billmanager.ViewModels;
+
+[AddINotifyPropertyChangedInterface]
+public class ViewModelBase : BindableBase, IViewModelBase
 {
-    [AddINotifyPropertyChangedInterface]
-    public class ViewModelBase : BindableBase, IViewModelBase
+    protected INavigationService? NavigationService { get; private set; }
+    protected INavigationParameters? navigationParameters; 
+
+    private string _title = string.Empty;
+    public string Title
     {
-        protected INavigationService? NavigationService { get; private set; }
-        protected INavigationParameters? navigationParameters; 
+        get { return _title; }
+        set { SetProperty(ref _title, value); }
+    }
 
-        private string _title = string.Empty;
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+    public ViewModelBase(INavigationService? navigationService)
+    {
+        NavigationService = navigationService;
+    }
 
-        public ViewModelBase(INavigationService? navigationService)
-        {
-            NavigationService = navigationService;
-        }
+    public virtual void Initialize(INavigationParameters parameters)
+    {
 
-        public virtual void Initialize(INavigationParameters parameters)
-        {
+    }
 
-        }
+    public virtual void OnNavigatedFrom(INavigationParameters parameters)
+    {
+        // away from this
+    }
 
-        public virtual void OnNavigatedFrom(INavigationParameters parameters)
-        {
-            // away from this
-        }
+    public virtual void OnNavigatedTo(INavigationParameters parameters)
+    {
+        // when this page is added to the navigation stack
+        this.navigationParameters = parameters;
+    }
 
-        public virtual void OnNavigatedTo(INavigationParameters parameters)
-        {
-            // when this page is added to the navigation stack
-            this.navigationParameters = parameters;
-        }
+    public virtual void Destroy()
+    {
 
-        public virtual void Destroy()
-        {
-
-        }
     }
 }

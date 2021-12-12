@@ -10,9 +10,8 @@ using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace Billmanager.Interface.ViewModels
+namespace Billmanager.Interface.ViewModels;
+
+public interface ISettingsViewModel<T> : IDataViewModelBase<T> where T : ISettingsDbt
 {
-    public interface ISettingsViewModel<T> : IDataViewModelBase<T> where T : ISettingsDbt
-    {
-    }
 }

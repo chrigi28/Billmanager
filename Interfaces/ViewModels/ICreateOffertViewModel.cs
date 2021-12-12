@@ -6,9 +6,8 @@ using System.Linq;
 using Prism.Navigation;
 using Xamarin.Forms;
 
-namespace Billmanager.Interface.ViewModels
+namespace Billmanager.Interface.ViewModels;
+
+public interface ICreateOffertViewModel : IViewModelBase
 {
-    public interface ICreateOffertViewModel : IViewModelBase
-    {
-    }
 }

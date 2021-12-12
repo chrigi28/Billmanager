@@ -7,30 +7,29 @@ using Microsoft.EntityFrameworkCore.Query;
 using Prism.Events;
 using Xamarin.Forms;
 
-namespace Billmanager.Services
+namespace Billmanager.Services;
+
+public static class SharedInitializations
 {
-    public static class SharedInitializations
+    public static void Initialize()
     {
-        public static void Initialize()
-        {
-            DependencyService.Register<IDbPath>();
-            DependencyService.Register<SelectionData>();
+        DependencyService.Register<IDbPath>();
+        DependencyService.Register<SelectionData>();
 
-            InitializeServices();
-        }
+        InitializeServices();
+    }
 
-        public static void PreInit()
-        {
-            Resources.Culture = new CultureInfo("de-CH");
-        }
+    public static void PreInit()
+    {
+        Resources.Culture = new CultureInfo("de-CH");
+    }
 
-        private static void InitializeServices()
-        {
-            DependencyService.Register<ICustomerService>();
-            DependencyService.Register<ICarService>();
-            DependencyService.Register<IBillService>();
-            DependencyService.Register<IBaseService>();
-            DependencyService.RegisterSingleton<IEventAggregator>(new EventAggregator());
-        }
+    private static void InitializeServices()
+    {
+        DependencyService.Register<ICustomerService>();
+        DependencyService.Register<ICarService>();
+        DependencyService.Register<IBillService>();
+        DependencyService.Register<IBaseService>();
+        DependencyService.RegisterSingleton<IEventAggregator>(new EventAggregator());
     }
 }

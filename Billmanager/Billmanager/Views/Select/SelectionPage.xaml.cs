@@ -2,14 +2,13 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Billmanager.Views
+namespace Billmanager.Views;
+
+[XamlCompilation(XamlCompilationOptions.Compile)]
+public partial class SelectionPage : ContentPage
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SelectionPage : ContentPage
+    public SelectionPage()
     {
-        public SelectionPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

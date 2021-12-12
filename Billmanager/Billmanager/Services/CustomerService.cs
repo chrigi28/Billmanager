@@ -8,14 +8,13 @@ using Billmanager.Services;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(CustomerService))]
-namespace Billmanager.Services
+namespace Billmanager.Services;
+
+public class CustomerService : BaseService, ICustomerService
 {
-    public class CustomerService : BaseService, ICustomerService
+    public async Task<IEnumerable<ICustomerDbt>> GetCustomerSelection()
     {
-        public async Task<IEnumerable<ICustomerDbt>> GetCustomerSelection()
-        {
-           return await SqliteDatabase.AssureDb().GetItemsAsync<CustomerDbt>();
+        return await SqliteDatabase.AssureDb().GetItemsAsync<CustomerDbt>();
            
-        }
     }
 }

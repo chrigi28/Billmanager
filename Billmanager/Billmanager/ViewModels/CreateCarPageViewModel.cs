@@ -18,55 +18,54 @@ using Prism.Navigation;
 using PropertyChanged;
 using Xamarin.Forms;
 
-namespace Billmanager.ViewModels
+namespace Billmanager.ViewModels;
+
+public class CreateCarPageViewModel : DataViewModelBase<CarDbt>, ICreateCarViewModel<CarDbt>
 {
-    public class CreateCarPageViewModel : DataViewModelBase<CarDbt>, ICreateCarViewModel<CarDbt>
+    public CreateCarPageViewModel(INavigationService? ns) : base(ns)
     {
-        public CreateCarPageViewModel(INavigationService? ns) : base(ns)
-        {
-            this.Title = Resources.CreateCar;
-        }
+        this.Title = Resources.CreateCar;
+    }
         
-        [AlsoNotifyFor(nameof(Model))]
-        public string SelectedCustomerText
-        {
-            get => this.Model.Customer == null
-                ? Resources.Customer
-                : string.Format(CultureInfo.CurrentCulture,
-                    $"{this.Model.Customer.FirstName} {this.Model.Customer.LastName}");
-        }
+    [AlsoNotifyFor(nameof(Model))]
+    public string SelectedCustomerText
+    {
+        get => this.Model.Customer == null
+            ? Resources.Customer
+            : string.Format(CultureInfo.CurrentCulture,
+                $"{this.Model.Customer.FirstName} {this.Model.Customer.LastName}");
+    }
 
-        public Command SelectCustomerCommand => new Command(async () => await this.SelectCustomer());
+    public Command SelectCustomerCommand => new Command(async () => await this.SelectCustomer());
 
-        private async Task SelectCustomer()
+    private async Task SelectCustomer()
+    {
+        var navparm = new NavigationParameters
         {
-            var navparm = new NavigationParameters
             {
-                {
-                    nameof(NavigationParameter.SelectionItems),
-                    await DependencyService.Get<ICustomerService>().GetCustomerSelection()
-                }
-            };
-
-            await this.NavigationService?.NavigateAsync(nameof(SelectionPage), navparm);
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            if (parameters.TryGetValue(nameof(NavigationParameter.Selection), out object selection))
-            {
-                if (selection is CarDbt dbo)
-                {
-                    this.Model = dbo;
-                }
-
-                if (selection is CustomerDbt cust)
-                {
-                    this.Model.Customer = cust;
-                }
-                
-                this.RaisePropertyChanged(nameof(SelectedCustomerText));
+                nameof(NavigationParameter.SelectionItems),
+                await DependencyService.Get<ICustomerService>().GetCustomerSelection()
             }
+        };
+
+        await this.NavigationService?.NavigateAsync(nameof(SelectionPage), navparm);
+    }
+
+    public override void OnNavigatedTo(INavigationParameters parameters)
+    {
+        if (parameters.TryGetValue(nameof(NavigationParameter.Selection), out object selection))
+        {
+            if (selection is CarDbt dbo)
+            {
+                this.Model = dbo;
+            }
+
+            if (selection is CustomerDbt cust)
+            {
+                this.Model.Customer = cust;
+            }
+                
+            this.RaisePropertyChanged(nameof(SelectedCustomerText));
         }
     }
 }

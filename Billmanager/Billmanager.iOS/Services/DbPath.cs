@@ -4,19 +4,18 @@ using Billmanager.iOS.Services;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(DbPath))]
-namespace Billmanager.iOS.Services
+namespace Billmanager.iOS.Services;
+
+class DbPath : IDbPath
 {
-    class DbPath : IDbPath
+    public string GetDbStoragePath()
     {
-        public string GetDbStoragePath()
+        var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "..", "Library", "data");
+        if (!Directory.Exists(path))
         {
-            var path = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "..", "Library", "data");
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            
-            return path;
+            Directory.CreateDirectory(path);
         }
+            
+        return path;
     }
 }

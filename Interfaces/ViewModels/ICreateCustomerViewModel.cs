@@ -10,10 +10,9 @@ using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace Billmanager.Interface.ViewModels
+namespace Billmanager.Interface.ViewModels;
+
+public interface ICreateCustomerViewModel<T> : IDataViewModelBase<T> where T : ICustomerDbt
 {
-    public interface ICreateCustomerViewModel<T> : IDataViewModelBase<T> where T : ICustomerDbt
-    {
-        ICommand SelectCustomerCommand { get; }
-    }
+    ICommand SelectCustomerCommand { get; }
 }

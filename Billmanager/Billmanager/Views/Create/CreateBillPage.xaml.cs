@@ -1,12 +1,11 @@
 ﻿using Xamarin.Forms;
 
-namespace Billmanager.Views
+namespace Billmanager.Views;
+
+public partial class CreateBillPage : ContentPage
 {
-    public partial class CreateBillPage : ContentPage
+    public CreateBillPage()
     {
-        public CreateBillPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -15,35 +15,32 @@ using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace Billmanager.ViewModels
+namespace Billmanager.ViewModels;
+
+public class CreateCustomerPageViewModel : DataViewModelBase<CustomerDbt>, ICreateCustomerViewModel<CustomerDbt>
 {
-    public class CreateCustomerPageViewModel : DataViewModelBase<CustomerDbt>, ICreateCustomerViewModel<CustomerDbt>
+    public CreateCustomerPageViewModel(INavigationService? ns) : base(ns)
     {
-        public CreateCustomerPageViewModel(INavigationService? ns) : base(ns)
-        {
-            this.Title = Resources.CreateCustomer;
-        }
-
-        public ICommand SelectCustomerCommand => new Command(async () => await this.SelectCustomer());
-
-        private async Task SelectCustomer()
-        {
-            await this.NavigationService?.NavigateAsync("CustomerSelection");
-        }
-
-        public override async void OnNavigatedTo(INavigationParameters parameters)
-        {
-            if (parameters.TryGetValue(nameof(NavigationParameter.Selection), out object selection))
-            {
-                if (selection is CustomerDbt customer)
-                {
-                    this.Model = customer;
-                }
-            }
-
-            base.OnNavigatedTo(parameters);
-        }
+        this.Title = Resources.CreateCustomer;
     }
 
+    public ICommand SelectCustomerCommand => new Command(async () => await this.SelectCustomer());
 
+    private async Task SelectCustomer()
+    {
+        await this.NavigationService?.NavigateAsync("CustomerSelection");
+    }
+
+    public override async void OnNavigatedTo(INavigationParameters parameters)
+    {
+        if (parameters.TryGetValue(nameof(NavigationParameter.Selection), out object selection))
+        {
+            if (selection is CustomerDbt customer)
+            {
+                this.Model = customer;
+            }
+        }
+
+        base.OnNavigatedTo(parameters);
+    }
 }

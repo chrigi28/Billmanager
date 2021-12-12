@@ -4,9 +4,8 @@ using System;
 using System.Collections.Generic;
 using Prism.Navigation;
 
-namespace Billmanager.Interface.ViewModels
+namespace Billmanager.Interface.ViewModels;
+
+public interface ICreateWorkcardViewModel : IViewModelBase
 {
-    public interface ICreateWorkcardViewModel : IViewModelBase
-    {
-    }
 }

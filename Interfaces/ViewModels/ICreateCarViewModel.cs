@@ -8,9 +8,8 @@ using Billmanager.Interfaces.Database;
 using Billmanager.Interfaces.Database.Datatables;
 using Prism.Navigation;
 
-namespace Billmanager.Interface.ViewModels
+namespace Billmanager.Interface.ViewModels;
+
+public interface ICreateCarViewModel<T> : IDataViewModelBase<T> where T : ICarDbt
 {
-    public interface ICreateCarViewModel<T> : IDataViewModelBase<T> where T : ICarDbt
-    {
-    }
 }

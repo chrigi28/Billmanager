@@ -10,19 +10,18 @@ using Billmanager.Services;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(BaseService))]
-namespace Billmanager.Services
+namespace Billmanager.Services;
+
+public class BaseService : IBaseService
 {
-    public class BaseService : IBaseService
+    public async Task<T> GetByIdAsync<T>(int id) where T : class, IDatabaseTable
     {
-        public async Task<T> GetByIdAsync<T>(int id) where T : class, IDatabaseTable
-        {
-            return await SqliteDatabase.AssureDb().GetItemAsync<T>(id);
-        }
+        return await SqliteDatabase.AssureDb().GetItemAsync<T>(id);
+    }
 
-        public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class, IDatabaseTable
-        {
-            return await SqliteDatabase.AssureDb().GetItemsAsync<T>();
+    public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class, IDatabaseTable
+    {
+        return await SqliteDatabase.AssureDb().GetItemsAsync<T>();
 
-        }
     }
 }

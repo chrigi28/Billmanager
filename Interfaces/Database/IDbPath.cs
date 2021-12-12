@@ -1,7 +1,6 @@
-﻿namespace Billmanager.Interfaces.Database
+﻿namespace Billmanager.Interfaces.Database;
+
+public interface IDbPath
 {
-    public interface IDbPath
-    {
-        string GetDbStoragePath();
-    }
+    string GetDbStoragePath();
 }

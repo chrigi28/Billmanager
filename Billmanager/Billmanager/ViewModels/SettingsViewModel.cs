@@ -17,49 +17,48 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace Billmanager.ViewModels
+namespace Billmanager.ViewModels;
+
+public class SettingViewModel : DataViewModelBase<SettingsDbt>, ISettingsViewModel<SettingsDbt>
 {
-    public class SettingViewModel : DataViewModelBase<SettingsDbt>, ISettingsViewModel<SettingsDbt>
+    private Command pickImgeCommand;
+
+    public SettingViewModel(INavigationService? ns) : base(ns)
     {
-        private Command pickImgeCommand;
+        this.Title = Resources.CreateCustomer;
+    }
 
-        public SettingViewModel(INavigationService? ns) : base(ns)
+    public Command PickImageCommand => this.pickImgeCommand ??= new Command(async () => await this.PickAndShow());
+
+    async Task PickAndShow()
+    {
+        try
         {
-            this.Title = Resources.CreateCustomer;
-        }
-
-        public Command PickImageCommand => this.pickImgeCommand ??= new Command(async () => await this.PickAndShow());
-
-        async Task PickAndShow()
-        {
-            try
+            var result = await FilePicker.PickAsync(PickOptions.Images);
+            if (result != null)
             {
-                var result = await FilePicker.PickAsync(PickOptions.Images);
-                if (result != null)
-                {
-                    var path = await DependencyService.Get<ICopyDataToLocalStorageService>().CopyDataToLocalStore(result);
-                    Model.LogoPath = path;
-                }
-            }
-            catch (Exception ex)
-            {
-                // The user canceled or something went wrong
+                var path = await DependencyService.Get<ICopyDataToLocalStorageService>().CopyDataToLocalStore(result);
+                Model.LogoPath = path;
             }
         }
-
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        catch (Exception ex)
         {
-            var settings = await DependencyService.Get<IBaseService>().GetAllAsync<SettingsDbt>();
-            var setting = settings.FirstOrDefault();
-            if (setting != null)
-            {
-                this.Model = setting;
-            }
-            else
-            {
-                this.Model = new SettingsDbt();
-            }
-
+            // The user canceled or something went wrong
         }
+    }
+
+    public override async void OnNavigatedTo(INavigationParameters parameters)
+    {
+        var settings = await DependencyService.Get<IBaseService>().GetAllAsync<SettingsDbt>();
+        var setting = settings.FirstOrDefault();
+        if (setting != null)
+        {
+            this.Model = setting;
+        }
+        else
+        {
+            this.Model = new SettingsDbt();
+        }
+
     }
 }

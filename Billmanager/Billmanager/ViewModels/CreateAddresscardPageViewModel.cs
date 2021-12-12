@@ -6,13 +6,12 @@ using System.Linq;
 using Billmanager.Translations.Texts;
 using Prism.Navigation;
 
-namespace Billmanager.ViewModels
+namespace Billmanager.ViewModels;
+
+public class CreateAddresscardPageViewModel : ViewModelBase
 {
-    public class CreateAddresscardPageViewModel : ViewModelBase
+    public CreateAddresscardPageViewModel(INavigationService? ns) : base(ns)
     {
-        public CreateAddresscardPageViewModel(INavigationService? ns) : base(ns)
-        {
-            this.Title = Resources.CreateAddresscard;
-        }
+        this.Title = Resources.CreateAddresscard;
     }
 }

@@ -1,14 +1,13 @@
 ﻿using Billmanager.Interfaces.Database.Datatables;
 
-namespace Billmanager.Interfaces.Database
+namespace Billmanager.Interfaces.Database;
+
+public interface ISelectionData
 {
-    public interface ISelectionData
-    {
         
-        ICustomerDbt SelectedCustomer { get; set; }
+    ICustomerDbt SelectedCustomer { get; set; }
         
-        ICarDbt SelectedCar { get; set; }
+    ICarDbt SelectedCar { get; set; }
         
-        IBillDbt SelectedBill { get; set; }
-    }
+    IBillDbt SelectedBill { get; set; }
 }

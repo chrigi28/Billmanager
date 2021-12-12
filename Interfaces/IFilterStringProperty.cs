@@ -1,8 +1,7 @@
-﻿namespace Billmanager.Interfaces
+﻿namespace Billmanager.Interfaces;
+
+public interface IFilterStringProperty
 {
-    public interface IFilterStringProperty
-    {
-        /// <summary>Provides a string to filter</summary>
-        string FilterString { get; }
-    }
+    /// <summary>Provides a string to filter</summary>
+    string FilterString { get; }
 }

@@ -3,11 +3,10 @@ using System.Threading.Tasks;
 using Billmanager.Interfaces.Database;
 using Billmanager.Interfaces.Database.Datatables;
 
-namespace Billmanager.Interfaces.Service
+namespace Billmanager.Interfaces.Service;
+
+public interface IBaseService
 {
-    public interface IBaseService
-    {
-        Task<T> GetByIdAsync<T>(int id) where T : class, IDatabaseTable;
-        Task<IEnumerable<T>> GetAllAsync<T>() where T : class, IDatabaseTable;
-    }
+    Task<T> GetByIdAsync<T>(int id) where T : class, IDatabaseTable;
+    Task<IEnumerable<T>> GetAllAsync<T>() where T : class, IDatabaseTable;
 }

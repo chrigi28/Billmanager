@@ -11,26 +11,25 @@ using Billmanager.Interfaces.Database;
 using Microsoft.EntityFrameworkCore;
 using Xamarin.Forms;
 
-namespace Billmanager.Database
+namespace Billmanager.Database;
+
+public static class SqliteDatabase
 {
-    public static class SqliteDatabase
+    ////public static readonly Dictionary<Type, DbContext> Tables = new Dictionary<Type, DbContext>();
+    private static Repository repo;
+
+    static SqliteDatabase()
     {
-        ////public static readonly Dictionary<Type, DbContext> Tables = new Dictionary<Type, DbContext>();
-        private static Repository repo;
+        repo = new Repository();
+    }
 
-        static SqliteDatabase()
+    public static Repository AssureDb()
+    {
+        if (repo != null)
         {
-            repo = new Repository();
+            return repo;
         }
 
-        public static Repository AssureDb()
-        {
-            if (repo != null)
-            {
-                return repo;
-            }
-
-            return repo = new Repository();
-        }
+        return repo = new Repository();
     }
 }

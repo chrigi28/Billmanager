@@ -4,16 +4,15 @@ using Prism.Navigation;
 using Prism.Navigation.Xaml;
 using Xamarin.Forms;
 
-namespace Billmanager.Interface.ViewModels
+namespace Billmanager.Interface.ViewModels;
+
+/// <summary> The data view Model base. </summary>
+public interface IDataViewModelBase<T> : IViewModelBase
 {
-    /// <summary> The data view Model base. </summary>
-    public interface IDataViewModelBase<T> : IViewModelBase
-    {
-        Command SaveCommand { get; }
+    Command SaveCommand { get; }
 
-        T Model { get; set; }
+    T Model { get; set; }
 
-        /// <summary>If Id of item is empty => new add otherwise update</summary>
-        Task Save(bool goBack = true);
-    }
+    /// <summary>If Id of item is empty => new add otherwise update</summary>
+    Task Save(bool goBack = true);
 }

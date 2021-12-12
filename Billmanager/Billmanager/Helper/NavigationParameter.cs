@@ -1,10 +1,9 @@
-﻿namespace Billmanager.Helper
+﻿namespace Billmanager.Helper;
+
+public enum NavigationParameter
 {
-    public enum NavigationParameter
-    {
-        Selection,
-        Selection2,
-        SelectionItems,
-        SelectionPropertiesToDisplay
-    }
+    Selection,
+    Selection2,
+    SelectionItems,
+    SelectionPropertiesToDisplay
 }

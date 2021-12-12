@@ -1,7 +1,6 @@
-﻿namespace Billmanager.Control
+﻿namespace Billmanager.Control;
+
+public class SelfExtendingList
 {
-    public class SelfExtendingList
-    {
         
-    }
 }

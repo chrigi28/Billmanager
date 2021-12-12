@@ -8,19 +8,18 @@ using Billmanager.Services;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(CarService))]
-namespace Billmanager.Services
-{
-    public class CarService : BaseService, ICarService
-    {
-        public async Task<IEnumerable<ICarDbt>> GetCarSelectionAsync()
-        {
-            return await this.GetAllAsync<CarDbt>();
-        }
+namespace Billmanager.Services;
 
-        public async Task<IEnumerable<ICarDbt>> GetCarSelectionFromCustomerAsync(int customer)
-        {
-            return await SqliteDatabase.AssureDb().GetItemsAsync<CarDbt>(f => f.CustomerId == customer);
+public class CarService : BaseService, ICarService
+{
+    public async Task<IEnumerable<ICarDbt>> GetCarSelectionAsync()
+    {
+        return await this.GetAllAsync<CarDbt>();
+    }
+
+    public async Task<IEnumerable<ICarDbt>> GetCarSelectionFromCustomerAsync(int customer)
+    {
+        return await SqliteDatabase.AssureDb().GetItemsAsync<CarDbt>(f => f.CustomerId == customer);
            
-        }
     }
 }

@@ -6,15 +6,14 @@ using System.Linq;
 using Prism.Navigation;
 using Xamarin.Forms;
 
-namespace Billmanager.Interface.ViewModels
+namespace Billmanager.Interface.ViewModels;
+
+public interface IOverviewViewModel : IViewModelBase
 {
-    public interface IOverviewViewModel : IViewModelBase
-    {
-        Command CreateCustomerCommand { get; }
-        Command CreateCarCommand { get; }
-        Command CreateBillCommand { get; }
-        Command CreateWorkcardCommand { get; }
-        Command CreateAddresscardCommand { get; }
-        Command CreateOffertCommand { get; }
-    }
+    Command CreateCustomerCommand { get; }
+    Command CreateCarCommand { get; }
+    Command CreateBillCommand { get; }
+    Command CreateWorkcardCommand { get; }
+    Command CreateAddresscardCommand { get; }
+    Command CreateOffertCommand { get; }
 }

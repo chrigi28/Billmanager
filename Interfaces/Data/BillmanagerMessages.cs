@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Billmanager.Interfaces.Data
+namespace Billmanager.Interfaces.Data;
+
+public static class BillmanagerMessages
 {
-    public static class BillmanagerMessages
-    {
-        public const string BillTotalChanged = "BillTotalChanged";
-    }
+    public const string BillTotalChanged = "BillTotalChanged";
 }

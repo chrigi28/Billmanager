@@ -14,13 +14,12 @@ using Billmanager.Interfaces.Database;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(DbPath))]
-namespace Billmanager.Droid.Services
+namespace Billmanager.Droid.Services;
+
+class DbPath : IDbPath
 {
-    class DbPath : IDbPath
+    public string GetDbStoragePath()
     {
-        public string GetDbStoragePath()
-        {
-            return System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
-        }
+        return System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
     }
 }

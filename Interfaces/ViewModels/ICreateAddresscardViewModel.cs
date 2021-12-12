@@ -5,9 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Prism.Navigation;
 
-namespace Billmanager.Interface.ViewModels
+namespace Billmanager.Interface.ViewModels;
+
+public interface ICreateAddresscardViewModel : IViewModelBase
 {
-    public interface ICreateAddresscardViewModel : IViewModelBase
-    {
-    }
 }

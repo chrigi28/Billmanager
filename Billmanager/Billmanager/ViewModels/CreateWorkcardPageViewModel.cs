@@ -6,13 +6,12 @@ using System.Linq;
 using Billmanager.Translations.Texts;
 using Prism.Navigation;
 
-namespace Billmanager.ViewModels
+namespace Billmanager.ViewModels;
+
+public class CreateWorkcardPageViewModel : ViewModelBase
 {
-    public class CreateWorkcardPageViewModel : ViewModelBase
+    public CreateWorkcardPageViewModel(INavigationService? ns) : base(ns)
     {
-        public CreateWorkcardPageViewModel(INavigationService? ns) : base(ns)
-        {
-            this.Title = Resources.CreateWorkcard;
-        }
+        this.Title = Resources.CreateWorkcard;
     }
 }
