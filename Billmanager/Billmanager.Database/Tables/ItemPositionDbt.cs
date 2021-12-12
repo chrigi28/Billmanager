@@ -45,6 +45,7 @@ public class ItemPositionDbt : BaseDbt, IItemPositionDbt
     private void NotifyTotalChanged()
     {
         this.OnPropertyChanged(nameof(this.Total));
-            
+
+        MessagingCenter.Send(this, BillmanagerMessages.BillTotalChanged);
     }
 }
