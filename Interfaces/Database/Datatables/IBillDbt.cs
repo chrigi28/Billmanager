@@ -9,7 +9,7 @@ namespace Billmanager.Interfaces.Database.Datatables;
 public interface IBillDbt : IDatabaseTable
 {
     int CustomerId { get; set; }
-    int CarId { get; set; }
+    int? CarId { get; set; }
 
     ////IList<IItemPositionDbt> ItemPositions { get; set; }
     DateTime Date { get; set; }

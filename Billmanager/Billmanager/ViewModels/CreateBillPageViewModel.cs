@@ -149,12 +149,10 @@ namespace Billmanager.ViewModels
                 if (selection is BillDbt bill)
                 {
                     this.Model = bill;
-                    this.AddExtraItem();
                 }
                 else
                 {
                     this.Model = new BillDbt();
-                    this.AddExtraItem();
                     this.RaisePropertyChanged(nameof(this.Model));
                 }
 
@@ -178,6 +176,8 @@ namespace Billmanager.ViewModels
                 this.RaisePropertyChanged(nameof(SelectedCustomerText));
                 this.RaisePropertyChanged(nameof(SelectedCarText));
             }
+            
+            this.AddExtraItem();
         }
 
         private async Task SelectCar()

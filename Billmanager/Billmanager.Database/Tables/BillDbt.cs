@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Billmanager.Database.Annotations;
 using Billmanager.Interfaces.Data;
 using Billmanager.Interfaces.Database.Datatables;
 using Prism.Events;
@@ -30,7 +31,7 @@ public class BillDbt : BaseDbt, IBillDbt
             {
                 _customerId = value;
                 this.Car = null;
-                this.CarId = 0;
+                this.CarId = null;
             }
         }
     }
@@ -38,8 +39,8 @@ public class BillDbt : BaseDbt, IBillDbt
     public virtual CustomerDbt Customer { get; set; }
 
     [ForeignKey(nameof(CarDbt))]
-    public int CarId { get; set; }
-    public virtual CarDbt Car { get; set; }
+    public int? CarId { get; set; }
+    [CanBeNull] public virtual CarDbt Car { get; set; }
 
     [ForeignKey(nameof(ItemPositionDbt))]
     public virtual ObservableCollection<ItemPositionDbt> ItemPositions { get; set; } = new ObservableCollection<ItemPositionDbt>();
