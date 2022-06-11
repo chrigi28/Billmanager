@@ -34,7 +34,7 @@ public class SelectionPageViewModel : ViewModelBase
         {
             this._selectedItem = value;
             var param = new NavigationParameters {{nameof(NavigationParameter.Selection), this.SelectedItem}};
-            this.NavigationService?.GoBackAsync(param);
+            this.NavigationService?.GoBackAsync(param, true, false);
         }
     }
 

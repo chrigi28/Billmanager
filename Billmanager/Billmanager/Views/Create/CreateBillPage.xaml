@@ -148,8 +148,7 @@
                          Grid.ColumnSpan="5"
                          Grid.Row="2"
                          BindableLayout.ItemsSource="{Binding Model.ItemPositions}"
-                         Spacing="0"
-                         BackgroundColor="Lime">
+                         Spacing="0">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <Grid HorizontalOptions="FillAndExpand" 

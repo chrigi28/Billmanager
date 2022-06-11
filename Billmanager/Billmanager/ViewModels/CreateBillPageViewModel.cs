@@ -126,7 +126,7 @@ namespace Billmanager.ViewModels
             var data = await DependencyService.Get<ICustomerService>().GetCustomerSelection();
             navparm.Add(nameof(NavigationParameter.SelectionItems), data);
 
-            await this.NavigationService?.NavigateAsync(nameof(SelectionPage), navparm);
+            await this.NavigationService?.NavigateAsync(nameof(SelectionPage), navparm, useModalNavigation: true, false);
         }
 
         public override void OnNavigatedFrom(INavigationParameters parameters)
@@ -146,14 +146,17 @@ namespace Billmanager.ViewModels
             if (parameters.TryGetValue(nameof(NavigationParameter.Selection), out object selection))
             {
 
-                if (selection is BillDbt bill)
+                if (selection is BillDbt bill ) 
                 {
                     this.Model = bill;
                 }
                 else
                 {
-                    this.Model = new BillDbt();
-                    this.RaisePropertyChanged(nameof(this.Model));
+                    if (this.Model == null)
+                    {
+                        this.Model = new BillDbt();
+                        this.RaisePropertyChanged(nameof(this.Model));
+                    }
                 }
 
                 if (selection is CarDbt car)
@@ -195,7 +198,7 @@ namespace Billmanager.ViewModels
 
             navparm.Add(nameof(NavigationParameter.SelectionItems), cars);
 
-            await this.NavigationService?.NavigateAsync("SelectionPage", navparm);
+            await this.NavigationService?.NavigateAsync("SelectionPage", navparm, true, false);
         }
 
         private void DeleteItemPosition(object item)

@@ -21,7 +21,7 @@ public class CarDbt : BaseDbt, ICarDbt
     public string Rootnumber { get; set; }
 
     [AlsoNotifyFor(nameof(Customer), nameof(CarMake), nameof(Typ))]
-    public override bool CanSave => this.Customer != null || !string.IsNullOrEmpty(this.CarMake) && !string.IsNullOrEmpty(this.Typ);
+    public override bool CanSave => this.Customer != null && !string.IsNullOrEmpty(this.CarMake) && !string.IsNullOrEmpty(this.Typ);
 
     public override string FilterString => base.FilterString + CarNumber + CarMake + Typ + Typecertificate + EnginNo + FirstOnMarket + Cubic +
                                            ChassisNo + Plate + Rootnumber + base.FilterString;

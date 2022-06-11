@@ -56,7 +56,7 @@ public class BillDbt : BaseDbt, IBillDbt
     public bool Payed { get; set; }
 
     [AlsoNotifyFor(nameof(Customer), nameof(Car), nameof(Conclusion))]
-    public override bool CanSave => this.Customer != null || this.Car != null || !string.IsNullOrEmpty(this.Conclusion);
+    public override bool CanSave => this.Customer != null && (this.ItemPositions.Any() && !string.IsNullOrEmpty(this.ItemPositions.FirstOrDefault().Description));
 
     public override string FilterString => base.FilterString + Date + BillNumber + Conclusion + Customer.FilterString + Car.FilterString;
 
