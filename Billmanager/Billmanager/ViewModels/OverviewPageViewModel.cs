@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Billmanager.Annotations;
 using Billmanager.Database.Tables;
 using Billmanager.Helper;
@@ -13,6 +14,7 @@ using Billmanager.Interfaces.Service;
 using Billmanager.Services;
 using Billmanager.Translations.Texts;
 using Billmanager.Views;
+using Converter;
 using Prism.Navigation;
 using PropertyChanged;
 using SkiaSharpSample.Samples;
@@ -94,6 +96,14 @@ namespace Billmanager.ViewModels
         public ObservableCollection<ICarDbt>? Cars { get; set; }
 
         public ObservableCollection<IBillDbt>? Bills { get; set; }
+
+        public ICommand ImportDataCommand => new AsyncCommand(this.ImportData);
+
+        private async Task ImportData()
+        {
+            ImportLabViewData importer = new ImportLabViewData();
+            importer.InitiateImport();
+        }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {

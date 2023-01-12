@@ -26,7 +26,7 @@ public class Repository : DbContext, IDataStore
 
         Database.EnsureCreated();
         //Database.Migrate();
-    }
+    }    
 
     public DbSet<CustomerDbt> Customer { get; set; }
     public DbSet<CarDbt> Car { get; set; }

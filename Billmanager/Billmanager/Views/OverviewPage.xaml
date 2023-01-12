@@ -92,6 +92,11 @@
                     HorizontalOptions="FillAndExpand" 
                     Command="{Binding TestCommand}"/>
                 <BoxView VerticalOptions="FillAndExpand"/>
+                <Button Text="ImportData"
+                    HeightRequest="50"
+                    HorizontalOptions="FillAndExpand" 
+                    Command="{Binding ImportDataCommand}"/>
+                <BoxView VerticalOptions="FillAndExpand"/>
             </StackLayout>
 
         </ScrollView>

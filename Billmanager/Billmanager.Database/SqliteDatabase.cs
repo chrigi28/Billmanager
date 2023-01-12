@@ -25,11 +25,11 @@ public static class SqliteDatabase
 
     public static Repository AssureDb()
     {
-        if (repo != null)
-        {
-            return repo;
-        }
+        return repo ??= new Repository();
+    }
 
-        return repo = new Repository();
+    public static Repository AssureDbImport()
+    {
+        return repo ??= new Repository();
     }
 }
