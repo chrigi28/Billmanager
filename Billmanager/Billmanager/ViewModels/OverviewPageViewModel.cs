@@ -14,7 +14,6 @@ using Billmanager.Interfaces.Service;
 using Billmanager.Services;
 using Billmanager.Translations.Texts;
 using Billmanager.Views;
-using Converter;
 using Prism.Navigation;
 using PropertyChanged;
 using SkiaSharpSample.Samples;
@@ -101,8 +100,8 @@ namespace Billmanager.ViewModels
 
         private async Task ImportData()
         {
-            ImportLabViewData importer = new ImportLabViewData();
-            importer.InitiateImport();
+            ////ImportLabViewData importer = new ImportLabViewData();
+            ////importer.InitiateImport();
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
